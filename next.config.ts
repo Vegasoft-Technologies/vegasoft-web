@@ -21,6 +21,9 @@ const nextConfig: NextConfig = {
     // There is no single root layout (English now, Turkish later), so addresses that
     // match no route are answered by app/global-not-found.tsx.
     globalNotFound: true,
+    // Off because @opennextjs/cloudflare 1.20 answers a segment prefetch with the whole
+    // page when it is on, and the router then requests it again without end.
+    prefetchInlining: false,
   },
 
   async headers() {
