@@ -4,6 +4,7 @@ import * as areas from "./en/areas.ts";
 import * as home from "./en/home.ts";
 import * as navigation from "./en/navigation.ts";
 import * as notFound from "./en/not-found.ts";
+import * as questions from "./en/questions.ts";
 
 // Phrases the writing rules exclude (docs/engineering-guidelines.md, "Writing"). They are
 // matched anywhere in a string, ignoring case.
@@ -49,6 +50,7 @@ const copy = [
   ...collect(home, "home"),
   ...collect(navigation, "navigation"),
   ...collect(notFound, "notFound"),
+  ...collect(questions, "questions"),
 ];
 
 test("the English copy avoids the excluded phrases", () => {

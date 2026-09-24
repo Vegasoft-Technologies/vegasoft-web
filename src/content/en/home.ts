@@ -93,6 +93,7 @@ export const home = {
   contact: {
     title: "Tell us about the job.",
     body: "If something in your business is repeated by hand every day, it can very likely be handed to a system. Tell us about it and we'll say plainly whether it's a fit and how long it would take. Needs not listed here are welcome too.",
+    hint: "It helps to know what is repeated, how often, who does it, and which programs or machines are involved. A rough note is enough. You do not need a specification.",
     cta: { label: "Email us", href: "mailto:hello@vegasoft.co.uk" },
     emailLabel: "Email",
     phoneLabel: "Phone",

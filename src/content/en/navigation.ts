@@ -17,6 +17,7 @@ export const footer = {
   companyLinks: [
     { label: "How we work", href: "/#how-we-work" },
     { label: "How we price", href: "/#pricing" },
+    { label: "Questions", href: "/#questions" },
     { label: "Contact", href: "/#contact" },
   ] satisfies NavLink[],
 };
