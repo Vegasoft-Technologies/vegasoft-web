@@ -1,0 +1,55 @@
+.section {
+  padding-block: var(--section-y);
+  border-top: 1px solid var(--rule);
+  background: var(--surface);
+}
+
+.head h2 {
+  font-size: clamp(1.875rem, 1.3rem + 2.2vw, 3rem);
+  font-stretch: 92%;
+  line-height: 1.05;
+  letter-spacing: -0.015em;
+}
+
+.head p {
+  margin-top: 16px;
+  color: var(--grey);
+  max-width: 36ch;
+}
+
+.pricing {
+  display: grid;
+  gap: 0;
+}
+
+.pricing li {
+  display: grid;
+  gap: 8px;
+  padding-block: 24px;
+  border-top: 1px solid var(--rule);
+}
+
+.pricing li:last-child {
+  border-bottom: 1px solid var(--rule);
+}
+
+.pricing h3 {
+  font-size: 1.25rem;
+  font-stretch: 96%;
+  line-height: 1.2;
+}
+
+.pricing p {
+  color: var(--grey);
+  max-width: 60ch;
+}
+
+@media (min-width: 1024px) {
+  .head {
+    grid-column: 1 / span 4;
+  }
+
+  .pricing {
+    grid-column: 5 / span 8;
+  }
+}

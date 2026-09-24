@@ -1,0 +1,80 @@
+.footer {
+  background: var(--navy);
+  color: var(--on-navy);
+  padding-block: 64px 40px;
+  font-size: 0.9375rem;
+}
+
+.footer a {
+  color: var(--on-navy);
+  text-decoration: none;
+}
+
+.footer a:hover {
+  text-decoration: underline;
+}
+
+.footer :focus-visible {
+  outline-color: var(--white);
+}
+
+.columns {
+  row-gap: 40px;
+}
+
+.tagline {
+  margin-top: 16px;
+  color: var(--on-navy-muted);
+  max-width: 30ch;
+}
+
+.col h2 {
+  font-family: var(--font-text);
+  font-size: 0.875rem;
+  font-weight: 600;
+  color: var(--on-navy-muted);
+  margin-bottom: 8px;
+}
+
+/* 44 px rather than the reference's 36 px, so every target meets the size rule in
+   docs/engineering-guidelines.md. */
+.col a {
+  display: inline-flex;
+  min-height: 44px;
+  align-items: center;
+}
+
+.legal {
+  margin-top: 56px;
+  padding-top: 24px;
+  border-top: 1px solid var(--on-navy-rule);
+  color: var(--on-navy-muted);
+  font-size: 0.8125rem;
+  display: flex;
+  flex-wrap: wrap;
+  gap: 8px 24px;
+}
+
+@media (min-width: 720px) {
+  .brand {
+    grid-column: 1 / span 12;
+  }
+
+  .col {
+    grid-column: span 4;
+  }
+}
+
+@media (min-width: 1024px) {
+  .brand {
+    grid-column: 1 / span 5;
+  }
+
+  .col {
+    grid-column: span 3;
+  }
+
+  .columns > .col:nth-of-type(1) {
+    grid-column: 6 / span 3;
+  }
+}

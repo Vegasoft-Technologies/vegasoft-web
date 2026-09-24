@@ -1,0 +1,34 @@
+.header {
+  border-bottom: 1px solid var(--rule);
+}
+
+.inner {
+  display: flex;
+  flex-wrap: wrap;
+  align-items: center;
+  justify-content: space-between;
+  column-gap: 32px;
+  row-gap: 4px;
+  padding-block: 16px;
+}
+
+.nav ul {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 4px 24px;
+}
+
+.nav a {
+  display: inline-flex;
+  align-items: center;
+  min-height: 44px;
+  color: var(--navy);
+  text-decoration: none;
+  font-weight: 500;
+  font-size: 0.9375rem;
+}
+
+.nav a:hover {
+  text-decoration: underline;
+  text-decoration-thickness: 2px;
+}

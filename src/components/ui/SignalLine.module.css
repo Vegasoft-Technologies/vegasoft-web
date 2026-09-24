@@ -1,0 +1,45 @@
+.signal {
+  margin: clamp(48px, 6vw, 80px) 0 0;
+}
+
+.signal svg {
+  display: block;
+  width: 100%;
+  height: auto;
+  overflow: visible;
+}
+
+.hand {
+  fill: none;
+  stroke: var(--signal-hand);
+  stroke-width: 2;
+  stroke-linecap: round;
+  stroke-linejoin: round;
+}
+
+.system {
+  fill: none;
+  stroke: var(--on-navy);
+  stroke-width: 2.5;
+  stroke-linecap: square;
+  stroke-linejoin: miter;
+}
+
+.handover {
+  stroke: var(--on-navy-muted);
+  stroke-width: 1;
+  stroke-dasharray: 3 5;
+}
+
+.labels {
+  display: grid;
+  grid-template-columns: 48.33% 1fr;
+  margin-top: 16px;
+  font-family: var(--font-mono);
+  font-size: 0.8125rem;
+  color: var(--on-navy-muted);
+}
+
+.labels span:last-child {
+  padding-left: 12px;
+}

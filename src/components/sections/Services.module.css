@@ -1,0 +1,133 @@
+.section {
+  padding-block: var(--section-y);
+  border-top: 1px solid var(--rule);
+}
+
+.grid,
+.area {
+  display: grid;
+  grid-template-columns: repeat(12, minmax(0, 1fr));
+  column-gap: var(--gutter);
+}
+
+.head,
+.intro,
+.areaHead,
+.services {
+  grid-column: 1 / -1;
+}
+
+.head h2 {
+  font-size: clamp(1.875rem, 1.3rem + 2.2vw, 3rem);
+  font-stretch: 92%;
+  line-height: 1.05;
+  letter-spacing: -0.015em;
+}
+
+.intro {
+  margin-top: 16px;
+  color: var(--grey);
+  max-width: 52ch;
+}
+
+.intro span {
+  vertical-align: 1px;
+}
+
+.areas {
+  margin-top: clamp(40px, 5vw, 64px);
+}
+
+.area {
+  border-top: 1px solid var(--navy);
+  padding-block: clamp(32px, 4vw, 56px);
+  row-gap: 20px;
+  scroll-margin-top: 24px;
+}
+
+.area h3 {
+  font-size: clamp(1.5rem, 1.25rem + 1vw, 2rem);
+  font-stretch: 94%;
+  line-height: 1.1;
+  letter-spacing: -0.01em;
+}
+
+.num {
+  display: block;
+  margin-bottom: 8px;
+  font-family: var(--font-display);
+  font-variant-numeric: tabular-nums;
+  font-weight: 600;
+  font-size: 1rem;
+  color: var(--grey);
+}
+
+.promise {
+  margin-top: 12px;
+  max-width: 42ch;
+}
+
+.audience {
+  margin-top: 16px;
+  color: var(--grey);
+  font-size: 0.9375rem;
+  max-width: 44ch;
+}
+
+.audience b {
+  color: var(--navy);
+  font-weight: 600;
+}
+
+.example {
+  margin-top: 16px;
+  font-size: 0.9375rem;
+  max-width: 44ch;
+}
+
+.example b {
+  font-weight: 600;
+}
+
+.services {
+  display: grid;
+  gap: 0 var(--gutter);
+  align-content: start;
+}
+
+.services li {
+  display: flex;
+  flex-wrap: wrap;
+  align-items: baseline;
+  gap: 4px 10px;
+  padding-block: 9px;
+  border-bottom: 1px solid var(--rule);
+  font-size: 0.9875rem;
+  line-height: 1.4;
+}
+
+@media (min-width: 720px) {
+  .services {
+    grid-template-columns: repeat(2, minmax(0, 1fr));
+  }
+}
+
+@media (min-width: 1024px) {
+  .head {
+    grid-column: 1 / span 4;
+  }
+
+  .intro {
+    grid-column: 7 / span 6;
+    margin-top: 0;
+    align-self: end;
+  }
+
+  .areaHead {
+    grid-column: 1 / span 5;
+  }
+
+  .services {
+    grid-column: 7 / span 6;
+  }
+}

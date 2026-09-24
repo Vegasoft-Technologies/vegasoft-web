@@ -1,0 +1,9 @@
+.brand {
+  display: inline-flex;
+  padding-block: 6px;
+  line-height: 1;
+}
+
+.brand img {
+  display: block;
+}
