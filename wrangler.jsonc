@@ -1,0 +1,20 @@
+{
+  // Cloudflare Workers configuration. The Worker is built from the Next.js output by
+  // @opennextjs/cloudflare (docs/decisions/0001-stack-and-hosting.md). Nothing in this
+  // file is secret. The account the Worker deploys to is given by the deployment token
+  // and CLOUDFLARE_ACCOUNT_ID.
+  "$schema": "node_modules/wrangler/config-schema.json",
+  "name": "vegasoft-web",
+  "main": ".open-next/worker.js",
+  "compatibility_date": "2026-09-01",
+  "compatibility_flags": ["nodejs_compat", "global_fetch_strictly_public"],
+  "assets": {
+    "directory": ".open-next/assets",
+    "binding": "ASSETS",
+  },
+  "observability": {
+    "enabled": true,
+  },
+  // Every uploaded version gets a preview address; the pull request workflow uses it.
+  "preview_urls": true,
+}

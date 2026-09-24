@@ -1,0 +1,77 @@
+name: CI
+
+on:
+  pull_request:
+    branches: [main]
+    types: [opened, synchronize, reopened, edited]
+
+permissions:
+  contents: read
+
+jobs:
+  build:
+    name: build
+    # Editing the description changes no code, so it does not rebuild.
+    if: github.event.action != 'edited'
+    runs-on: ubuntu-latest
+
+    steps:
+      - name: Check out the repository
+        uses: actions/checkout@v4
+
+      - name: Set up Node.js
+        uses: actions/setup-node@v4
+        with:
+          # Read from .nvmrc so the version is stated in exactly one place.
+          node-version-file: .nvmrc
+          cache: npm
+
+      - name: Install dependencies
+        run: npm ci
+
+      - name: Lint
+        run: npm run lint
+
+      # The build must run before the type check, because it generates the route
+      # types that TypeScript needs.
+      - name: Build
+        run: npm run build
+
+      - name: Type check
+        run: npx tsc --noEmit
+
+      - name: Formatting
+        run: npm run format:check
+
+      - name: Tests
+        run: npm test
+
+  commit-messages:
+    name: commit messages
+    runs-on: ubuntu-latest
+
+    steps:
+      - name: Check out the repository
+        uses: actions/checkout@v4
+        with:
+          fetch-depth: 0
+
+      # A commit has one author and no trailers, and nothing is appended after the body
+      # (CONTRIBUTING.md). The pull request description follows the same rule.
+      - name: Check the commit messages and the description
+        env:
+          BASE_SHA: ${{ github.event.pull_request.base.sha }}
+          HEAD_SHA: ${{ github.event.pull_request.head.sha }}
+          DESCRIPTION: ${{ github.event.pull_request.body }}
+        run: |
+          pattern='^\W*((co-authored-by|signed-off-by)\s*:|generated (with|by)\b)'
+          status=0
+          if git log --format=%B "$BASE_SHA..$HEAD_SHA" | grep -inE "$pattern"; then
+            echo "::error::A commit message carries a trailer or an attribution line. See CONTRIBUTING.md."
+            status=1
+          fi
+          if printf '%s\n' "$DESCRIPTION" | grep -inE "$pattern"; then
+            echo "::error::The pull request description carries an attribution line. See CONTRIBUTING.md."
+            status=1
+          fi
+          exit "$status"

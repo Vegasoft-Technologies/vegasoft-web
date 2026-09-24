@@ -1,0 +1,9 @@
+# Generated or vendored
+.next/
+.open-next/
+.wrangler/
+out/
+build/
+coverage/
+node_modules/
+package-lock.json
