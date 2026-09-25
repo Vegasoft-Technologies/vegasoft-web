@@ -24,6 +24,16 @@ Because there is no single root layout, addresses that match no route are answer
 `app/global-not-found.tsx`, which in Next.js 16.3 needs `experimental.globalNotFound` in
 `next.config.ts`.
 
+## How it turned out
+
+The Turkish version was built this way. `src/content/en/` and `src/content/tr/` mirror
+each other, `src/content/index.ts` holds both to the type the English objects give, and
+`src/content/routes.ts` holds every address in both languages, including the Turkish
+service addresses (`/tr/hizmetler/uretim` and the rest) and the Turkish ids of the
+sections on the home page. Components take the language and read the copy through it.
+There is no translation function and no library: a page renders from one set of
+components and two sets of words.
+
 ## Consequences
 
 - Copy is checked by TypeScript: a missing field is a build error, not a blank on the

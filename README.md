@@ -81,8 +81,11 @@ The canonical address is always <https://vegasoft.co.uk>.
 
 ## Where content lives
 
-All copy is in `src/content/`, never in JSX. English copy is in `src/content/en/`; the
-Turkish copy will live in its own files. Facts that appear in more than one place, such as
+All copy is in `src/content/`, never in JSX. `src/content/en/` and `src/content/tr/`
+mirror each other file for file, and `src/content/index.ts` holds the two to the same
+type. Every address in both languages is in `src/content/routes.ts`: the English pages at
+`/`, `/about`, `/contact`, `/company` and `/services/<area>`, the Turkish ones at `/tr`,
+`/tr/hakkimizda`, `/tr/iletisim`, `/tr/sirket-bilgileri` and `/tr/hizmetler/<alan>`. Facts that appear in more than one place, such as
 the email address and the telephone number, are in `src/content/site.ts`. Company details
 that are not known yet are `null` in `src/content/company.ts`, and the launch checklist
 says which ones must be filled in before the site goes live.
