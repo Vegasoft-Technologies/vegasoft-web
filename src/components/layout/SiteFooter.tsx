@@ -3,6 +3,7 @@ import { company, companyLabels } from "@/content/company.ts";
 import { areas } from "@/content/en/areas.ts";
 import { footer } from "@/content/en/navigation.ts";
 import { site } from "@/content/site.ts";
+import { servicePath } from "@/lib/services.ts";
 import { showSoon } from "@/lib/soon.ts";
 import Container from "@/components/ui/Container.tsx";
 import Logo from "@/components/ui/Logo.tsx";
@@ -29,7 +30,7 @@ export default function SiteFooter() {
           <ul>
             {areas.map((area) => (
               <li key={area.slug}>
-                <Link href={`/#${area.slug}`}>{area.name}</Link>
+                <Link href={servicePath(area.slug)}>{area.name}</Link>
               </li>
             ))}
           </ul>

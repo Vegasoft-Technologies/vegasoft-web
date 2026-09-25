@@ -52,6 +52,18 @@
   letter-spacing: -0.01em;
 }
 
+/* The heading is the link to the area's own page, in the heading's own colour. */
+.area h3 a {
+  color: inherit;
+  text-decoration: none;
+}
+
+.area h3 a:hover {
+  text-decoration: underline;
+  text-decoration-thickness: 2px;
+  text-underline-offset: 0.12em;
+}
+
 .num {
   display: block;
   margin-bottom: 8px;
