@@ -12,6 +12,11 @@ when it is done, with the date.
 - [ ] ICO registration is recorded there if the ICO's self-assessment says the data
       protection fee is due.
 - [ ] The "How we price" wording is approved by the business owner.
+- [ ] The business owner has confirmed the published commitments (reply within one
+      working day, ownership of the work, on-site visits) match how the business works and
+      what its contracts say.
+- [ ] Every entry with `approved: false` is approved or removed, and every place in
+      `docs/company-details.md` is filled or deliberately left empty.
 
 ## Domain
 
