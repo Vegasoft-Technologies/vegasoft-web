@@ -9,8 +9,8 @@ when it is done, with the date.
       geographic address and the email address (Electronic Commerce (EC Directive)
       Regulations 2002, regulation 6), and the company number and VAT number if they
       exist.
-- [ ] ICO registration is recorded there if the ICO's self-assessment says the data
-      protection fee is due.
+- [ ] Check with the ICO's self-assessment whether the data protection fee is due, and
+      pay it if so.
 - [ ] The "How we price" wording is approved by the business owner.
 - [ ] The business owner has confirmed the published commitments (reply within one
       working day, ownership of the work, on-site visits) match how the business works and
