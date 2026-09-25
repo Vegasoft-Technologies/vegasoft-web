@@ -5,6 +5,11 @@ import * as home from "./en/home.ts";
 import * as navigation from "./en/navigation.ts";
 import * as notFound from "./en/not-found.ts";
 import * as questions from "./en/questions.ts";
+import * as about from "./en/about.ts";
+import * as commitments from "./en/commitments.ts";
+import * as companyPage from "./en/company-page.ts";
+import * as contact from "./en/contact.ts";
+import * as proof from "./en/proof.ts";
 
 // Phrases the writing rules exclude (docs/engineering-guidelines.md, "Writing"). They are
 // matched anywhere in a string, ignoring case.
@@ -51,6 +56,11 @@ const copy = [
   ...collect(navigation, "navigation"),
   ...collect(notFound, "notFound"),
   ...collect(questions, "questions"),
+  ...collect(about, "about"),
+  ...collect(commitments, "commitments"),
+  ...collect(companyPage, "companyPage"),
+  ...collect(contact, "contact"),
+  ...collect(proof, "proof"),
 ];
 
 test("the English copy avoids the excluded phrases", () => {

@@ -21,6 +21,7 @@
 .nav a {
   display: inline-flex;
   align-items: center;
+  min-width: 44px;
   min-height: 44px;
   color: var(--navy);
   text-decoration: none;
@@ -31,4 +32,33 @@
 .nav a:hover {
   text-decoration: underline;
   text-decoration-thickness: 2px;
+}
+
+/* The telephone number and the email address, from 1024 px only. */
+.contact {
+  display: none;
+}
+
+@media (min-width: 1024px) {
+  .nav {
+    margin-left: auto;
+  }
+
+  .contact {
+    display: flex;
+    gap: 24px;
+  }
+
+  .contact a {
+    display: inline-flex;
+    align-items: center;
+    min-height: 44px;
+    color: var(--grey);
+    font-size: 0.875rem;
+    text-decoration: none;
+  }
+
+  .contact a:hover {
+    text-decoration: underline;
+  }
 }

@@ -1,12 +1,12 @@
-// Links in the header and footer. Pages that do not exist yet are reached through
-// sections of the home page; each later pull request points its link at the new page.
+// Links in the header and footer. The service pages do not exist yet, so Services points
+// at the section of the home page; the pull request that adds them moves the link.
 
 export type NavLink = { label: string; href: string };
 
 export const mainNav: NavLink[] = [
   { label: "Services", href: "/#services" },
-  { label: "How we work", href: "/#how-we-work" },
-  { label: "Contact", href: "/#contact" },
+  { label: "About", href: "/about" },
+  { label: "Contact", href: "/contact" },
 ];
 
 export const footer = {
@@ -15,10 +15,12 @@ export const footer = {
   companyTitle: "Company",
   contactTitle: "Contact",
   companyLinks: [
+    { label: "About", href: "/about" },
     { label: "How we work", href: "/#how-we-work" },
     { label: "How we price", href: "/#pricing" },
     { label: "Questions", href: "/#questions" },
-    { label: "Contact", href: "/#contact" },
+    { label: "Contact", href: "/contact" },
+    { label: "Company information", href: "/company" },
   ] satisfies NavLink[],
 };
 
@@ -27,4 +29,6 @@ export const labels = {
   skipLink: "Skip to content",
   mainNav: "Main",
   homeLink: "Vegasoft Technologies, home",
+  /** Before a sentence the owner has not approved yet. Shown only in development. */
+  draft: "Draft, not yet approved:",
 };

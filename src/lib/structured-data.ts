@@ -17,10 +17,18 @@ export function structuredData() {
     email: site.email,
     telephone: site.phone,
     logo: `${site.url}/brand/vegasoft-logo-renkli.svg`,
+    contactPoint: {
+      "@type": "ContactPoint",
+      email: site.email,
+      telephone: site.phone,
+    },
     ...(company.legalName !== null && { legalName: company.legalName }),
     ...(company.address !== null && { address: company.address }),
     ...(company.companyNumber !== null && { identifier: company.companyNumber }),
     ...(company.vatNumber !== null && { vatID: company.vatNumber }),
+    ...(company.serviceArea !== null && { areaServed: company.serviceArea }),
+    ...(company.founded !== null && { foundingDate: company.founded }),
+    ...(company.social !== null && { sameAs: company.social.map((link) => link.href) }),
   };
   const webSite = {
     "@type": "WebSite",

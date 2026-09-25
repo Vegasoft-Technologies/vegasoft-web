@@ -16,11 +16,27 @@
 }
 
 .hint {
+  margin-top: 16px;
   color: var(--grey);
 }
 
-.action {
+.reply {
+  font-weight: 500;
+}
+
+.actions {
+  display: flex;
+  flex-wrap: wrap;
+  align-items: center;
+  gap: 8px 24px;
   margin-top: 32px;
+}
+
+.more {
+  display: inline-flex;
+  align-items: center;
+  min-height: 44px;
+  font-weight: 500;
 }
 
 .details {

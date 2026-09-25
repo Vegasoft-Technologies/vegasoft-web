@@ -1,5 +1,6 @@
 import Link from "next/link";
 import { labels, mainNav } from "@/content/en/navigation.ts";
+import { site } from "@/content/site.ts";
 import Container from "@/components/ui/Container.tsx";
 import Logo from "@/components/ui/Logo.tsx";
 import styles from "./SiteHeader.module.css";
@@ -18,6 +19,10 @@ export default function SiteHeader() {
             ))}
           </ul>
         </nav>
+        <div className={styles.contact}>
+          <a href={site.phoneHref}>{site.phone}</a>
+          <a href={`mailto:${site.email}`}>{site.email}</a>
+        </div>
       </Container>
     </header>
   );

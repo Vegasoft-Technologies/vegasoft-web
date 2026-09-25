@@ -1,0 +1,13 @@
+.draft {
+  display: grid;
+  gap: 8px;
+  padding: 12px 14px;
+  border: 1px dashed currentColor;
+  border-radius: 2px;
+  opacity: 0.8;
+}
+
+.label {
+  font-size: 0.875rem;
+  font-weight: 600;
+}

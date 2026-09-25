@@ -52,22 +52,30 @@ export const home = {
   },
   howWeWork: {
     title: "How we work",
+    youGetLabel: "You get:",
     steps: [
       {
         title: "Listen",
         text: "We see the problem on site and measure together how long each task really takes.",
+        youGet:
+          "a written note of how the job is done today, how long it takes and what a system would change.",
       },
       {
         title: "Start small",
         text: "We first build a working version for a single process or line. Nothing grows before it proves its value.",
+        youGet: "a working version on one process or line, with its results measured.",
       },
       {
         title: "Install and hand over",
         text: "We install it in your environment, train your team and document how it works.",
+        youGet:
+          "the system running in your environment, a trained team and written documentation.",
       },
       {
         title: "Stay with you",
         text: "We continue with maintenance, updates and monitoring, and extend the system as your needs grow.",
+        youGet:
+          "maintenance, updates and monitoring for a fixed monthly fee, and changes as your needs grow.",
       },
     ],
   },
@@ -95,6 +103,7 @@ export const home = {
     body: "If something in your business is repeated by hand every day, it can very likely be handed to a system. Tell us about it and we'll say plainly whether it's a fit and how long it would take. Needs not listed here are welcome too.",
     hint: "It helps to know what is repeated, how often, who does it, and which programs or machines are involved. A rough note is enough. You do not need a specification.",
     cta: { label: "Email us", href: "mailto:hello@vegasoft.co.uk" },
+    allDetails: { label: "All contact details", href: "/contact" },
     emailLabel: "Email",
     phoneLabel: "Phone",
     locationLabel: "Location",

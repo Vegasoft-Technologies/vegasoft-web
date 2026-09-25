@@ -3,11 +3,13 @@ import { home } from "@/content/en/home.ts";
 import { site } from "@/content/site.ts";
 import { structuredDataJson } from "@/lib/structured-data.ts";
 import Approach from "@/components/sections/Approach.tsx";
+import Commitments from "@/components/sections/Commitments.tsx";
 import Contact from "@/components/sections/Contact.tsx";
 import Hero from "@/components/sections/Hero.tsx";
 import HowWePrice from "@/components/sections/HowWePrice.tsx";
 import HowWeWork from "@/components/sections/HowWeWork.tsx";
 import Problems from "@/components/sections/Problems.tsx";
+import Proof from "@/components/sections/Proof.tsx";
 import Questions from "@/components/sections/Questions.tsx";
 import Services from "@/components/sections/Services.tsx";
 
@@ -37,6 +39,8 @@ export default function HomePage() {
         <Approach />
         <HowWeWork />
         <HowWePrice />
+        <Commitments />
+        <Proof />
         <Questions />
         <Contact />
       </main>

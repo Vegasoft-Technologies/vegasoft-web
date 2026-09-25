@@ -1,5 +1,6 @@
 .section {
   padding-block: var(--section-y);
+  border-top: 1px solid var(--rule);
 }
 
 .head h2 {

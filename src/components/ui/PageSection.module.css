@@ -1,0 +1,35 @@
+.section {
+  padding-block: var(--section-y);
+}
+
+.rule {
+  border-top: 1px solid var(--rule);
+}
+
+.head h2 {
+  font-size: clamp(1.875rem, 1.3rem + 2.2vw, 3rem);
+  font-stretch: 92%;
+  line-height: 1.05;
+  letter-spacing: -0.015em;
+}
+
+.head p {
+  margin-top: 16px;
+  color: var(--grey);
+  max-width: 36ch;
+}
+
+.body {
+  margin-top: 40px;
+}
+
+@media (min-width: 1024px) {
+  .head {
+    grid-column: 1 / span 4;
+  }
+
+  .body {
+    grid-column: 5 / span 8;
+    margin-top: 0;
+  }
+}

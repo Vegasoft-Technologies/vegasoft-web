@@ -50,6 +50,15 @@
   color: var(--grey);
 }
 
+.steps .youGet {
+  color: var(--navy);
+  font-size: 0.9375rem;
+}
+
+.youGet b {
+  font-weight: 600;
+}
+
 @media (min-width: 720px) {
   .steps {
     grid-template-columns: repeat(2, minmax(0, 1fr));
