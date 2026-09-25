@@ -10,6 +10,7 @@
     "build": "next build",
     "start": "next start",
     "preview": "opennextjs-cloudflare build && opennextjs-cloudflare preview",
+    "preview:soon": "SHOW_SOON=1 npm run preview",
     "lint": "eslint",
     "format": "prettier --write .",
     "format:check": "prettier --check .",

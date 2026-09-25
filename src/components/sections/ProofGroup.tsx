@@ -1,4 +1,5 @@
-import Placeholder from "@/components/ui/Placeholder.tsx";
+import { showSoon } from "@/lib/soon.ts";
+import Soon from "@/components/ui/Soon.tsx";
 import styles from "./Proof.module.css";
 
 type ProofGroupProps = {
@@ -16,10 +17,10 @@ export default function ProofGroup({
   children,
 }: ProofGroupProps) {
   if (count === 0) {
-    if (process.env.NODE_ENV !== "development") return null;
+    if (!showSoon) return null;
     return (
       <div className={styles.group}>
-        <Placeholder text={placeholder} />
+        <Soon label={placeholder} />
       </div>
     );
   }

@@ -4,11 +4,12 @@ import { contact } from "@/content/en/contact.ts";
 import { home } from "@/content/en/home.ts";
 import { site } from "@/content/site.ts";
 import { pageMetadata } from "@/lib/metadata.ts";
+import { showSoon } from "@/lib/soon.ts";
 import Container from "@/components/ui/Container.tsx";
 import DetailList, { type Detail } from "@/components/ui/DetailList.tsx";
 import PageIntro from "@/components/ui/PageIntro.tsx";
 import PageSection from "@/components/ui/PageSection.tsx";
-import Placeholder from "@/components/ui/Placeholder.tsx";
+import Soon from "@/components/ui/Soon.tsx";
 import styles from "./page.module.css";
 
 export const metadata = pageMetadata(contact.meta, "/contact");
@@ -36,10 +37,10 @@ export default function ContactPage() {
       <PageSection id="details" title={contact.details.title}>
         <DetailList details={details} />
       </PageSection>
-      {process.env.NODE_ENV === "development" && (
+      {showSoon && (
         <div className={styles.form}>
           <Container>
-            <Placeholder text={contact.formPlaceholder} />
+            <Soon label={contact.formLabel} />
           </Container>
         </div>
       )}
