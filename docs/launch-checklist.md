@@ -5,18 +5,23 @@ when it is done, with the date.
 
 ## Company details
 
-- [ ] `src/content/company.ts` is filled in. The site must show the legal name, a
-      geographic address and the email address (Electronic Commerce (EC Directive)
-      Regulations 2002, regulation 6), and the company number and VAT number if they
-      exist.
+- [ ] Incorporation of Vegasoft Technologies London Ltd is complete, the company number is
+      in `src/content/company.ts`, and the legal name, registered office and place of
+      registration there match the Companies House register.
+- [ ] If the registered office has changed, `company.ts` has the new one.
+- [ ] Written permission from Zuki's Caffetteria to name them as an example is on file.
+      The confidentiality commitment says we never name a client without written
+      permission; without it, the example comes off the Websites area.
+- [ ] The "Where your data lives" draft is decided in the hosting work: approved with the
+      real hosting locations, or removed.
+- [ ] The terms of business are written and published, or their "Soon" entry is removed.
+- [ ] The contact form is built, or its "Soon" entry is removed.
 - [ ] Check with the ICO's self-assessment whether the data protection fee is due, and
       pay it if so.
 - [ ] The "How we price" wording is approved by the business owner.
-- [ ] The business owner has confirmed the published commitments (reply within one
-      working day, ownership of the work, on-site visits) match how the business works and
-      what its contracts say.
-- [ ] Every entry with `approved: false` is approved or removed, and every place in
-      `docs/company-details.md` is filled or deliberately left empty.
+- [ ] The business owner has confirmed the published commitments (a first conversation,
+      the reply time, payment, progress, ownership, confidentiality, on-site visits and
+      support hours) match how the business works and what its contracts say.
 
 ## Domain
 
