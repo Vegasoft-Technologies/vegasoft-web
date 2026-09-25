@@ -11,8 +11,9 @@ permissions:
 jobs:
   build:
     name: build
-    # Editing the description changes no code, so it does not rebuild.
-    if: github.event.action != 'edited'
+    # Editing the description changes no code, so it does not rebuild. A new base branch
+    # does, so that a pull request moved to main is built against main.
+    if: github.event.action != 'edited' || github.event.changes.base
     runs-on: ubuntu-latest
 
     steps:
