@@ -40,8 +40,20 @@
    docs/engineering-guidelines.md. */
 .col a {
   display: inline-flex;
+  min-width: 44px;
   min-height: 44px;
   align-items: center;
+}
+
+.detail {
+  padding-block: 10px;
+  color: var(--on-navy-muted);
+}
+
+.label {
+  display: block;
+  font-size: 0.875rem;
+  font-weight: 600;
 }
 
 .legal {
@@ -65,16 +77,21 @@
   }
 }
 
+/* Three columns beside the brand on one row: 3 + 3 + 2 + 3 of the 12 columns. */
 @media (min-width: 1024px) {
   .brand {
-    grid-column: 1 / span 5;
+    grid-column: 1 / span 3;
   }
 
-  .col {
-    grid-column: span 3;
+  .services {
+    grid-column: 5 / span 3;
   }
 
-  .columns > .col:nth-of-type(1) {
-    grid-column: 6 / span 3;
+  .company {
+    grid-column: 8 / span 2;
+  }
+
+  .contact {
+    grid-column: 10 / span 3;
   }
 }
