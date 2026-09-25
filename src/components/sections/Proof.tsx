@@ -3,16 +3,15 @@ import PageSection from "@/components/ui/PageSection.tsx";
 import ProofGroup from "./ProofGroup.tsx";
 import styles from "./Proof.module.css";
 
-const { testimonials, clients, caseStudies, reviews, awards, press } = proof;
+const { testimonials, caseStudies } = proof;
 
 /**
- * Proof a visitor can check. Every list is empty until the owner supplies real, named
+ * Proof a visitor can check. Both lists are empty until the owner supplies real, named
  * entries with permission; until then the section is absent from deployed builds and
  * shows its placeholders in development.
  */
 export default function Proof() {
-  const groups = [testimonials, clients, caseStudies, reviews, awards, press];
-  const hasAny = groups.some((group) => group.items.length > 0);
+  const hasAny = testimonials.items.length > 0 || caseStudies.items.length > 0;
   if (!hasAny && process.env.NODE_ENV !== "development") return null;
   return (
     <PageSection id="proof" title={proof.title} rule>
@@ -36,19 +35,6 @@ export default function Proof() {
           </ul>
         </ProofGroup>
         <ProofGroup
-          title={clients.title}
-          placeholder={clients.placeholder}
-          count={clients.items.length}
-        >
-          <ul className={styles.rows}>
-            {clients.items.map((item) => (
-              <li key={item.href}>
-                <a href={item.href}>{item.name}</a>
-              </li>
-            ))}
-          </ul>
-        </ProofGroup>
-        <ProofGroup
           title={caseStudies.title}
           placeholder={caseStudies.placeholder}
           count={caseStudies.items.length}
@@ -58,48 +44,6 @@ export default function Proof() {
               <li key={item.href}>
                 <a href={item.href}>{item.title}</a>
                 <p>{item.summary}</p>
-              </li>
-            ))}
-          </ul>
-        </ProofGroup>
-        <ProofGroup
-          title={reviews.title}
-          placeholder={reviews.placeholder}
-          count={reviews.items.length}
-        >
-          <ul className={styles.rows}>
-            {reviews.items.map((item) => (
-              <li key={item.href}>
-                <a href={item.href}>{item.platform}</a>
-              </li>
-            ))}
-          </ul>
-        </ProofGroup>
-        <ProofGroup
-          title={awards.title}
-          placeholder={awards.placeholder}
-          count={awards.items.length}
-        >
-          <ul className={styles.rows}>
-            {awards.items.map((item) => (
-              <li key={item.href}>
-                <a href={item.href}>
-                  {item.name}, {item.year}
-                </a>
-              </li>
-            ))}
-          </ul>
-        </ProofGroup>
-        <ProofGroup
-          title={press.title}
-          placeholder={press.placeholder}
-          count={press.items.length}
-        >
-          <ul className={styles.rows}>
-            {press.items.map((item) => (
-              <li key={item.href}>
-                <a href={item.href}>{item.title}</a>
-                <p>{item.publication}</p>
               </li>
             ))}
           </ul>

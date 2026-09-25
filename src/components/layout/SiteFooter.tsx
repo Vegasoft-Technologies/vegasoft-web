@@ -9,7 +9,7 @@ import Pending from "@/components/ui/Pending.tsx";
 import styles from "./SiteFooter.module.css";
 
 /** The company details under the email address and the telephone number. */
-const contactFields = ["location", "hours"] as const;
+const contactFields = ["location"] as const;
 
 export default function SiteFooter() {
   // A detail that is not known yet is left out of a deployed build entirely, and shown

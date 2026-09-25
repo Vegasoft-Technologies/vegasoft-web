@@ -45,14 +45,10 @@ test("a company detail that is not known yet is left out, never null", () => {
 
 test("the organisation has a contact point with the email address and the telephone number", () => {
   const organization = structuredData()["@graph"][0] as {
-    contactPoint: { email: string; telephone: string; availableLanguage?: string[] };
+    contactPoint: { email: string; telephone: string };
   };
   assert.equal(organization.contactPoint.email, site.email);
   assert.equal(organization.contactPoint.telephone, site.phone);
-  assert.equal(
-    "availableLanguage" in organization.contactPoint,
-    company.languages !== null,
-  );
 });
 
 test("the script text parses back and cannot close a script element", () => {

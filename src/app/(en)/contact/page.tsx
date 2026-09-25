@@ -22,10 +22,8 @@ export default function ContactPage() {
     },
     { label: home.contact.phoneLabel, node: <a href={site.phoneHref}>{site.phone}</a> },
     ...(reply ? [{ label: contact.details.replyLabel, value: reply.text }] : []),
-    { label: companyLabels.hours, value: company.hours },
     { label: companyLabels.location, value: company.location },
     { label: companyLabels.serviceArea, value: company.serviceArea },
-    { label: companyLabels.booking, value: company.booking },
     { label: companyLabels.social, value: company.social },
   ];
   return (

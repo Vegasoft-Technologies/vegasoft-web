@@ -19,13 +19,12 @@ test("the trading name is Vegasoft Technologies", () => {
   assert.equal(company.tradingName, "Vegasoft Technologies");
 });
 
-test("every other detail is unknown (null), a trimmed non-empty value or link, or a non-empty list of them", () => {
+test("every other detail is unknown (null), a trimmed non-empty value, or a non-empty list of them", () => {
   for (const [key, value] of Object.entries(company)) {
     if (key === "tradingName") continue;
     const ok =
       value === null ||
       isTrimmedText(value) ||
-      isLink(value) ||
       (Array.isArray(value) &&
         value.length > 0 &&
         value.every((item) => isTrimmedText(item) || isLink(item)));

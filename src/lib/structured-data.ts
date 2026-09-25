@@ -21,7 +21,6 @@ export function structuredData() {
       "@type": "ContactPoint",
       email: site.email,
       telephone: site.phone,
-      ...(company.languages !== null && { availableLanguage: company.languages }),
     },
     ...(company.legalName !== null && { legalName: company.legalName }),
     ...(company.address !== null && { address: company.address }),

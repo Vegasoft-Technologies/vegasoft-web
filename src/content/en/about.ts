@@ -41,11 +41,6 @@ export const about = {
     title: "The company",
     link: { label: "Company information", href: "/company" },
   },
-  /** A sentence for the owner to decide on. Shown only in development until approved. */
-  draft: {
-    text: "Vega is the star astronomers chose as the zero point of their brightness scale: the reference the others are measured against.",
-    approved: false,
-  },
   closing: {
     title: "Tell us about the job.",
     cta: { label: "All contact details", href: "/contact" },

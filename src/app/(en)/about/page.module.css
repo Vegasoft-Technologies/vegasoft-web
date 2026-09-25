@@ -14,10 +14,6 @@
   font-weight: 500;
 }
 
-.link + div {
-  margin-top: 24px;
-}
-
 .closing {
   padding-block: var(--section-y);
   border-top: 1px solid var(--rule);

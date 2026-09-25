@@ -6,7 +6,7 @@ export type Detail =
   | {
       label: string;
       /** null means not known yet: left out of deployed builds, a placeholder in development. */
-      value: string | string[] | ProfileLink | ProfileLink[] | null;
+      value: string | string[] | ProfileLink[] | null;
     }
   | { label: string; node: React.ReactNode };
 
@@ -33,8 +33,6 @@ export default function DetailList({ details }: { details: Detail[] }) {
                 <Pending label={detail.label} />
               ) : typeof detail.value === "string" ? (
                 detail.value
-              ) : !Array.isArray(detail.value) ? (
-                <a href={detail.value.href}>{detail.value.label}</a>
               ) : (
                 <ul>
                   {(detail.value as (string | ProfileLink)[]).map((item) =>

@@ -33,21 +33,9 @@ export const commitments = {
       approved: false,
     },
     {
-      id: "faults",
-      title: "Faults after handover",
-      text: "A genuine fault found after handover is fixed without charge for an agreed period.",
-      approved: false,
-    },
-    {
       id: "support-hours",
       title: "Support hours",
       text: "Support runs in office hours, with cover outside them by arrangement.",
-      approved: false,
-    },
-    {
-      id: "notice",
-      title: "No long contracts",
-      text: "The monthly fee runs month by month and stops at the end of an agreed notice period.",
       approved: false,
     },
     {
@@ -72,18 +60,6 @@ export const commitments = {
       id: "payment",
       title: "Payment follows the work",
       text: "Payment is staged against the written scope, and nothing is due before the scope is agreed.",
-      approved: false,
-    },
-    {
-      id: "direct",
-      title: "The person you brief builds it",
-      text: "The person you describe the job to is the person who builds and installs the system. Nothing is passed through an account manager.",
-      approved: false,
-    },
-    {
-      id: "standards",
-      title: "Built to public guidance",
-      text: "We build to the guidance of the National Cyber Security Centre and the Information Commissioner's Office, and say which parts apply to your system.",
       approved: false,
     },
   ] satisfies Commitment[],

@@ -26,6 +26,5 @@ export const companyPage = {
     "phone",
     "companyNumber",
     "vatNumber",
-    "icoRegistration",
   ] satisfies CompanyRow[],
 };
