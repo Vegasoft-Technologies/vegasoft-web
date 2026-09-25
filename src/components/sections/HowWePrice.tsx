@@ -1,12 +1,16 @@
-import { home } from "@/content/en/home.ts";
+import { contentFor } from "@/content/index.ts";
+import { anchorId, type Language } from "@/content/routes.ts";
 import Container from "@/components/ui/Container.tsx";
 import styles from "./HowWePrice.module.css";
 
-const { pricing } = home;
-
-export default function HowWePrice() {
+export default function HowWePrice({ language }: { language: Language }) {
+  const { pricing } = contentFor(language).home;
   return (
-    <section className={styles.section} id="pricing" aria-labelledby="pricing-title">
+    <section
+      className={styles.section}
+      id={anchorId("pricing", language)}
+      aria-labelledby="pricing-title"
+    >
       <Container grid>
         <header className={styles.head}>
           <h2 id="pricing-title">{pricing.title}</h2>

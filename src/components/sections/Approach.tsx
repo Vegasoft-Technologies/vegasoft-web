@@ -1,11 +1,11 @@
-import { home } from "@/content/en/home.ts";
+import { contentFor } from "@/content/index.ts";
+import type { Language } from "@/content/routes.ts";
 import Container from "@/components/ui/Container.tsx";
 import SignalLine from "@/components/ui/SignalLine.tsx";
 import styles from "./Approach.module.css";
 
-const { approach } = home;
-
-export default function Approach() {
+export default function Approach({ language }: { language: Language }) {
+  const { approach } = contentFor(language).home;
   return (
     <section className={styles.band} aria-labelledby="approach-title">
       <Container grid>
@@ -13,7 +13,7 @@ export default function Approach() {
           <h2 id="approach-title">{approach.title}</h2>
           <p>{approach.body}</p>
         </div>
-        <SignalLine />
+        <SignalLine language={language} />
       </Container>
     </section>
   );

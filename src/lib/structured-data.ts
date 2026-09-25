@@ -1,5 +1,6 @@
 import { company, formatAddress } from "../content/company.ts";
-import { questions } from "../content/en/questions.ts";
+import { content } from "../content/index.ts";
+import { languageNames, pagePath, type Language } from "../content/routes.ts";
 import { site } from "../content/site.ts";
 
 // Facts about the business, the site and the questions section in the form search
@@ -7,8 +8,9 @@ import { site } from "../content/site.ts";
 // company detail that is not known yet is left out, exactly as the page leaves it out.
 // Relative imports, so that Node's test runner can load this file without the alias.
 
-export function structuredData() {
+export function structuredData(language: Language) {
   const organizationId = `${site.url}/#organization`;
+  const homeUrl = `${site.url}${pagePath("home", language)}`.replace(/\/$/, "");
   const organization = {
     "@type": "Organization",
     "@id": organizationId,
@@ -49,16 +51,17 @@ export function structuredData() {
   };
   const webSite = {
     "@type": "WebSite",
-    "@id": `${site.url}/#website`,
+    "@id": `${homeUrl}/#website`,
     name: site.name,
-    url: site.url,
-    inLanguage: "en-GB",
+    url: `${homeUrl}/`,
+    inLanguage: languageNames[language].hrefLang,
     publisher: { "@id": organizationId },
   };
   const faqPage = {
     "@type": "FAQPage",
-    "@id": `${site.url}/#questions`,
-    mainEntity: questions.items.map((item) => ({
+    "@id": `${homeUrl}/#questions`,
+    inLanguage: languageNames[language].hrefLang,
+    mainEntity: content[language].questions.items.map((item) => ({
       "@type": "Question",
       name: item.question,
       acceptedAnswer: { "@type": "Answer", text: item.answer },
@@ -67,12 +70,12 @@ export function structuredData() {
   return { "@context": "https://schema.org", "@graph": [organization, webSite, faqPage] };
 }
 
+/** The JSON for a script element. "<" is escaped so the text can never close the element. */
+export function structuredDataJson(language: Language): string {
+  return JSON.stringify(structuredData(language)).replace(/</g, "\\u003c");
+}
+
 /** The address of the registered office, as the pages print it. */
 export function registeredOffice(): string | null {
   return company.address === null ? null : formatAddress(company.address);
-}
-
-/** The JSON for a script element. "<" is escaped so the text can never close the element. */
-export function structuredDataJson(): string {
-  return JSON.stringify(structuredData()).replace(/</g, "\\u003c");
 }

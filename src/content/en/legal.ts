@@ -1,15 +1,15 @@
 // The words of the footer's legal line. The values come from src/content/company.ts, so
 // a change of registered office or a new company number is a one-line change there.
-//
-// It reads: "© Vegasoft Technologies. Vegasoft Technologies is a trading name of
-// Vegasoft Technologies London Ltd, registered in England and Wales, company number
-// 12345678. Registered office: 20 Wenlock Road, London N1 7GU. VAT number GB 123 4567 89."
-// A clause whose detail is not known is left out.
+// {trading}, {legal}, {place}, {number} and {address} are filled in where they appear;
+// each language puts them in the order its own sentence needs.
 
 export const legal = {
-  tradingNameOf: "is a trading name of",
-  registeredIn: "registered in",
-  companyNumber: "company number",
-  registeredOffice: "Registered office",
-  vatNumber: "VAT number",
+  copyright: "© {trading}.",
+  company: "{trading} is a trading name of {legal}, registered in {place}.",
+  companyWithNumber:
+    "{trading} is a trading name of {legal}, registered in {place}, company number {number}.",
+  office: "Registered office: {address}.",
+  vat: "VAT number {number}.",
+  /** The place of registration in this language. company.ts holds its legal spelling. */
+  placeNames: {} as Record<string, string>,
 };

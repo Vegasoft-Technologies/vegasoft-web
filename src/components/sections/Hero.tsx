@@ -1,13 +1,13 @@
-import { areas } from "@/content/en/areas.ts";
-import { home } from "@/content/en/home.ts";
+import { contentFor } from "@/content/index.ts";
+import { areaSegment, type Language } from "@/content/routes.ts";
 import { numbering } from "@/lib/numbering.ts";
 import ButtonLink from "@/components/ui/ButtonLink.tsx";
 import Container from "@/components/ui/Container.tsx";
 import styles from "./Hero.module.css";
 
-const { hero } = home;
-
-export default function Hero() {
+export default function Hero({ language }: { language: Language }) {
+  const { areas, home } = contentFor(language);
+  const { hero } = home;
   return (
     <section className={styles.hero} aria-labelledby="hero-title">
       <Container grid>
@@ -23,7 +23,7 @@ export default function Hero() {
           <ol>
             {areas.map((area, i) => (
               <li key={area.slug}>
-                <a href={`#${area.slug}`}>
+                <a href={`#${areaSegment(area.slug, language)}`}>
                   <span className={styles.num}>{numbering(i)}</span>
                   {area.name}
                 </a>

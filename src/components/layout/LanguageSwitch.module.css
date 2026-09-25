@@ -1,0 +1,16 @@
+.switch {
+  display: inline-flex;
+  align-items: center;
+  min-width: 44px;
+  min-height: 44px;
+  justify-content: center;
+  color: var(--navy);
+  font-weight: 600;
+  font-size: 0.9375rem;
+  text-decoration: none;
+}
+
+.switch:hover {
+  text-decoration: underline;
+  text-decoration-thickness: 2px;
+}
