@@ -1,5 +1,8 @@
 .section {
   padding-block: var(--section-y);
+}
+
+.rule {
   border-top: 1px solid var(--rule);
 }
 
@@ -16,32 +19,8 @@
   max-width: 36ch;
 }
 
-.list {
+.body {
   margin-top: 40px;
-  display: grid;
-  gap: 0;
-}
-
-.list li {
-  display: grid;
-  gap: 8px;
-  padding-block: 24px;
-  border-top: 1px solid var(--rule);
-}
-
-.list li:last-child {
-  border-bottom: 1px solid var(--rule);
-}
-
-.list h3 {
-  font-size: 1.25rem;
-  font-stretch: 96%;
-  line-height: 1.2;
-}
-
-.list p {
-  color: var(--grey);
-  max-width: 60ch;
 }
 
 @media (min-width: 1024px) {
@@ -49,7 +28,7 @@
     grid-column: 1 / span 4;
   }
 
-  .list {
+  .body {
     grid-column: 5 / span 8;
     margin-top: 0;
   }

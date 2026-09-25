@@ -20,6 +20,9 @@ export default function HowWeWork() {
               <span className={styles.num}>{numbering(i)}</span>
               <h3>{step.title}</h3>
               <p>{step.text}</p>
+              <p className={styles.youGet}>
+                <b>{howWeWork.youGetLabel}</b> {step.youGet}
+              </p>
             </li>
           ))}
         </ol>

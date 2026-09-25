@@ -1,0 +1,40 @@
+.groups {
+  display: grid;
+  gap: 40px;
+}
+
+.group h3 {
+  font-family: var(--font-text);
+  font-size: 0.875rem;
+  font-weight: 600;
+  color: var(--grey);
+  padding-bottom: 12px;
+  border-bottom: 1px solid var(--navy);
+}
+
+.rows > li {
+  padding-block: 10px;
+  border-bottom: 1px solid var(--rule);
+}
+
+.rows a {
+  display: inline-flex;
+  min-height: 44px;
+  align-items: center;
+  font-weight: 500;
+}
+
+.rows p {
+  color: var(--grey);
+  max-width: 60ch;
+}
+
+.quote {
+  margin: 0;
+}
+
+.quote footer {
+  margin-top: 8px;
+  color: var(--grey);
+  font-size: 0.9375rem;
+}
