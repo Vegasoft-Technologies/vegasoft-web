@@ -1,7 +1,8 @@
 import assert from "node:assert/strict";
 import test from "node:test";
 import { company } from "../content/company.ts";
-import { questions } from "../content/en/questions.ts";
+import { content } from "../content/index.ts";
+import { languageNames, languages } from "../content/routes.ts";
 import { site } from "../content/site.ts";
 import { structuredData, structuredDataJson } from "./structured-data.ts";
 
@@ -17,39 +18,52 @@ function walk(
     for (const [key, item] of Object.entries(value)) walk(item, `${path}.${key}`, visit);
 }
 
-const graph = () => structuredData()["@graph"] as Record<string, unknown>[];
+const graph = (language: "en" | "tr") =>
+  structuredData(language)["@graph"] as Record<string, unknown>[];
 
 test("the graph holds the organisation, the site and the questions", () => {
-  assert.deepEqual(
-    graph().map((node) => node["@type"]),
-    ["Organization", "WebSite", "FAQPage"],
-  );
+  for (const language of languages) {
+    assert.deepEqual(
+      graph(language).map((node) => node["@type"]),
+      ["Organization", "WebSite", "FAQPage"],
+      language,
+    );
+  }
 });
 
-test("every question on the page is in the structured data, in order", () => {
-  const faq = graph()[2] as unknown as { mainEntity: { name: string }[] };
-  assert.deepEqual(
-    faq.mainEntity.map((entity) => entity.name),
-    questions.items.map((item) => item.question),
-  );
+test("each language's questions are in its own structured data, in order", () => {
+  for (const language of languages) {
+    const faq = graph(language)[2] as unknown as {
+      inLanguage: string;
+      mainEntity: { name: string }[];
+    };
+    assert.equal(faq.inLanguage, languageNames[language].hrefLang, language);
+    assert.deepEqual(
+      faq.mainEntity.map((entity) => entity.name),
+      content[language].questions.items.map((item) => item.question),
+      language,
+    );
+  }
 });
 
 test("a company detail that is not known yet is left out, never null", () => {
-  walk(structuredData(), "graph", (path, value) => {
-    assert.notEqual(value, null, path);
-    assert.notEqual(value, "", path);
-  });
-  const organization = graph()[0];
-  assert.equal("legalName" in organization, company.legalName !== null);
-  assert.equal("address" in organization, company.address !== null);
-  assert.equal("identifier" in organization, company.companyNumber !== null);
-  assert.equal("vatID" in organization, company.vatNumber !== null);
-  assert.equal("foundingDate" in organization, company.founded !== null);
-  assert.equal("sameAs" in organization, company.social !== null);
+  for (const language of languages) {
+    walk(structuredData(language), "graph", (path, value) => {
+      assert.notEqual(value, null, `${language} ${path}`);
+      assert.notEqual(value, "", `${language} ${path}`);
+    });
+    const organization = graph(language)[0];
+    assert.equal("legalName" in organization, company.legalName !== null);
+    assert.equal("address" in organization, company.address !== null);
+    assert.equal("identifier" in organization, company.companyNumber !== null);
+    assert.equal("vatID" in organization, company.vatNumber !== null);
+    assert.equal("foundingDate" in organization, company.founded !== null);
+    assert.equal("sameAs" in organization, company.social !== null);
+  }
 });
 
 test("the registered office is in the structured data field by field", () => {
-  const organization = graph()[0] as unknown as {
+  const organization = graph("en")[0] as unknown as {
     address: {
       "@type": string;
       streetAddress: string;
@@ -70,7 +84,7 @@ test("the registered office is in the structured data field by field", () => {
 });
 
 test("the contact point carries the email address, the phone number and the support hours", () => {
-  const organization = graph()[0] as unknown as {
+  const organization = graph("en")[0] as unknown as {
     contactPoint: {
       email: string;
       telephone: string;
@@ -94,7 +108,9 @@ test("the contact point carries the email address, the phone number and the supp
 });
 
 test("the script text parses back as JSON and cannot close a script element", () => {
-  const json = structuredDataJson();
-  assert.ok(!json.includes("<"));
-  assert.deepEqual(JSON.parse(json), structuredData());
+  for (const language of languages) {
+    const json = structuredDataJson(language);
+    assert.ok(!json.includes("<"), language);
+    assert.deepEqual(JSON.parse(json), structuredData(language), language);
+  }
 });

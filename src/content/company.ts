@@ -83,18 +83,3 @@ export const company: CompanyDetails = {
 export function formatAddress(address: PostalAddress): string {
   return `${address.street}, ${address.town} ${address.postcode}`;
 }
-
-/** Labels for the details above. */
-export const companyLabels = {
-  tradingName: "Trading name",
-  legalName: "Legal name",
-  placeOfRegistration: "Registered in",
-  address: "Registered office",
-  location: "Location",
-  companyNumber: "Company number",
-  vatNumber: "VAT number",
-  serviceArea: "Area covered on site",
-  founded: "Founded",
-  social: "Profiles",
-  supportHours: "Support hours",
-} as const;

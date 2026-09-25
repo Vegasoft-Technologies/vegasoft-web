@@ -1,5 +1,6 @@
 // Every word on the English home page. Components read from here; no copy lives in JSX.
 
+import { anchorHref, pagePath } from "../routes.ts";
 import type { AreaSlug } from "./areas.ts";
 
 type Problem = { text: string; area: AreaSlug };
@@ -25,7 +26,7 @@ export const home = {
   hero: {
     title: "Repetitive work, handed over to systems.",
     lead: "From the machine on the factory floor to the inbox in the office, we use software, data and AI to win back the hours a business loses every day.",
-    cta: { label: "Tell us about the job", href: "#contact" },
+    cta: { label: "Tell us about the job", href: anchorHref("contact", "en") },
     indexTitle: "Areas of work",
   },
   problems: {
@@ -103,7 +104,7 @@ export const home = {
     body: "If something in your business is repeated by hand every day, it can very likely be handed to a system. Tell us about it and we'll say plainly whether it's a fit and how long it would take. Needs not listed here are welcome too.",
     hint: "It helps to know what is repeated, how often, who does it, and which programs or machines are involved. A rough note is enough. You do not need a specification.",
     cta: { label: "Email us", href: "mailto:hello@vegasoft.co.uk" },
-    allDetails: { label: "All contact details", href: "/contact" },
+    allDetails: { label: "All contact details", href: pagePath("contact", "en") },
     emailLabel: "Email",
     phoneLabel: "Phone",
     locationLabel: "Location",

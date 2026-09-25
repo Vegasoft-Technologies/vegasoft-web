@@ -1,21 +1,22 @@
 import Link from "next/link";
 import { company } from "@/content/company.ts";
-import { commitment } from "@/content/en/commitments.ts";
-import { home } from "@/content/en/home.ts";
+import { contentFor } from "@/content/index.ts";
+import { anchorId, type Language } from "@/content/routes.ts";
 import { site } from "@/content/site.ts";
 import ButtonLink from "@/components/ui/ButtonLink.tsx";
 import Container from "@/components/ui/Container.tsx";
 import styles from "./Contact.module.css";
 
-const { contact } = home;
-
-export default function Contact() {
-  // A detail that is not known is left out; the location is known.
-  const showLocation = company.location !== null;
-  const reply = commitment("reply");
-
+export default function Contact({ language }: { language: Language }) {
+  const { commitments, home } = contentFor(language);
+  const { contact } = home;
+  const reply = commitments.items.find((item) => item.id === "reply" && item.approved);
   return (
-    <section className={styles.section} id="contact" aria-labelledby="contact-title">
+    <section
+      className={styles.section}
+      id={anchorId("contact", language)}
+      aria-labelledby="contact-title"
+    >
       <Container grid>
         <div className={styles.text}>
           <h2 id="contact-title">{contact.title}</h2>
@@ -42,7 +43,7 @@ export default function Contact() {
               <a href={site.phoneHref}>{site.phone}</a>
             </dd>
           </div>
-          {showLocation && (
+          {company.location !== null && (
             <div>
               <dt>{contact.locationLabel}</dt>
               <dd>{company.location}</dd>

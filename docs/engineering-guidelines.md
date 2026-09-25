@@ -7,8 +7,13 @@ why it is shaped the way it is.
 ## Language
 
 All repository content is written in English: code, identifiers, comments, commit
-messages, documentation, issues and pull requests. Site copy is in British English, with
-sentence-case headings. Turkish copy will live in its own files under `src/content/`.
+messages, documentation, issues and pull requests.
+
+The site itself is published in British English and in Turkish. `src/content/en/` and
+`src/content/tr/` mirror each other file for file, and `src/content/index.ts` holds the
+two to the same type, so a missing or an extra key is a type error. Every address is in
+`src/content/routes.ts`. A component never imports one language: it takes the language
+and reads the copy through it, so both languages render from the same markup.
 
 ## Branches and commits
 
@@ -79,10 +84,18 @@ file in `src/content/`.
 - British English. Short sentences. Concrete nouns.
 - Every claim can be checked. No invented numbers, logos, quotes, testimonials, client
   names, certifications or awards.
-- These phrases are excluded, and `src/content/style.test.ts` fails if one appears in
-  the copy: empower, unlock, seamless, cutting-edge, revolutionise, leverage, elevate,
-  harness, supercharge, game-changer, next-gen, innovative solutions, world-class,
-  best-in-class, state-of-the-art, fast-paced, transform your business.
+- These phrases are excluded from the English copy, and `src/content/style.test.ts`
+  fails if one appears: empower, unlock, seamless, cutting-edge, revolutionise, leverage,
+  elevate, harness, supercharge, game-changer, next-gen, innovative solutions,
+  world-class, best-in-class, state-of-the-art, fast-paced, transform your business.
+- The Turkish copy is in the "siz" form, with short sentences and plain words, and the
+  same test excludes: yenilikçi, inovatif, dijital dönüşüm, son teknoloji, sektör lideri,
+  öncü, çığır açan, fark yaratan, benzersiz, uçtan uca, sinerji, katma değer, vizyoner,
+  kusursuz, dünya standartlarında. Technical names keep their spelling: OEE, PLC, OPC UA,
+  Modbus, MQTT, CRM, Excel, WhatsApp, SPF, DKIM, DMARC, KVKK.
+- The Turkish site says what the English site says. A fact appears in one place only:
+  the email address, the telephone number, the support hours, the registered office and
+  the legal name all come from `src/content/company.ts` and `src/content/site.ts`.
 - No arrows, long dashes or exclamation marks. The same test checks for them.
 - The site's copy uses the trading name, "Vegasoft Technologies". The legal name comes
   only from `src/content/company.ts`, and appears only in the footer's legal line, on the

@@ -1,13 +1,17 @@
-import { home } from "@/content/en/home.ts";
+import { contentFor } from "@/content/index.ts";
+import { anchorId, type Language } from "@/content/routes.ts";
 import { numbering } from "@/lib/numbering.ts";
 import Container from "@/components/ui/Container.tsx";
 import styles from "./HowWeWork.module.css";
 
-const { howWeWork } = home;
-
-export default function HowWeWork() {
+export default function HowWeWork({ language }: { language: Language }) {
+  const { howWeWork } = contentFor(language).home;
   return (
-    <section className={styles.section} id="how-we-work" aria-labelledby="how-title">
+    <section
+      className={styles.section}
+      id={anchorId("how-we-work", language)}
+      aria-labelledby="how-title"
+    >
       <Container>
         <div className={styles.grid}>
           <header className={styles.head}>
