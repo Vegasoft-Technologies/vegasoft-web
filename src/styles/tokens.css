@@ -1,0 +1,28 @@
+/* Design tokens. The only file in which a literal colour appears. */
+:root {
+  --navy: #0b1f3a;
+  --blue: #1a73e8;
+  --blue-deep: #1558b0;
+  --grey: #56627a;
+  --white: #ffffff;
+  --surface: #f4f6f9;
+  --rule: #dce1e8;
+  --on-navy: #ffffff;
+  --on-navy-muted: #aeb9cc;
+  --on-navy-link: #8ab8ff;
+  /* A rule on the navy background, such as the line above the footer's legal line. */
+  --on-navy-rule: rgba(255, 255, 255, 0.16);
+  --signal-hand: #8fa0ba;
+
+  --font-display: var(--font-archivo), "Arial Narrow", Arial, sans-serif;
+  --font-text: var(--font-plex-sans), "Helvetica Neue", Arial, sans-serif;
+  --font-mono: var(--font-plex-mono), ui-monospace, Menlo, monospace;
+
+  --text-base: 1.0625rem;
+  --leading: 1.6;
+  --radius: 3px;
+  --gutter: clamp(16px, 2vw, 24px);
+  --page-x: clamp(16px, 4vw, 48px);
+  --section-y: clamp(64px, 9vw, 128px);
+  --max: 1240px;
+}

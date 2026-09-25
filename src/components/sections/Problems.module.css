@@ -1,0 +1,62 @@
+.section {
+  padding-block: var(--section-y);
+}
+
+.head h2 {
+  font-size: clamp(1.875rem, 1.3rem + 2.2vw, 3rem);
+  font-stretch: 92%;
+  line-height: 1.05;
+  letter-spacing: -0.015em;
+}
+
+.head p {
+  margin-top: 16px;
+  color: var(--grey);
+  max-width: 36ch;
+}
+
+.problems {
+  margin-top: 40px;
+  display: grid;
+  gap: 0 var(--gutter);
+}
+
+.problems li {
+  border-top: 1px solid var(--rule);
+  padding-block: 24px 28px;
+}
+
+.problem {
+  font-family: var(--font-display);
+  font-weight: 500;
+  font-stretch: 96%;
+  font-size: clamp(1.25rem, 1.1rem + 0.6vw, 1.5rem);
+  line-height: 1.25;
+  max-width: 24ch;
+}
+
+.problems a {
+  display: inline-flex;
+  min-height: 44px;
+  align-items: center;
+  margin-top: 4px;
+  font-weight: 500;
+  font-size: 0.9375rem;
+}
+
+@media (min-width: 720px) {
+  .problems {
+    grid-template-columns: repeat(2, minmax(0, 1fr));
+  }
+}
+
+@media (min-width: 1024px) {
+  .head {
+    grid-column: 1 / span 4;
+  }
+
+  .problems {
+    grid-column: 5 / span 8;
+    margin-top: 0;
+  }
+}

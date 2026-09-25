@@ -1,0 +1,23 @@
+.main {
+  padding-block: var(--section-y);
+}
+
+.title {
+  font-size: clamp(1.875rem, 1.3rem + 2.2vw, 3rem);
+  font-stretch: 92%;
+  line-height: 1.05;
+  letter-spacing: -0.015em;
+}
+
+.text {
+  margin-top: 16px;
+  max-width: 52ch;
+}
+
+.link {
+  display: inline-flex;
+  align-items: center;
+  min-height: 44px;
+  margin-top: 16px;
+  font-weight: 500;
+}

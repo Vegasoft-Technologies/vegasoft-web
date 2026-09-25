@@ -1,0 +1,34 @@
+.band {
+  background: var(--navy);
+  color: var(--on-navy);
+  padding-block: var(--section-y);
+}
+
+.band h2 {
+  font-size: clamp(2rem, 1.3rem + 2.8vw, 3.5rem);
+  font-stretch: 88%;
+  line-height: 1.02;
+  letter-spacing: -0.02em;
+  max-width: 18ch;
+}
+
+.band p {
+  margin-top: 24px;
+  color: var(--on-navy-muted);
+  max-width: 58ch;
+  font-size: clamp(1.0625rem, 1rem + 0.25vw, 1.1875rem);
+}
+
+.band a {
+  color: var(--on-navy-link);
+}
+
+.band :focus-visible {
+  outline-color: var(--white);
+}
+
+@media (min-width: 1024px) {
+  .text {
+    grid-column: 1 / span 9;
+  }
+}

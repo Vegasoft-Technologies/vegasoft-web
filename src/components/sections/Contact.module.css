@@ -1,0 +1,67 @@
+.section {
+  padding-block: var(--section-y);
+}
+
+.text h2 {
+  font-size: clamp(2.25rem, 1.4rem + 3.4vw, 4rem);
+  font-stretch: 88%;
+  line-height: 1;
+  letter-spacing: -0.02em;
+}
+
+.text p {
+  margin-top: 24px;
+  max-width: 52ch;
+}
+
+.action {
+  margin-top: 32px;
+}
+
+.details {
+  margin: 48px 0 0;
+  display: grid;
+  gap: 0;
+}
+
+.details div {
+  display: grid;
+  gap: 2px;
+  padding-block: 14px;
+  border-top: 1px solid var(--rule);
+}
+
+.details div:last-child {
+  border-bottom: 1px solid var(--rule);
+}
+
+.details dt {
+  font-size: 0.875rem;
+  font-weight: 600;
+  color: var(--grey);
+}
+
+.details dd {
+  margin: 0;
+  font-size: 1.0625rem;
+}
+
+/* 44 px rather than the reference's 32 px, so every target meets the size rule in
+   docs/engineering-guidelines.md. */
+.details dd a {
+  display: inline-flex;
+  min-height: 44px;
+  align-items: center;
+}
+
+@media (min-width: 1024px) {
+  .text {
+    grid-column: 1 / span 7;
+  }
+
+  .details {
+    grid-column: 9 / span 4;
+    margin-top: 0;
+    align-self: end;
+  }
+}

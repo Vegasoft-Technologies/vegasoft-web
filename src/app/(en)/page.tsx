@@ -1,8 +1,40 @@
+import type { Metadata } from "next";
+import { home } from "@/content/en/home.ts";
+import { site } from "@/content/site.ts";
+import Approach from "@/components/sections/Approach.tsx";
+import Contact from "@/components/sections/Contact.tsx";
+import Hero from "@/components/sections/Hero.tsx";
+import HowWePrice from "@/components/sections/HowWePrice.tsx";
+import HowWeWork from "@/components/sections/HowWeWork.tsx";
+import Problems from "@/components/sections/Problems.tsx";
+import Services from "@/components/sections/Services.tsx";
+
+export const metadata: Metadata = {
+  title: { absolute: home.meta.title },
+  description: home.meta.description,
+  alternates: { canonical: "/" },
+  // A page's openGraph replaces the layout's rather than merging with it, so the
+  // fields the layout sets are repeated here.
+  openGraph: {
+    title: home.meta.title,
+    description: home.meta.description,
+    url: "/",
+    siteName: site.name,
+    locale: "en_GB",
+    type: "website",
+  },
+};
+
 export default function HomePage() {
   return (
-    <main>
-      <h1>Vegasoft Technologies</h1>
-      <p>The new website is being built.</p>
+    <main id="main">
+      <Hero />
+      <Problems />
+      <Services />
+      <Approach />
+      <HowWeWork />
+      <HowWePrice />
+      <Contact />
     </main>
   );
 }

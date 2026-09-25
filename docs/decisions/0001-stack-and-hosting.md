@@ -36,3 +36,8 @@ queues are provisioned.
   what the deployed site does.
 - Anyone who can work on zuki-web can work on this site without learning a second
   setup.
+- Next's prefetch inlining (`experimental.prefetchInlining`, on by default since 16.2)
+  is turned off. With it on, the adapter's cache interception answers a segment
+  prefetch with the whole page, and the router requests it again without end: several
+  thousand requests a minute from one open tab. With it off, the same prefetch is four
+  small requests that stop. Revisit when the adapter is updated.

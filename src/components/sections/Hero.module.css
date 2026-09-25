@@ -1,0 +1,71 @@
+.hero {
+  padding-block: clamp(48px, 8vw, 112px) clamp(56px, 8vw, 112px);
+}
+
+.hero h1 {
+  font-size: clamp(2.625rem, 1.1rem + 5.4vw, 5.5rem);
+  font-stretch: 86%;
+  line-height: 0.98;
+  letter-spacing: -0.022em;
+  max-width: 15ch;
+}
+
+.lead {
+  margin-top: clamp(24px, 3vw, 40px);
+  font-size: clamp(1.125rem, 1rem + 0.5vw, 1.375rem);
+  line-height: 1.5;
+  max-width: 34ch;
+}
+
+.actions {
+  margin-top: clamp(32px, 4vw, 48px);
+}
+
+.index {
+  margin-top: 56px;
+}
+
+.index h2 {
+  font-family: var(--font-text);
+  font-size: 0.875rem;
+  font-weight: 600;
+  color: var(--grey);
+  padding-bottom: 12px;
+  border-bottom: 1px solid var(--navy);
+}
+
+.index a {
+  display: flex;
+  gap: 16px;
+  align-items: baseline;
+  min-height: 44px;
+  padding-block: 10px;
+  border-bottom: 1px solid var(--rule);
+  color: var(--navy);
+  text-decoration: none;
+  font-weight: 500;
+}
+
+.index a:hover {
+  color: var(--blue-deep);
+}
+
+.num {
+  font-family: var(--font-display);
+  font-variant-numeric: tabular-nums;
+  font-weight: 600;
+  color: var(--grey);
+  min-width: 1.75em;
+}
+
+@media (min-width: 1024px) {
+  .main {
+    grid-column: 1 / span 8;
+  }
+
+  .index {
+    grid-column: 10 / span 3;
+    margin-top: 0;
+    align-self: end;
+  }
+}
