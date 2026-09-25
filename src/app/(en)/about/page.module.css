@@ -1,0 +1,35 @@
+.text {
+  margin-bottom: 24px;
+  max-width: 52ch;
+}
+
+.link {
+  margin-top: 24px;
+}
+
+.link a {
+  display: inline-flex;
+  align-items: center;
+  min-height: 44px;
+  font-weight: 500;
+}
+
+.link + div {
+  margin-top: 24px;
+}
+
+.closing {
+  padding-block: var(--section-y);
+  border-top: 1px solid var(--rule);
+}
+
+.closing h2 {
+  font-size: clamp(2.25rem, 1.4rem + 3.4vw, 4rem);
+  font-stretch: 88%;
+  line-height: 1;
+  letter-spacing: -0.02em;
+}
+
+.action {
+  margin-top: 32px;
+}

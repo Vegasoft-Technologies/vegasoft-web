@@ -3,5 +3,7 @@ import { site } from "@/content/site.ts";
 
 // Every page of the site, at the canonical address. Later pull requests add their pages.
 export default function sitemap(): MetadataRoute.Sitemap {
-  return [{ url: `${site.url}/` }];
+  return ["/", "/about", "/contact", "/company"].map((path) => ({
+    url: `${site.url}${path}`,
+  }));
 }

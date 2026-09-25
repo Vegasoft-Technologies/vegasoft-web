@@ -1,0 +1,7 @@
+.details {
+  padding-block: 0 var(--section-y);
+}
+
+.details dl {
+  max-width: 64ch;
+}

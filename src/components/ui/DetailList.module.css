@@ -1,0 +1,38 @@
+.list {
+  margin: 0;
+  display: grid;
+  gap: 0;
+}
+
+.list > div {
+  display: grid;
+  gap: 2px;
+  padding-block: 14px;
+  border-top: 1px solid var(--rule);
+}
+
+.list > div:last-child {
+  border-bottom: 1px solid var(--rule);
+}
+
+.list dt {
+  font-size: 0.875rem;
+  font-weight: 600;
+  color: var(--grey);
+}
+
+.list dd {
+  margin: 0;
+  font-size: 1.0625rem;
+}
+
+.list dd a {
+  display: inline-flex;
+  min-height: 44px;
+  align-items: center;
+}
+
+.list dd ul {
+  display: grid;
+  gap: 4px;
+}
