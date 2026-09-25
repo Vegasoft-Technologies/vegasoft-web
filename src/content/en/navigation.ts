@@ -22,6 +22,8 @@ export const footer = {
     { label: "Contact", href: "/contact" },
     { label: "Company information", href: "/company" },
   ] satisfies NavLink[],
+  /** Pages that are coming. Their place is shown where the markers are on. */
+  companySoon: ["Privacy notice", "Terms of business"],
 };
 
 /** Text that assistive technology reads but the page does not show. */

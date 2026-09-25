@@ -1,20 +1,19 @@
 import Link from "next/link";
-import { company, companyLabels, legalLineFields } from "@/content/company.ts";
+import { company, companyLabels } from "@/content/company.ts";
 import { areas } from "@/content/en/areas.ts";
 import { footer } from "@/content/en/navigation.ts";
 import { site } from "@/content/site.ts";
+import { showSoon } from "@/lib/soon.ts";
 import Container from "@/components/ui/Container.tsx";
 import Logo from "@/components/ui/Logo.tsx";
-import Pending from "@/components/ui/Pending.tsx";
+import Soon from "@/components/ui/Soon.tsx";
+import LegalLine from "./LegalLine.tsx";
 import styles from "./SiteFooter.module.css";
 
 /** The company details under the email address and the telephone number. */
 const contactFields = ["location"] as const;
 
 export default function SiteFooter() {
-  // A detail that is not known yet is left out of a deployed build entirely, and shown
-  // as a placeholder in development (docs/decisions/0004).
-  const development = process.env.NODE_ENV === "development";
   return (
     <footer className={styles.footer}>
       <Container grid className={styles.columns}>
@@ -46,6 +45,12 @@ export default function SiteFooter() {
                 <Link href={link.href}>{link.label}</Link>
               </li>
             ))}
+            {showSoon &&
+              footer.companySoon.map((label) => (
+                <li key={label} className={styles.soon}>
+                  <Soon label={label} />
+                </li>
+              ))}
           </ul>
         </nav>
         <div className={`${styles.col} ${styles.contact}`}>
@@ -59,16 +64,10 @@ export default function SiteFooter() {
             </li>
             {contactFields.map((key) => {
               const value = company[key];
-              if (value === null && !development) return null;
+              if (value === null) return null;
               return (
                 <li key={key} className={styles.detail}>
-                  {value === null ? (
-                    <Pending label={companyLabels[key]} />
-                  ) : (
-                    <>
-                      <span className={styles.label}>{companyLabels[key]}</span> {value}
-                    </>
-                  )}
+                  <span className={styles.label}>{companyLabels[key]}</span> {value}
                 </li>
               );
             })}
@@ -76,22 +75,7 @@ export default function SiteFooter() {
         </div>
       </Container>
       <Container>
-        <div className={styles.legal}>
-          <span>© {site.name}</span>
-          {legalLineFields.map((key) => {
-            const value = company[key];
-            if (value === null && !development) return null;
-            return (
-              <span key={key}>
-                {value === null ? (
-                  <Pending label={companyLabels[key]} />
-                ) : (
-                  `${companyLabels[key]}: ${value}`
-                )}
-              </span>
-            );
-          })}
-        </div>
+        <LegalLine />
       </Container>
     </footer>
   );

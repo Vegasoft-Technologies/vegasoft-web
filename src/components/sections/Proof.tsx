@@ -1,4 +1,5 @@
 import { proof } from "@/content/en/proof.ts";
+import { showSoon } from "@/lib/soon.ts";
 import PageSection from "@/components/ui/PageSection.tsx";
 import ProofGroup from "./ProofGroup.tsx";
 import styles from "./Proof.module.css";
@@ -12,7 +13,7 @@ const { testimonials, caseStudies } = proof;
  */
 export default function Proof() {
   const hasAny = testimonials.items.length > 0 || caseStudies.items.length > 0;
-  if (!hasAny && process.env.NODE_ENV !== "development") return null;
+  if (!hasAny && !showSoon) return null;
   return (
     <PageSection id="proof" title={proof.title} rule>
       <div className={styles.groups}>

@@ -5,16 +5,13 @@ import { home } from "@/content/en/home.ts";
 import { site } from "@/content/site.ts";
 import ButtonLink from "@/components/ui/ButtonLink.tsx";
 import Container from "@/components/ui/Container.tsx";
-import Pending from "@/components/ui/Pending.tsx";
 import styles from "./Contact.module.css";
 
 const { contact } = home;
 
 export default function Contact() {
-  // The location row is left out of a deployed build while it is not known, and shown
-  // as a placeholder in development (docs/decisions/0004).
-  const showLocation =
-    company.location !== null || process.env.NODE_ENV === "development";
+  // A detail that is not known is left out; the location is known.
+  const showLocation = company.location !== null;
   const reply = commitment("reply");
 
   return (
@@ -48,7 +45,7 @@ export default function Contact() {
           {showLocation && (
             <div>
               <dt>{contact.locationLabel}</dt>
-              <dd>{company.location ?? <Pending label={contact.locationLabel} />}</dd>
+              <dd>{company.location}</dd>
             </div>
           )}
         </dl>

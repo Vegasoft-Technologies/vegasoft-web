@@ -52,8 +52,12 @@ jobs:
         if: steps.secrets.outputs.present == 'true'
         run: npm ci
 
+      # A pull request preview shows the markers for details that are still coming; the
+      # deployment of main never does.
       - name: Build the Worker
         if: steps.secrets.outputs.present == 'true'
+        env:
+          SHOW_SOON: ${{ github.event_name == 'pull_request' && '1' || '' }}
         run: npx opennextjs-cloudflare build
 
       # pipefail, so that a failed deployment is not hidden behind tee's exit status.

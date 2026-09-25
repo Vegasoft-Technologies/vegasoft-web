@@ -10,12 +10,12 @@ export const proof = {
   title: "Clients and work",
   testimonials: {
     title: "What clients say",
-    placeholder: "Testimonials: to be added, real and named only",
+    placeholder: "Testimonials",
     items: [] as Testimonial[],
   },
   caseStudies: {
     title: "Case studies",
-    placeholder: "Case studies: to be added, real and named only",
+    placeholder: "Case studies",
     items: [] as CaseStudy[],
   },
 };

@@ -12,55 +12,83 @@ AI consultancies. The last column of each table says how many of the fourteen sh
 kind of information. Everything that fails the rule is listed at the end, with its count
 and the reason.
 
-Nothing is invented. A fact that is not known yet is `null` in `src/content/company.ts`
-and invisible in deployed builds; `npm run dev` shows a dashed placeholder where it will
-go. A promise the owner has not approved is `approved: false` in
-`src/content/en/commitments.ts` and shown only in development, marked as a draft. Proof
-lives in `src/content/en/proof.ts` as empty lists: real, named and with permission only.
+Nothing is invented. The business trades as Vegasoft Technologies and is being
+incorporated as Vegasoft Technologies London Ltd; the details are in
+`src/content/company.ts` and every page reads them from there.
+
+## Details that are still coming, and the "Soon" switch
+
+A detail that is not known yet is `null` in `src/content/company.ts`. A promise the owner
+has not approved is `approved: false` in `src/content/en/commitments.ts`.
+
+The production build shows neither: a live site does not advertise what it has not got.
+Where the gaps are worth seeing they are marked "Soon", in the place the detail will take:
+
+- `npm run dev`
+- `npm run preview:soon`, which is `npm run preview` with `SHOW_SOON=1`
+- the preview of every pull request, because `.github/workflows/deploy.yml` sets
+  `SHOW_SOON=1` for pull requests and leaves it empty for `main`
+
+`src/lib/soon.ts` holds that switch, and the `Soon` component marks each place with a
+`data-soon` attribute, so a build can be searched for markers that should not be in it.
+
+These places show a marker, and no others:
+
+| What                              | Where                                  |
+| --------------------------------- | -------------------------------------- |
+| Company number                    | Footer legal line, Company information |
+| Privacy notice                    | Footer, Company column                 |
+| Terms of business                 | Footer, Company column                 |
+| Contact form                      | Contact page                           |
+| Case studies, testimonials        | Home page, "Clients and work"          |
+| The "Where your data lives" draft | Home page, "What you can count on"     |
+
+The VAT number shows nothing anywhere, not even a marker: the business is not VAT
+registered.
 
 ## Facts about the business
 
-| Field                | Where it appears                                                             | Required by law before launch                                        | Format expected                                                       | Shown by |
-| -------------------- | ---------------------------------------------------------------------------- | -------------------------------------------------------------------- | --------------------------------------------------------------------- | -------- |
-| Trading name         | Everywhere                                                                   | Yes, and the legal name where it differs                             | `Vegasoft Technologies`                                               | 14 of 14 |
-| Legal name           | Footer legal line, Company information                                       | Yes (Companies Act 2006, E-Commerce Regulations 2002 reg. 6)         | The registered name exactly as on the public register                 | 12 of 14 |
-| Registered in        | Footer legal line, Company information                                       | Yes, if a company (Company, LLP and Business Names Regulations 2015) | `England and Wales`                                                   | 12 of 14 |
-| Address              | Footer legal line, Company information, structured data                      | Yes: a geographic address, a PO box does not qualify (reg. 6)        | `12 Example Street, Exeter EX1 1AA`                                   | 10 of 14 |
-| Location             | Contact section and page, About, footer                                      | No                                                                   | `Exeter, United Kingdom`                                              | 14 of 14 |
-| Company number       | Footer legal line, Company information (linked to the register)              | Yes, if a company                                                    | `12345678`                                                            | 11 of 14 |
-| VAT number           | Footer legal line, Company information                                       | Yes, if VAT registered (reg. 6)                                      | `GB 123 4567 89`                                                      | 3 of 14  |
-| Email address        | Header (from 1024 px), contact section and page, footer, Company information | Yes (reg. 6)                                                         | `hello@vegasoft.co.uk`, known                                         | 14 of 14 |
-| Telephone number     | Header (from 1024 px), contact section and page, footer, Company information | No                                                                   | `+44 7767 080863`, known                                              | 10 of 14 |
-| Area covered on site | About, Contact, structured data                                              | No                                                                   | `Devon and the South West; elsewhere in the UK by arrangement`        | 14 of 14 |
-| Founded              | About, structured data                                                       | No                                                                   | `2024`                                                                | 9 of 14  |
-| Profiles             | Contact, structured data                                                     | No                                                                   | Label and address: `LinkedIn`, `https://www.linkedin.com/company/...` | 11 of 14 |
-| Privacy notice       | A page of its own, linked from the footer (later pull request)               | Yes (UK GDPR): what is collected, why, for how long, and the rights  | A page, with the date it was last updated                             | 14 of 14 |
-| Terms of business    | A page of its own, if the owner wants them published                         | No                                                                   | A page, with the date it was last updated                             | 11 of 14 |
+| Field                | Where it appears                                                             | Required by law before launch                                        | Value or format                                           | Shown by |
+| -------------------- | ---------------------------------------------------------------------------- | -------------------------------------------------------------------- | --------------------------------------------------------- | -------- |
+| Trading name         | Everywhere                                                                   | Yes, and the legal name where it differs                             | Filled: `Vegasoft Technologies`                           | 14 of 14 |
+| Legal name           | Footer legal line, Company information, structured data                      | Yes (Companies Act 2006, E-Commerce Regulations 2002 reg. 6)         | Filled: `Vegasoft Technologies London Ltd`                | 12 of 14 |
+| Registered in        | Footer legal line, Company information                                       | Yes, if a company (Company, LLP and Business Names Regulations 2015) | Filled: `England and Wales`                               | 12 of 14 |
+| Registered office    | Footer legal line, Company information, structured data                      | Yes: a geographic address, a PO box does not qualify (reg. 6)        | Filled: `20 Wenlock Road, London N1 7GU`, held in parts   | 10 of 14 |
+| Company number       | Footer legal line, Company information (linked to the register once known)   | Yes, if a company                                                    | **Soon**: incorporation is in progress. Format `12345678` | 11 of 14 |
+| VAT number           | Nowhere                                                                      | Yes, if VAT registered (reg. 6)                                      | Not applicable: the business is not VAT registered        | 3 of 14  |
+| Location             | Contact section and page, About, footer                                      | No                                                                   | Filled: `London, United Kingdom`                          | 14 of 14 |
+| Email address        | Header (from 1024 px), contact section and page, footer, Company information | Yes (reg. 6)                                                         | Filled: `hello@vegasoft.co.uk`                            | 14 of 14 |
+| Telephone number     | Header (from 1024 px), contact section and page, footer, Company information | No                                                                   | Filled: `+44 7767 080863`                                 | 10 of 14 |
+| Area covered on site | About, Contact                                                               | No                                                                   | Filled: `Anywhere in the UK, by arrangement`              | 14 of 14 |
+| Founded              | About, structured data                                                       | No                                                                   | Filled: `2026`                                            | 9 of 14  |
+| Profiles             | Contact, structured data                                                     | No                                                                   | Filled: LinkedIn                                          | 11 of 14 |
+| Support hours        | The support-hours commitment, structured data                                | No                                                                   | Filled: Monday to Friday, 9:00 to 18:00 UK time           | 8 of 14  |
+| Privacy notice       | A page of its own, linked from the footer                                    | Yes (UK GDPR): what is collected, why, for how long, and the rights  | **Soon**: a page, with the date it was last updated       | 14 of 14 |
+| Terms of business    | A page of its own                                                            | No                                                                   | **Soon**: a page, with the date it was last updated       | 11 of 14 |
 
 ## Promises to clients
 
-Approved entries are published in "What you can count on" on the home page and, where
-they belong, on the About and Contact pages and in the questions. Each draft is a proposed
-sentence for the owner to approve, change or remove.
+Published entries are in "What you can count on" on the home page and, where they belong,
+on the About and Contact pages and in the questions. The draft is a proposed sentence for
+the owner to decide on.
 
-| Commitment                              | Status            | Shown by |
-| --------------------------------------- | ----------------- | -------- |
-| A reply within one working day          | Published         | 7 of 14  |
-| Ownership of the work, handover         | Published         | 11 of 14 |
-| On site when the job needs it           | Published         | 12 of 14 |
-| Plain answers, saying no when not a fit | Published (About) | 12 of 14 |
-| A first conversation costs nothing      | Draft             | 14 of 14 |
-| Payment staged against the scope        | Draft             | 13 of 14 |
-| Seeing the work as it is built          | Draft             | 10 of 14 |
-| Where data is hosted                    | Draft             | 10 of 14 |
-| Confidentiality and naming clients      | Draft             | 9 of 14  |
-| Support hours                           | Draft             | 8 of 14  |
+| Commitment                              | Status                                               | Shown by |
+| --------------------------------------- | ---------------------------------------------------- | -------- |
+| A first conversation costs nothing      | Published                                            | 14 of 14 |
+| A reply within one working day          | Published                                            | 7 of 14  |
+| Payment follows the work                | Published                                            | 13 of 14 |
+| You see the work as it is built         | Published                                            | 10 of 14 |
+| Yours to keep, ownership and handover   | Published                                            | 11 of 14 |
+| Your business stays your business       | Published                                            | 9 of 14  |
+| On site when the job needs it           | Published                                            | 12 of 14 |
+| Support hours                           | Published                                            | 8 of 14  |
+| Plain answers, saying no when not a fit | Published (About)                                    | 12 of 14 |
+| Where your data lives                   | **Draft**: a technical decision for the hosting work | 10 of 14 |
 
 ## Proof
 
-Each list is empty until the owner supplies a real, named entry and the person or business
-named has agreed to it. In deployed builds an empty list renders nothing; in development
-each shows a placeholder in the "Clients and work" section of the home page.
+Both lists are empty until the owner supplies a real, named entry and the person or
+business named has agreed to it. They are marked "Soon" where the markers are on.
 
 | Kind         | Shown by |
 | ------------ | -------- |
@@ -71,7 +99,7 @@ each shows a placeholder in the "Clients and work" section of the home page.
 
 Fewer than half of the comparable sites show it, and the law does not require it:
 
-- Office hours (4 of 14).
+- Office hours as a company detail (4 of 14). The support hours are a commitment instead.
 - Languages (3 of 14).
 - Certifications (5 of 14).
 - Memberships, partner programmes and funding schemes (5 of 14).

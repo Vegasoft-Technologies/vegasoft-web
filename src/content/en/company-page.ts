@@ -21,10 +21,10 @@ export const companyPage = {
     "tradingName",
     "legalName",
     "placeOfRegistration",
+    "companyNumber",
     "address",
     "email",
     "phone",
-    "companyNumber",
     "vatNumber",
   ] satisfies CompanyRow[],
 };

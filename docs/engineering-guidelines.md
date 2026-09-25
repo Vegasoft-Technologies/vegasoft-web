@@ -84,8 +84,10 @@ file in `src/content/`.
   harness, supercharge, game-changer, next-gen, innovative solutions, world-class,
   best-in-class, state-of-the-art, fast-paced, transform your business.
 - No arrows, long dashes or exclamation marks. The same test checks for them.
-- The business is never described as a limited company. The trading name is "Vegasoft
-  Technologies"; the legal name appears only where the law requires it, once it is known.
+- The site's copy uses the trading name, "Vegasoft Technologies". The legal name comes
+  only from `src/content/company.ts`, and appears only in the footer's legal line, on the
+  Company information page and in the structured data. No file in `src/content/en/` names
+  it; `src/content/style.test.ts` checks that.
 
 ## Visual rules
 

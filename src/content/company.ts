@@ -1,8 +1,11 @@
 // Company details for the footer, the About, Contact and Company information pages, the
-// structured data and, later, the privacy notice. null means "not known yet": deployed
-// builds leave the detail out entirely, label included, and `npm run dev` shows a dashed
-// placeholder where it will go. A list is null until known, never an empty list, so that
-// "not known" and "none" stay different.
+// structured data and, later, the privacy notice.
+//
+// The business trades as Vegasoft Technologies and is being incorporated as a private
+// company limited by shares. null means "not known yet". A deployed build shows nothing
+// for a null detail, and a build with the markers on (`npm run dev`, `npm run preview:soon`
+// and pull request previews) shows "Soon" in the places listed in docs/company-details.md.
+// A null detail that is not coming at all, such as the VAT number, shows nothing anywhere.
 //
 // Before launch the site must show the legal name, a geographic address and an email
 // address (Electronic Commerce (EC Directive) Regulations 2002, regulation 6), plus the
@@ -12,59 +15,86 @@
 
 export type ProfileLink = { label: string; href: string };
 
+/** An address in parts, so that the page and the structured data read the same fields. */
+export type PostalAddress = {
+  street: string;
+  town: string;
+  postcode: string;
+  country: string;
+};
+
+/** Support hours, for the structured data. The sentence is the support-hours commitment. */
+export type SupportHours = { days: string[]; opens: string; closes: string };
+
 export type CompanyDetails = {
   /** The name the business trades under. Shown everywhere. */
   tradingName: string;
-  /** The legal person or company behind the trading name. */
+  /** The registered company behind the trading name. */
   legalName: string | null;
   /** Where the company is registered, for example "England and Wales". */
   placeOfRegistration: string | null;
-  /** A geographic address; a PO box does not qualify. */
-  address: string | null;
+  /** The registered office. A PO box does not qualify. */
+  address: PostalAddress | null;
   /** A short public location, such as a town and country. */
   location: string | null;
+  /** From Companies House, once incorporation is complete. */
   companyNumber: string | null;
+  /** The business is not VAT registered, so nothing is shown for this, not even "Soon". */
   vatNumber: string | null;
-  /** Where we work on site, for example "Devon and the South West; elsewhere in the UK by arrangement". */
+  /** Where we work on site. */
   serviceArea: string | null;
-  /** The year the business started, for example "2024". */
+  /** The year the business started, for example "2026". */
   founded: string | null;
-  /** Public profiles, for example [{ label: "LinkedIn", href: "https://www.linkedin.com/company/..." }]. */
+  /** Public profiles. */
   social: ProfileLink[] | null;
+  /** The hours in the support-hours commitment, in the form the structured data needs. */
+  supportHours: SupportHours | null;
 };
 
 export const company: CompanyDetails = {
   tradingName: "Vegasoft Technologies",
-  legalName: null,
-  placeOfRegistration: null,
-  address: null,
-  location: null,
+  legalName: "Vegasoft Technologies London Ltd",
+  placeOfRegistration: "England and Wales",
+  address: {
+    street: "20 Wenlock Road",
+    town: "London",
+    postcode: "N1 7GU",
+    country: "United Kingdom",
+  },
+  location: "London, United Kingdom",
   companyNumber: null,
   vatNumber: null,
-  serviceArea: null,
-  founded: null,
-  social: null,
+  serviceArea: "Anywhere in the UK, by arrangement",
+  founded: "2026",
+  social: [
+    {
+      label: "LinkedIn",
+      href: "https://www.linkedin.com/company/vegasoft-technologies-london",
+    },
+  ],
+  supportHours: {
+    days: ["Monday", "Tuesday", "Wednesday", "Thursday", "Friday"],
+    opens: "09:00",
+    closes: "18:00",
+  },
 };
+
+/** The address on one line, as the pages show it. */
+export function formatAddress(address: PostalAddress): string {
+  return `${address.street}, ${address.town} ${address.postcode}`;
+}
 
 /** Labels for the details above. */
 export const companyLabels = {
   tradingName: "Trading name",
   legalName: "Legal name",
   placeOfRegistration: "Registered in",
-  address: "Address",
+  address: "Registered office",
   location: "Location",
   companyNumber: "Company number",
   vatNumber: "VAT number",
   serviceArea: "Area covered on site",
   founded: "Founded",
   social: "Profiles",
+  supportHours: "Support hours",
 } as const;
-
-/** The details in the footer's legal line, in the order they are shown. */
-export const legalLineFields = [
-  "legalName",
-  "placeOfRegistration",
-  "address",
-  "companyNumber",
-  "vatNumber",
-] as const;

@@ -12,6 +12,6 @@ export const contact = {
     title: "How to reach us",
     replyLabel: "Reply",
   },
-  /** Shown only in development, where the form will go. */
-  formPlaceholder: "Contact form: added with the server work",
+  /** Marks where the form will go, where the markers are on. */
+  formLabel: "Contact form",
 };

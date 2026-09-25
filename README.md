@@ -28,7 +28,12 @@ the local Workers runtime, which is what the deployed site runs:
 npm run preview
 ```
 
-That serves the site at <http://localhost:8787>.
+That serves the site at <http://localhost:8787>, exactly as the deployed site looks.
+
+Details that are still coming, and sentences the business owner has not approved, are
+marked "Soon" in `npm run dev` and in `npm run preview:soon`, and in the preview of every
+pull request. They never appear in the deployed production build.
+[`docs/company-details.md`](docs/company-details.md) lists every such place.
 
 ## Commands
 
@@ -38,6 +43,7 @@ That serves the site at <http://localhost:8787>.
 | `npm run build`        | Produce a production build.                                      |
 | `npm run start`        | Serve a production build with Node.                              |
 | `npm run preview`      | Build the Cloudflare Worker and run it locally.                  |
+| `npm run preview:soon` | The same, with the markers for details that are still coming.    |
 | `npm run lint`         | Run ESLint.                                                      |
 | `npm run format`       | Format the project with Prettier.                                |
 | `npm run format:check` | Check formatting without writing changes.                        |

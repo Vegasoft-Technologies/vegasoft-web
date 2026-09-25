@@ -1,4 +1,4 @@
-import { company } from "../content/company.ts";
+import { company, formatAddress } from "../content/company.ts";
 import { questions } from "../content/en/questions.ts";
 import { site } from "../content/site.ts";
 
@@ -21,12 +21,29 @@ export function structuredData() {
       "@type": "ContactPoint",
       email: site.email,
       telephone: site.phone,
+      ...(company.supportHours !== null && {
+        hoursAvailable: {
+          "@type": "OpeningHoursSpecification",
+          dayOfWeek: company.supportHours.days,
+          opens: company.supportHours.opens,
+          closes: company.supportHours.closes,
+        },
+      }),
     },
     ...(company.legalName !== null && { legalName: company.legalName }),
-    ...(company.address !== null && { address: company.address }),
+    ...(company.address !== null && {
+      address: {
+        "@type": "PostalAddress",
+        streetAddress: company.address.street,
+        addressLocality: company.address.town,
+        postalCode: company.address.postcode,
+        addressCountry: company.address.country,
+      },
+      areaServed: { "@type": "Country", name: company.address.country },
+    }),
+    // The company number, once Companies House has issued it.
     ...(company.companyNumber !== null && { identifier: company.companyNumber }),
     ...(company.vatNumber !== null && { vatID: company.vatNumber }),
-    ...(company.serviceArea !== null && { areaServed: company.serviceArea }),
     ...(company.founded !== null && { foundingDate: company.founded }),
     ...(company.social !== null && { sameAs: company.social.map((link) => link.href) }),
   };
@@ -48,6 +65,11 @@ export function structuredData() {
     })),
   };
   return { "@context": "https://schema.org", "@graph": [organization, webSite, faqPage] };
+}
+
+/** The address of the registered office, as the pages print it. */
+export function registeredOffice(): string | null {
+  return company.address === null ? null : formatAddress(company.address);
 }
 
 /** The JSON for a script element. "<" is escaped so the text can never close the element. */
