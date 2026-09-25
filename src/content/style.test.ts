@@ -5,6 +5,7 @@ import * as home from "./en/home.ts";
 import * as navigation from "./en/navigation.ts";
 import * as notFound from "./en/not-found.ts";
 import * as questions from "./en/questions.ts";
+import * as services from "./en/services.ts";
 import * as about from "./en/about.ts";
 import * as commitments from "./en/commitments.ts";
 import * as companyPage from "./en/company-page.ts";
@@ -57,6 +58,7 @@ const copy = [
   ...collect(navigation, "navigation"),
   ...collect(notFound, "notFound"),
   ...collect(questions, "questions"),
+  ...collect(services, "services"),
   ...collect(about, "about"),
   ...collect(commitments, "commitments"),
   ...collect(companyPage, "companyPage"),
