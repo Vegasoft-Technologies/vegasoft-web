@@ -43,5 +43,20 @@ export const questions = {
       answer:
         "Tell us about it anyway. If something in your business is repeated by hand every day, it can very likely be handed to a system, and we will say plainly whether it is a fit and how long it would take.",
     },
+    {
+      question: "How quickly do you reply?",
+      answer:
+        "Within one working day. Email hello@vegasoft.co.uk or call +44 7767 080863.",
+    },
+    {
+      question: "Who owns what you build?",
+      answer:
+        "You do: the code, the data and the documentation. If you ever move to someone else, we hand over everything they need to look after it.",
+    },
+    {
+      question: "Do you come on site?",
+      answer:
+        "Yes, when the job needs it, for example to see a line running or to install a system. The rest of the work is done remotely.",
+    },
   ] satisfies Question[],
 };

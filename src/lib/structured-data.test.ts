@@ -2,6 +2,7 @@ import assert from "node:assert/strict";
 import test from "node:test";
 import { company } from "../content/company.ts";
 import { questions } from "../content/en/questions.ts";
+import { site } from "../content/site.ts";
 import { structuredData, structuredDataJson } from "./structured-data.ts";
 
 function walk(
@@ -37,6 +38,21 @@ test("a company detail that is not known yet is left out, never null", () => {
   const organization = structuredData()["@graph"][0] as Record<string, unknown>;
   assert.equal("legalName" in organization, company.legalName !== null);
   assert.equal("address" in organization, company.address !== null);
+  assert.equal("areaServed" in organization, company.serviceArea !== null);
+  assert.equal("foundingDate" in organization, company.founded !== null);
+  assert.equal("sameAs" in organization, company.social !== null);
+});
+
+test("the organisation has a contact point with the email address and the telephone number", () => {
+  const organization = structuredData()["@graph"][0] as {
+    contactPoint: { email: string; telephone: string; availableLanguage?: string[] };
+  };
+  assert.equal(organization.contactPoint.email, site.email);
+  assert.equal(organization.contactPoint.telephone, site.phone);
+  assert.equal(
+    "availableLanguage" in organization.contactPoint,
+    company.languages !== null,
+  );
 });
 
 test("the script text parses back and cannot close a script element", () => {
