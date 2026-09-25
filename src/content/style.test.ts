@@ -9,6 +9,7 @@ import * as about from "./en/about.ts";
 import * as commitments from "./en/commitments.ts";
 import * as companyPage from "./en/company-page.ts";
 import * as contact from "./en/contact.ts";
+import * as legal from "./en/legal.ts";
 import * as proof from "./en/proof.ts";
 
 // Phrases the writing rules exclude (docs/engineering-guidelines.md, "Writing"). They are
@@ -60,6 +61,7 @@ const copy = [
   ...collect(commitments, "commitments"),
   ...collect(companyPage, "companyPage"),
   ...collect(contact, "contact"),
+  ...collect(legal, "legal"),
   ...collect(proof, "proof"),
 ];
 
@@ -77,7 +79,10 @@ test("no arrows, long dashes or exclamation marks", () => {
   }
 });
 
-test("the business is never described as a limited company", () => {
+// The site's copy uses the trading name. The legal name appears only in the footer's
+// legal line, on the Company information page and in the structured data, and always
+// comes from src/content/company.ts.
+test("no copy file names the company behind the trading name", () => {
   for (const { path, text } of copy) {
     assert.doesNotMatch(text, /\bLtd\b|\bLimited\b/, path);
   }

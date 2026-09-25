@@ -1,4 +1,4 @@
-import { company, companyLabels } from "@/content/company.ts";
+import { company, companyLabels, formatAddress } from "@/content/company.ts";
 import { companyPage } from "@/content/en/company-page.ts";
 import { site } from "@/content/site.ts";
 import { pageMetadata } from "@/lib/metadata.ts";
@@ -23,8 +23,18 @@ export default function CompanyPage() {
         node: <a href={site.phoneHref}>{site.phone}</a>,
       };
     }
-    // The company number links to the public register, so anyone can check it.
-    if (row === "companyNumber" && company.companyNumber !== null) {
+    if (row === "address") {
+      return {
+        label: companyLabels.address,
+        value: company.address === null ? null : formatAddress(company.address),
+      };
+    }
+    // The company number is coming, so its row is marked; once it is known it links to
+    // the register, where anyone can check it.
+    if (row === "companyNumber") {
+      if (company.companyNumber === null) {
+        return { label: companyLabels.companyNumber, value: null, soon: true };
+      }
       return {
         label: companyLabels.companyNumber,
         node: (
@@ -34,7 +44,11 @@ export default function CompanyPage() {
         ),
       };
     }
-    return { label: companyLabels[row], value: company[row] };
+    const value = company[row];
+    return {
+      label: companyLabels[row],
+      value: typeof value === "string" || value === null ? value : null,
+    };
   });
   return (
     <main id="main">
