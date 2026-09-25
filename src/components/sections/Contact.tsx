@@ -20,6 +20,7 @@ export default function Contact() {
         <div className={styles.text}>
           <h2 id="contact-title">{contact.title}</h2>
           <p>{contact.body}</p>
+          <p className={styles.hint}>{contact.hint}</p>
           <div className={styles.action}>
             <ButtonLink href={contact.cta.href}>{contact.cta.label}</ButtonLink>
           </div>

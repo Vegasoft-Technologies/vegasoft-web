@@ -1,5 +1,6 @@
 .section {
   padding-block: var(--section-y);
+  border-top: 1px solid var(--rule);
 }
 
 .text h2 {
@@ -12,6 +13,10 @@
 .text p {
   margin-top: 24px;
   max-width: 52ch;
+}
+
+.hint {
+  color: var(--grey);
 }
 
 .action {
