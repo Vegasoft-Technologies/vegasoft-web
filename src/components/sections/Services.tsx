@@ -1,6 +1,8 @@
+import Link from "next/link";
 import { areas } from "@/content/en/areas.ts";
 import { home } from "@/content/en/home.ts";
 import { numbering } from "@/lib/numbering.ts";
+import { servicePath } from "@/lib/services.ts";
 import Container from "@/components/ui/Container.tsx";
 import PilotTag from "@/components/ui/PilotTag.tsx";
 import styles from "./Services.module.css";
@@ -24,7 +26,9 @@ export default function Services() {
             <li key={area.slug} className={styles.area} id={area.slug}>
               <div className={styles.areaHead}>
                 <span className={styles.num}>{numbering(i)}</span>
-                <h3>{area.name}</h3>
+                <h3>
+                  <Link href={servicePath(area.slug)}>{area.name}</Link>
+                </h3>
                 <p className={styles.promise}>{area.promise}</p>
                 <p className={styles.audience}>
                   <b>{services.audienceLabel}</b> {area.audience}
