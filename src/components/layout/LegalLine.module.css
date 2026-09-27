@@ -6,3 +6,12 @@
   font-size: 0.8125rem;
   max-width: 100ch;
 }
+
+/* On a page rather than in the footer: no rule above it, and the page's own colours. */
+.light {
+  margin-top: 24px;
+  padding-top: 0;
+  border-top: 0;
+  color: var(--grey);
+  max-width: 62ch;
+}

@@ -22,9 +22,10 @@ export const navigation = {
       { label: "Sorular", href: anchorHref("questions", "tr") },
       { label: "İletişim", href: pagePath("contact", "tr") },
       { label: "Şirket bilgileri", href: pagePath("company", "tr") },
+      { label: "Gizlilik bildirimi", href: pagePath("privacy", "tr") },
     ] satisfies NavLink[],
     /** Yolda olan sayfalar. Yerleri, işaretler açıkken görünür. */
-    companySoon: ["Gizlilik bildirimi", "Hizmet şartları"],
+    companySoon: ["Hizmet şartları"],
   },
   /** Yardımcı teknolojinin okuduğu metinler ve iki işaret. */
   labels: {

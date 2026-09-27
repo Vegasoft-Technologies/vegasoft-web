@@ -13,7 +13,14 @@ import styles from "./LegalLine.module.css";
  * left out whole, so no deployed build shows a gap. The company number, which is coming,
  * keeps its clause and is marked where the markers are on (src/lib/soon.ts).
  */
-export default function LegalLine({ language }: { language: Language }) {
+export default function LegalLine({
+  language,
+  tone = "dark",
+}: {
+  language: Language;
+  /** "dark" for the footer, "light" for a page. */
+  tone?: "dark" | "light";
+}) {
   const { legal } = contentFor(language);
   const {
     tradingName,
@@ -29,7 +36,7 @@ export default function LegalLine({ language }: { language: Language }) {
       : (legal.placeNames[placeOfRegistration] ?? placeOfRegistration);
   const showNumber = companyNumber !== null || showSoon;
   return (
-    <p className={styles.legal}>
+    <p className={tone === "light" ? `${styles.legal} ${styles.light}` : styles.legal}>
       {fill(legal.copyright, { trading: site.name })}{" "}
       {legalName !== null &&
         place !== null &&

@@ -1,0 +1,26 @@
+.text {
+  max-width: 62ch;
+}
+
+.text + .text {
+  margin-top: 16px;
+}
+
+.text a {
+  overflow-wrap: anywhere;
+}
+
+.list {
+  display: grid;
+  gap: 0;
+  max-width: 62ch;
+}
+
+.list > li {
+  padding-block: 14px;
+  border-top: 1px solid var(--rule);
+}
+
+.list > li:last-child {
+  border-bottom: 1px solid var(--rule);
+}

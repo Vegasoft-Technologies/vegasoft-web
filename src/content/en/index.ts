@@ -11,6 +11,7 @@ import { home } from "./home.ts";
 import { legal } from "./legal.ts";
 import { navigation } from "./navigation.ts";
 import { notFound } from "./not-found.ts";
+import { privacy } from "./privacy.ts";
 import { proof } from "./proof.ts";
 import { questions } from "./questions.ts";
 import { servicePage } from "./services.ts";
@@ -27,6 +28,7 @@ export const content = {
   navigation,
   notFound,
   pilotLabel,
+  privacy,
   proof,
   questions,
   servicePage,
