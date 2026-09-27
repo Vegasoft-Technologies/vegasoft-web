@@ -11,7 +11,7 @@ export const navigation = {
     { label: "İletişim", href: pagePath("contact", "tr") },
   ] satisfies NavLink[],
   footer: {
-    tagline: "Tekrar eden işler için yazılım, veri ve yapay zekâ.",
+    tagline: "Tekrar eden işler için yazılım, veri ve yapay zeka.",
     servicesTitle: "Hizmetler",
     companyTitle: "Şirket",
     contactTitle: "İletişim",
@@ -24,12 +24,12 @@ export const navigation = {
       { label: "Şirket bilgileri", href: pagePath("company", "tr") },
     ] satisfies NavLink[],
     /** Yolda olan sayfalar. Yerleri, işaretler açıkken görünür. */
-    companySoon: ["Gizlilik bildirimi", "Çalışma şartları"],
+    companySoon: ["Gizlilik bildirimi", "Hizmet şartları"],
   },
   /** Yardımcı teknolojinin okuduğu metinler ve iki işaret. */
   labels: {
     skipLink: "İçeriğe geç",
-    mainNav: "Ana",
+    mainNav: "Ana menü",
     homeLink: "Vegasoft Technologies, ana sayfa",
     /** Yolda olan bir bilgi veya sayfa için. */
     soon: "Yakında",

@@ -8,7 +8,7 @@ export const pilotLabel = "Pilot";
 export const areas: Area[] = [
   {
     slug: "manufacturing",
-    name: "Üretim",
+    name: "Üretim ve fabrika",
     promise:
       "Makine verisini kimse elle yazmadan toplar, üretimin gerçekte nasıl gittiğini ekranda gösteririz.",
     audience: "Üretim tesisleri, atölyeler, dolum ve paketleme hatları.",
@@ -106,7 +106,7 @@ export const areas: Area[] = [
   },
   {
     slug: "websites",
-    name: "Web siteleri ve çevrim içi sistemler",
+    name: "Web ve online sistemler",
     promise:
       "Hızlı açılan, telefonda düzgün görünen ve Google'da bulunan siteler kurarız; arkalarında gerçekten çalışan sistemlerle.",
     audience:
@@ -160,9 +160,9 @@ export const areas: Area[] = [
   },
   {
     slug: "ai",
-    name: "Yapay zekâ",
+    name: "Yapay zeka",
     promise:
-      "Yapay zekâyı gösteriş için kurmayız. Belirli ve çok zaman alan bir işi devralsın diye kurarız.",
+      "Yapay zekayı gösteriş için kurmayız. Belirli ve çok zaman alan bir işi devralsın diye kurarız.",
     audience:
       "Yoğun evrakla, dolu bir gelen kutusuyla veya sürekli tekrarlanan sorularla uğraşan ekipler.",
     services: [

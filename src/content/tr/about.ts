@@ -10,12 +10,12 @@ export const about = {
   meta: {
     title: "Hakkımızda",
     description:
-      "Vegasoft Technologies, işletmelerin tekrar eden işlerini devralan yazılım, veri araçları ve yapay zekâ kurar.",
+      "Vegasoft Technologies, işletmelerin tekrar eden işlerini devralan yazılım, veri araçları ve yapay zeka kurar.",
   },
   title: "Vegasoft hakkında",
-  lead: "Fabrikadaki makineden ofisteki gelen kutusuna kadar, işletmelerin tekrar eden işlerini devralan yazılım, veri araçları ve yapay zekâ kuruyoruz.",
+  lead: "Fabrikadaki makineden ofisteki gelen kutusuna kadar, işletmelerin tekrar eden işlerini devralan yazılım, veri araçları ve yapay zeka kuruyoruz.",
   principles: {
-    title: "Neye bağlıyız",
+    title: "İlkelerimiz",
     items: [
       {
         title: "Gösteriş değil, ölçülebilir iş",

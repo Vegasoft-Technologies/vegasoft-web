@@ -19,7 +19,7 @@ export const questions = {
         "Üç parçada. İlk adım için, başlamadan önce kararlaştırılan sabit bir ücret. Kurulum için, yazılı kapsama göre belirlenen tek seferlik bir fiyat. Devirden sonra barındırma, güncelleme, izleme ve destek için sabit bir aylık ücret. Her iş farklı olduğu için fiyat listemiz yok.",
     },
     {
-      question: "Bir hizmetteki Pilot ne demek?",
+      question: "Hizmetlerdeki Pilot işareti ne anlama geliyor?",
       answer:
         "Hizmet, tek bir hat veya süreçte küçük bir denemeyle başlar. Ancak sonuçlar ölçüldükten sonra yaygınlaştırılır.",
     },
@@ -36,7 +36,7 @@ export const questions = {
     {
       question: "Yalnızca üreticilerle mi çalışıyorsunuz?",
       answer:
-        "Hayır. Üretim, yedi alandan biri. Diğerleri ofis işleri, web siteleri ve çevrim içi sistemler, yapay zekâ, veri ve raporlama, mobil ve saha ekipleri, altyapı ve güvenlik.",
+        "Hayır. Üretim ve fabrika, yedi alandan biri. Diğerleri ofis işleri, web ve online sistemler, yapay zeka, veri ve raporlama, mobil ve saha ekipleri, altyapı ve güvenlik.",
     },
     {
       question: "İş, listenizde yoksa ne olur?",
@@ -54,7 +54,7 @@ export const questions = {
         "Sizin: kod, veri ve belgeler. Bir gün başka birine geçerseniz, sistemi sürdürmek için gereken her şeyi devrederiz.",
     },
     {
-      question: "Yerinde geliyor musunuz?",
+      question: "Yanımıza geliyor musunuz?",
       answer:
         "İş gerektirdiğinde evet; örneğin bir hattın çalışmasını görmek veya bir sistemi kurmak için. İşin geri kalanı uzaktan yapılır.",
     },

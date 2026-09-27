@@ -16,13 +16,13 @@ const problems: Problem[] = [
 
 export const home = {
   meta: {
-    title: "Vegasoft Technologies | Tekrar eden işler için yazılım, veri ve yapay zekâ",
+    title: "Vegasoft Technologies | Tekrar eden işler için yazılım, veri ve yapay zeka",
     description:
-      "Fabrikadaki makineden ofisteki gelen kutusuna kadar, bir işletmenin her gün kaybettiği saatleri yazılım, veri ve yapay zekâ ile geri kazandırıyoruz.",
+      "Fabrikadaki makineden ofisteki gelen kutusuna kadar, bir işletmenin her gün kaybettiği saatleri yazılım, veri ve yapay zeka ile geri kazandırıyoruz.",
   },
   hero: {
-    title: "Tekrar eden işler, sistemlere devredilir.",
-    lead: "Fabrikadaki makineden ofisteki gelen kutusuna kadar, bir işletmenin her gün kaybettiği saatleri yazılım, veri ve yapay zekâ ile geri kazandırıyoruz.",
+    title: "Tekrar eden işleri sistemlere devrediyoruz.",
+    lead: "Fabrikadaki makineden ofisteki gelen kutusuna kadar, bir işletmenin her gün kaybettiği saatleri yazılım, veri ve yapay zeka ile geri kazandırıyoruz.",
     cta: { label: "İşinizi anlatın", href: anchorHref("contact", "tr") },
     indexTitle: "Çalışma alanları",
   },
@@ -50,7 +50,7 @@ export const home = {
   },
   howWeWork: {
     title: "Nasıl çalışıyoruz",
-    youGetLabel: "Aldığınız:",
+    youGetLabel: "Elinize geçen:",
     steps: [
       {
         title: "Dinleriz",
@@ -98,7 +98,7 @@ export const home = {
   },
   contact: {
     title: "İşinizi anlatın.",
-    body: "İşletmenizde her gün elle tekrarlanan bir iş varsa, büyük olasılıkla bir sisteme devredilebilir. Bize anlatın, uygun olup olmadığını ve ne kadar süreceğini açıkça söyleyelim. Burada sayılmayan ihtiyaçlar da olabilir.",
+    body: "İşletmenizde her gün elle tekrarlanan bir iş varsa, büyük olasılıkla bir sisteme devredilebilir. Bize anlatın, uygun olup olmadığını ve ne kadar süreceğini açıkça söyleyelim. Burada sayılmayan ihtiyaçlarınızı da dinleriz.",
     hint: "Neyin tekrarlandığını, ne sıklıkla ve kimin yaptığını, hangi programların veya makinelerin işin içinde olduğunu bilmek yardımcı olur. Kabaca bir not yeterli. Şartname hazırlamanıza gerek yok.",
     cta: { label: "E-posta gönderin", href: "mailto:hello@vegasoft.co.uk" },
     allDetails: {
