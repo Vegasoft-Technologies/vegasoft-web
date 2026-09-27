@@ -19,7 +19,7 @@ import {
   type Language,
 } from "./routes.ts";
 
-const pageKeys = ["home", "about", "contact", "company"] as const;
+const pageKeys = ["home", "about", "contact", "company", "privacy"] as const;
 const anchorKeys = [
   "services",
   "how-we-work",

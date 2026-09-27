@@ -12,6 +12,10 @@
     "directory": ".open-next/assets",
     "binding": "ASSETS",
   },
+  // Where the contact form sends an enquiry. Not a secret; the address is on the site.
+  "vars": {
+    "CONTACT_TO": "hello@vegasoft.co.uk",
+  },
   "observability": {
     "enabled": true,
   },

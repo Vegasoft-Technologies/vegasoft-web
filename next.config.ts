@@ -32,6 +32,22 @@ const nextConfig: NextConfig = {
     return [
       { source: "/services", destination: "/#services", permanent: true },
       { source: "/tr/hizmetler", destination: "/tr#hizmetler", permanent: true },
+      // The old site linked to the privacy notice by file name.
+      { source: "/privacy.html", destination: "/privacy", permanent: true },
+      // One address for the site: www goes to the apex, keeping the path. The root and
+      // the rest are separate rules, because an empty :path* is left unfilled.
+      {
+        source: "/",
+        has: [{ type: "host", value: "www.vegasoft.co.uk" }],
+        destination: "https://vegasoft.co.uk/",
+        permanent: true,
+      },
+      {
+        source: "/:path+",
+        has: [{ type: "host", value: "www.vegasoft.co.uk" }],
+        destination: "https://vegasoft.co.uk/:path+",
+        permanent: true,
+      },
     ];
   },
 

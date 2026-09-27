@@ -23,13 +23,14 @@ export const languageNames: Record<
 };
 
 /** A page, whatever language it is read in. */
-export type PageKey = "home" | "about" | "contact" | "company";
+export type PageKey = "home" | "about" | "contact" | "company" | "privacy";
 
 const pages: Record<PageKey, Record<Language, string>> = {
   home: { en: "/", tr: "/tr" },
   about: { en: "/about", tr: "/tr/hakkimizda" },
   contact: { en: "/contact", tr: "/tr/iletisim" },
   company: { en: "/company", tr: "/tr/sirket-bilgileri" },
+  privacy: { en: "/privacy", tr: "/tr/gizlilik" },
 };
 
 /** The part of a service address before the area, for example /services or /tr/hizmetler. */
@@ -129,6 +130,7 @@ export function allPaths(language: Language): string[] {
     pagePath("about", language),
     pagePath("contact", language),
     pagePath("company", language),
+    pagePath("privacy", language),
   ];
 }
 
@@ -140,6 +142,7 @@ export function allPagePaths(): Record<Language, string>[] {
     pagePaths("about"),
     pagePaths("contact"),
     pagePaths("company"),
+    pagePaths("privacy"),
   ];
 }
 

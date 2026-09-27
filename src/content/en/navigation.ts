@@ -23,9 +23,10 @@ export const navigation = {
       { label: "Questions", href: anchorHref("questions", "en") },
       { label: "Contact", href: pagePath("contact", "en") },
       { label: "Company information", href: pagePath("company", "en") },
+      { label: "Privacy notice", href: pagePath("privacy", "en") },
     ] satisfies NavLink[],
     /** Pages that are coming. Their place is shown where the markers are on. */
-    companySoon: ["Privacy notice", "Terms of business"],
+    companySoon: ["Terms of business"],
   },
   /** Text that assistive technology reads, and the two markers. */
   labels: {
