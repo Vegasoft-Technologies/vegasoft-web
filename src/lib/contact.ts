@@ -1,6 +1,8 @@
 // What happens to a contact form submission, without any framework around it, so that
-// the rules can be tested with nothing but a mocked fetch. Nothing here is stored or
-// logged: the message and the address go straight into one email and are then forgotten.
+// the rules can be tested with nothing but a mocked fetch. Nothing is stored: the message
+// and the address go straight into one email and are then forgotten. A send that fails
+// leaves one line in the Worker's log saying why, and that line never carries a field of
+// the submission, the token, an address or a key.
 
 export const TURNSTILE_VERIFY_URL =
   "https://challenges.cloudflare.com/turnstile/v0/siteverify";
@@ -44,6 +46,11 @@ export type Config = {
   to?: string;
 };
 
+/** One line, so a failed send can be read in the Worker's log instead of guessed at. */
+function warn(detail: string) {
+  console.warn(`contact: ${detail}`);
+}
+
 /** Enough of an address to reply to: something, an at sign, a dot in the domain. */
 const emailPattern = /^[^\s@]+@[^\s@.]+\.[^\s@]+$/;
 
@@ -76,18 +83,28 @@ export function validate(submission: Submission): Partial<Record<FieldName, Fiel
   return errors;
 }
 
-/** Asks Cloudflare whether the token the browser sent is a real one. */
+/**
+ * Asks Cloudflare whether the token the browser sent is a real one. A refusal comes back
+ * with its reasons, so that a wrong key reads as `invalid-input-secret` in the log.
+ */
 export async function verifyToken(
   token: string,
   secret: string,
   ip?: string,
-): Promise<boolean> {
+): Promise<{ human: boolean; status: number; codes: string[] }> {
   const body = new URLSearchParams({ secret, response: token });
   if (ip) body.set("remoteip", ip);
   const response = await fetch(TURNSTILE_VERIFY_URL, { method: "POST", body });
-  if (!response.ok) return false;
-  const result = (await response.json()) as { success?: boolean };
-  return result.success === true;
+  if (!response.ok) return { human: false, status: response.status, codes: [] };
+  const result = (await response.json()) as {
+    success?: boolean;
+    "error-codes"?: string[];
+  };
+  return {
+    human: result.success === true,
+    status: response.status,
+    codes: result["error-codes"] ?? [],
+  };
 }
 
 /** The email the enquiry becomes. */
@@ -119,18 +136,38 @@ export async function submitContact(
   ip?: string,
 ): Promise<Outcome> {
   const submission = readSubmission(body);
-  if (submission.honeypot !== "") return { ok: false, status: 400, reason: "spam" };
+  if (submission.honeypot !== "") {
+    warn("spam (honeypot)");
+    return { ok: false, status: 400, reason: "spam" };
+  }
 
   const errors = validate(submission);
-  if (Object.keys(errors).length > 0)
+  const invalid = Object.keys(errors);
+  if (invalid.length > 0) {
+    warn(`invalid (${invalid.join(", ")})`);
     return { ok: false, status: 400, reason: "invalid", errors };
+  }
 
   const { resendApiKey, turnstileSecret, to } = config;
-  if (!resendApiKey || !turnstileSecret || !to)
+  if (!resendApiKey || !turnstileSecret || !to) {
+    const missing = (
+      [
+        ["RESEND_API_KEY", resendApiKey],
+        ["TURNSTILE_SECRET_KEY", turnstileSecret],
+        ["CONTACT_TO", to],
+      ] as const
+    ).flatMap(([name, value]) => (value ? [] : [name]));
+    warn(`not configured (${missing.join(", ")} missing)`);
     return { ok: false, status: 503, reason: "unconfigured" };
+  }
 
-  const human = await verifyToken(submission.token, turnstileSecret, ip);
-  if (!human) return { ok: false, status: 403, reason: "spam" };
+  const check = await verifyToken(submission.token, turnstileSecret, ip);
+  if (!check.human) {
+    const why =
+      check.codes.length > 0 ? check.codes.join(", ") : `answered ${check.status}`;
+    warn(`spam check refused (${why})`);
+    return { ok: false, status: 403, reason: "spam" };
+  }
 
   const response = await fetch(RESEND_URL, {
     method: "POST",
@@ -140,7 +177,11 @@ export async function submitContact(
     },
     body: JSON.stringify(buildEmail(submission, to)),
   });
-  // The reply carries the message id and the address; neither is logged or kept.
-  if (!response.ok) return { ok: false, status: 502, reason: "failed" };
+  // The reply carries the message id and the address; neither is logged or kept, so a
+  // failure is recorded by its status alone.
+  if (!response.ok) {
+    warn(`email service answered ${response.status}`);
+    return { ok: false, status: 502, reason: "failed" };
+  }
   return { ok: true };
 }

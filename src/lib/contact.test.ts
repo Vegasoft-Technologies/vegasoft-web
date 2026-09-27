@@ -31,27 +31,46 @@ type Call = { url: string; init?: RequestInit };
 let calls: Call[] = [];
 const realFetch = globalThis.fetch;
 
+type Answers = {
+  human?: boolean;
+  /** What the spam check gives as its reasons for refusing. */
+  codes?: string[];
+  sent?: boolean;
+  /** What the email API answers, when it is not simply 200 or 422. */
+  sendStatus?: number;
+};
+
 /** Answers the spam check and the email API, and records every call. */
-function mockFetch(options: { human?: boolean; sent?: boolean } = {}) {
-  const { human = true, sent = true } = options;
+function mockFetch(options: Answers = {}) {
+  const { human = true, codes = [], sent = true, sendStatus } = options;
   globalThis.fetch = (async (url: string | URL | Request, init?: RequestInit) => {
     const address = typeof url === "string" ? url : url.toString();
     calls.push({ url: address, init });
     if (address === TURNSTILE_VERIFY_URL) {
-      return new Response(JSON.stringify({ success: human }), { status: 200 });
+      return new Response(JSON.stringify({ success: human, "error-codes": codes }), {
+        status: 200,
+      });
     }
     return new Response(JSON.stringify({ id: "message-id" }), {
-      status: sent ? 200 : 422,
+      status: sendStatus ?? (sent ? 200 : 422),
     });
   }) as typeof fetch;
 }
 
+let warnings: string[] = [];
+const realWarn = console.warn;
+
 beforeEach(() => {
   calls = [];
+  warnings = [];
+  console.warn = (...parts: unknown[]) => {
+    warnings.push(parts.map(String).join(" "));
+  };
 });
 
 afterEach(() => {
   globalThis.fetch = realFetch;
+  console.warn = realWarn;
 });
 
 test("a valid submission sends one email, with the right addresses and subject", async () => {
@@ -178,4 +197,94 @@ test("the company is left out of the email when it is not given", () => {
   );
   assert.ok(!email.text.includes("Company:"));
   assert.match(email.text, /Page: English/);
+});
+
+/** Every way a send can fail, and the one line each one is expected to leave behind. */
+const failures: { what: string; run: () => Promise<unknown>; line: string }[] = [
+  {
+    what: "honeypot",
+    run: () => submitContact({ ...good, honeypot: "http://spam" }, config),
+    line: "contact: spam (honeypot)",
+  },
+  {
+    what: "an address we could not reply to",
+    run: () => submitContact({ ...good, email: "ada" }, config),
+    line: "contact: invalid (email)",
+  },
+  {
+    what: "nothing filled in",
+    run: () => submitContact({}, config),
+    line: "contact: invalid (name, email, message, token)",
+  },
+  {
+    what: "a missing key",
+    run: () => submitContact(good, { ...config, turnstileSecret: undefined }),
+    line: "contact: not configured (TURNSTILE_SECRET_KEY missing)",
+  },
+  {
+    what: "the wrong spam check key",
+    run: () => submitContact(good, config, "203.0.113.1"),
+    line: "contact: spam check refused (invalid-input-secret)",
+  },
+  {
+    what: "a spam check that simply says no",
+    run: () => submitContact(good, config),
+    line: "contact: spam check refused (answered 200)",
+  },
+  {
+    what: "an email service that refuses the key",
+    run: () => submitContact(good, config, "203.0.113.1"),
+    line: "contact: email service answered 401",
+  },
+];
+
+/** The answers each failure needs from the two services it talks to. */
+const answersFor: Record<string, Answers> = {
+  "the wrong spam check key": { human: false, codes: ["invalid-input-secret"] },
+  "a spam check that simply says no": { human: false },
+  "an email service that refuses the key": { sendStatus: 401 },
+};
+
+for (const { what, run, line } of failures) {
+  test(`${what} leaves one line saying why`, async () => {
+    mockFetch(answersFor[what]);
+    await run();
+    assert.deepEqual(warnings, [line]);
+  });
+}
+
+test("a send that works says nothing", async () => {
+  mockFetch();
+  const outcome = await submitContact(good, config, "203.0.113.1");
+  assert.deepEqual(outcome, { ok: true });
+  assert.deepEqual(warnings, []);
+});
+
+test("no line carries the sender, the token or a key", async () => {
+  const secrets = [
+    good.name,
+    good.email,
+    good.company,
+    good.message,
+    good.token,
+    "203.0.113.1",
+    config.resendApiKey,
+    config.turnstileSecret,
+    config.to,
+  ];
+  const seen: string[] = [];
+  for (const { what, run } of failures) {
+    mockFetch(answersFor[what]);
+    warnings = [];
+    await run();
+    seen.push(...warnings);
+  }
+  assert.equal(seen.length, failures.length);
+  for (const line of seen) {
+    assert.match(line, /^contact: /);
+    for (const secret of secrets) {
+      assert.ok(secret);
+      assert.ok(!line.includes(secret), `${line} carries ${secret}`);
+    }
+  }
 });
