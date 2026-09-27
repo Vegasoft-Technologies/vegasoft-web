@@ -19,10 +19,10 @@ when it is done, with the date.
       it carries the widget. 27 September 2026: the widget renders on the live contact
       page and asks the visitor to confirm they are a person.
 - [x] The Worker is attached to `vegasoft.co.uk` and `www.vegasoft.co.uk` in the
-      Cloudflare dashboard, under Workers and Pages, vegasoft-web, Settings, Domains and
-      Routes. Attaching the apex replaces the two A records that still point at the old
-      site. 27 September 2026: both names resolve to Cloudflare, the certificate is
-      valid to 26 December 2026, and every page answers 200 over HTTPS.
+      Cloudflare dashboard, under Workers and Pages, vegasoft-web, Domains, which is a
+      tab of its own. Attaching the apex replaces the two A records that still point at
+      the old site. 27 September 2026: both names resolve to Cloudflare, the certificate
+      is valid to 26 December 2026, and every page answers 200 over HTTPS.
 - [x] The mail records are untouched: the MX records and the SPF, DKIM and DMARC entries
       still point at SiteGround, and email keeps arriving. 27 September 2026: MX still
       the three `mailspamprotection.com` servers, `mail.vegasoft.co.uk` still
@@ -30,12 +30,17 @@ when it is done, with the date.
 - [ ] A form submission from the live site arrives at `hello@vegasoft.co.uk`, with the
       sender's address as the reply-to. It has to be sent by a person: the spam check
       refuses an automated browser, which is what it is for.
-- [ ] Cloudflare Web Analytics is switched on for the site in the dashboard.
-- [ ] Search Console is verified with a DNS TXT record on the zone.
+- [ ] Cloudflare Web Analytics is switched on for the site in the dashboard. Checked on
+      28 September 2026: the pages carry no `cloudflareinsights` beacon, so it is still
+      off. It is switched on in the dashboard, never added to the code.
+- [ ] Search Console is verified with a DNS TXT record on the zone. Checked on
+      28 September 2026: the zone holds one TXT record, the SPF one, and no
+      `google-site-verification` record yet.
 - [ ] The sitemap is submitted: `https://vegasoft.co.uk/sitemap.xml`.
 
 - [ ] "Always Use HTTPS" is on in Cloudflare, under SSL/TLS, Edge Certificates.
-      27 September 2026: `http://vegasoft.co.uk/` answers 200 rather than redirecting.
+      Checked again on 28 September 2026: `http://vegasoft.co.uk/` and
+      `http://vegasoft.co.uk/about` still answer 200 rather than redirecting.
       `http://www.vegasoft.co.uk/` does redirect, because the site's own rule catches the
       host, but the apex over plain HTTP does not, and that is a zone setting rather than
       code.
@@ -75,13 +80,12 @@ when it is done, with the date.
 The zone is on Cloudflare. Attaching the Worker on 27 September 2026 moved the site; the
 mailbox stays on SiteGround.
 
-- [ ] Confirm that outbound email still passes SPF. The record is
-      `v=spf1 +a +mx include:vegasoft.co.uk.spf.auto.dnssmarthost.net ~all`. Its `+a`
-      mechanism authorises whatever the domain's A records point at, which is now
-      Cloudflare rather than the old mail server. SiteGround's own `include:` should
-      still cover their sending servers, so nothing is expected to break, but send one
-      email and check the SPF result in its headers. Replacing `+a` with
-      `ip4:35.214.100.129` would say plainly what is meant.
+- [x] The SPF record came through the move unchanged and still names the mail server.
+      27 September 2026, from the zone's own nameservers:
+      `v=spf1 ip4:35.214.100.129 +mx include:vegasoft.co.uk.spf.auto.dnssmarthost.net ~all`,
+      one record, no `+a`. Public resolvers answered with the old zone's copy for about
+      a day afterwards, because it carried a long time to live; the authoritative answer
+      is the record.
 
 - [ ] The old form provider, if the old site had one, is switched off.
 - [ ] The domain's registration is renewed and not due to lapse in the next month.
