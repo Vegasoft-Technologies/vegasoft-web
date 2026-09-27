@@ -1,15 +1,12 @@
 import { company } from "@/content/company.ts";
 import { contentFor } from "@/content/index.ts";
-import { pagePaths, type Language } from "@/content/routes.ts";
+import { pagePath, pagePaths, type Language } from "@/content/routes.ts";
 import PageFrame from "@/components/layout/PageFrame.tsx";
 import { site } from "@/content/site.ts";
-import { showSoon } from "@/lib/soon.ts";
-import Container from "@/components/ui/Container.tsx";
+import ContactForm from "@/components/ui/ContactForm.tsx";
 import DetailList, { type Detail } from "@/components/ui/DetailList.tsx";
 import PageIntro from "@/components/ui/PageIntro.tsx";
 import PageSection from "@/components/ui/PageSection.tsx";
-import Soon from "@/components/ui/Soon.tsx";
-import styles from "./ContactPage.module.css";
 
 export default function ContactPage({ language }: { language: Language }) {
   const { commitments, companyLabels, contact, home } = contentFor(language);
@@ -33,16 +30,19 @@ export default function ContactPage({ language }: { language: Language }) {
           lead={home.contact.body}
           note={home.contact.hint}
         />
-        <PageSection id="details" title={contact.details.title}>
+        <PageSection id="form" title={contact.form.title}>
+          <ContactForm
+            language={language}
+            copy={contact.form}
+            email={site.email}
+            phone={site.phone}
+            phoneHref={site.phoneHref}
+            privacyHref={pagePath("privacy", language)}
+          />
+        </PageSection>
+        <PageSection id="details" title={contact.details.title} rule>
           <DetailList language={language} details={details} />
         </PageSection>
-        {showSoon && (
-          <div className={styles.form}>
-            <Container>
-              <Soon language={language} label={contact.formLabel} />
-            </Container>
-          </div>
-        )}
       </main>
     </PageFrame>
   );

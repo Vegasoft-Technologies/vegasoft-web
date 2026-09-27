@@ -58,6 +58,9 @@ jobs:
         if: steps.secrets.outputs.present == 'true'
         env:
           SHOW_SOON: ${{ github.event_name == 'pull_request' && '1' || '' }}
+          # The public half of the spam check, read into the page at build time. It is a
+          # repository variable rather than a secret: it is visible in the markup.
+          NEXT_PUBLIC_TURNSTILE_SITE_KEY: ${{ vars.NEXT_PUBLIC_TURNSTILE_SITE_KEY }}
         run: npx opennextjs-cloudflare build
 
       # pipefail, so that a failed deployment is not hidden behind tee's exit status.

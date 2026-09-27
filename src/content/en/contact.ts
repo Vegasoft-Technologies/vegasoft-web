@@ -12,6 +12,28 @@ export const contact = {
     title: "How to reach us",
     replyLabel: "Reply",
   },
-  /** Marks where the form will go, where the markers are on. */
-  formLabel: "Contact form",
+  form: {
+    title: "Send us a note",
+    /** Shown in place of the form when the browser runs no JavaScript. */
+    noScript:
+      "This form needs JavaScript. Email or call us instead and we will pick it up the same way.",
+    nameLabel: "Your name",
+    emailLabel: "Your email address",
+    companyLabel: "Company",
+    companyOptional: "optional",
+    messageLabel: "What is repeated by hand, how often, and by whom?",
+    /** The field a person never sees. Anything typed into it is treated as spam. */
+    honeypotLabel: "Leave this field empty",
+    submit: "Send",
+    sending: "Sending",
+    required: "This field is required.",
+    badEmail: "Enter an email address we can reply to.",
+    checkLabel: "Spam check",
+    checkMissing: "Complete the spam check.",
+    successTitle: "Thank you.",
+    successText: "We reply within one working day.",
+    failure: "The message did not send. Email us at",
+    privacyNote: "We use what you send only to reply. Nothing is stored on this site.",
+    privacyLink: "How we handle it",
+  },
 };
