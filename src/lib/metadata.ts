@@ -1,6 +1,17 @@
 import type { Metadata } from "next";
+import { contentFor } from "@/content/index.ts";
 import { languageNames, type Language } from "@/content/routes.ts";
 import { site } from "@/content/site.ts";
+
+/** The image a link to the site shows, one per language. */
+export function shareImage(language: Language) {
+  return {
+    url: `/og/share-${language}.png`,
+    width: 1200,
+    height: 630,
+    alt: `${contentFor(language).home.hero.title} ${site.name}`,
+  };
+}
 
 /**
  * Metadata for a page: its title (the layout adds the site name unless the title is
@@ -32,6 +43,7 @@ export function pageMetadata(
       siteName: site.name,
       locale: languageNames[language].locale,
       type: "website",
+      images: [shareImage(language)],
     },
   };
 }
