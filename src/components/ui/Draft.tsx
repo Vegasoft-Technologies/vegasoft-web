@@ -1,8 +1,10 @@
-import { labels } from "@/content/en/navigation.ts";
+import { contentFor } from "@/content/index.ts";
+import type { Language } from "@/content/routes.ts";
 import { showSoon } from "@/lib/soon.ts";
 import styles from "./Draft.module.css";
 
 type DraftProps = {
+  language: Language;
   children: React.ReactNode;
 };
 
@@ -12,11 +14,11 @@ type DraftProps = {
  * absent from the production build. The sentence lives in the content file with
  * `approved: false`.
  */
-export default function Draft({ children }: DraftProps) {
+export default function Draft({ language, children }: DraftProps) {
   if (!showSoon) return null;
   return (
     <div className={styles.draft}>
-      <span className={styles.label}>{labels.draft}</span>
+      <span className={styles.label}>{contentFor(language).navigation.labels.draft}</span>
       {children}
     </div>
   );

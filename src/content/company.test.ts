@@ -1,6 +1,8 @@
 import assert from "node:assert/strict";
 import test from "node:test";
-import { company, companyLabels, formatAddress } from "./company.ts";
+import { company, formatAddress } from "./company.ts";
+import { content } from "./index.ts";
+import { languages } from "./routes.ts";
 
 function isTrimmedText(value: unknown): value is string {
   return typeof value === "string" && value.length > 0 && value === value.trim();
@@ -62,8 +64,11 @@ test("the support hours name days and two times of day", () => {
   }
 });
 
-test("every detail has a label", () => {
-  for (const key of Object.keys(company)) {
-    assert.ok(key in companyLabels, `${key} has no label`);
+test("every detail has a label in every language", () => {
+  for (const language of languages) {
+    const labels = content[language].companyLabels;
+    for (const key of Object.keys(company)) {
+      assert.ok(isTrimmedText(labels[key as keyof typeof labels]), `${language} ${key}`);
+    }
   }
 });

@@ -1,4 +1,5 @@
 import type { ProfileLink } from "@/content/company.ts";
+import type { Language } from "@/content/routes.ts";
 import { showSoon } from "@/lib/soon.ts";
 import Soon from "./Soon.tsx";
 import styles from "./DetailList.module.css";
@@ -8,15 +9,21 @@ export type Detail =
       label: string;
       value: string | string[] | ProfileLink[] | null;
       /**
-       * Whether a value that is not known yet is marked "Soon". Without it the row is
-       * left out entirely while the value is null, everywhere.
+       * Whether a value that is not known yet is marked. Without it the row is left out
+       * entirely while the value is null, everywhere.
        */
       soon?: boolean;
     }
   | { label: string; node: React.ReactNode };
 
 /** Labelled rows separated by rules, as in the contact section of the home page. */
-export default function DetailList({ details }: { details: Detail[] }) {
+export default function DetailList({
+  details,
+  language,
+}: {
+  details: Detail[];
+  language: Language;
+}) {
   return (
     <dl className={styles.list}>
       {details.map((detail) => {
@@ -34,7 +41,7 @@ export default function DetailList({ details }: { details: Detail[] }) {
             <dt>{detail.label}</dt>
             <dd>
               {detail.value === null ? (
-                <Soon />
+                <Soon language={language} />
               ) : typeof detail.value === "string" ? (
                 detail.value
               ) : (

@@ -1,10 +1,11 @@
-import { labels } from "@/content/en/navigation.ts";
+import { contentFor } from "@/content/index.ts";
+import type { Language } from "@/content/routes.ts";
 import styles from "./SkipLink.module.css";
 
-export default function SkipLink() {
+export default function SkipLink({ language }: { language: Language }) {
   return (
     <a className={styles.skip} href="#main">
-      {labels.skipLink}
+      {contentFor(language).navigation.labels.skipLink}
     </a>
   );
 }

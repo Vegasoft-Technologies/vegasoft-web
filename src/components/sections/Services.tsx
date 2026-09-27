@@ -1,33 +1,41 @@
 import Link from "next/link";
-import { areas } from "@/content/en/areas.ts";
-import { home } from "@/content/en/home.ts";
+import { contentFor } from "@/content/index.ts";
+import { anchorId, areaSegment, servicePath, type Language } from "@/content/routes.ts";
 import { numbering } from "@/lib/numbering.ts";
-import { servicePath } from "@/lib/services.ts";
 import Container from "@/components/ui/Container.tsx";
 import PilotTag from "@/components/ui/PilotTag.tsx";
 import styles from "./Services.module.css";
 
-const { services } = home;
-
-export default function Services() {
+export default function Services({ language }: { language: Language }) {
+  const { areas, home } = contentFor(language);
+  const { services } = home;
   return (
-    <section className={styles.section} id="services" aria-labelledby="services-title">
+    <section
+      className={styles.section}
+      id={anchorId("services", language)}
+      aria-labelledby="services-title"
+    >
       <Container>
         <div className={styles.grid}>
           <header className={styles.head}>
             <h2 id="services-title">{services.title}</h2>
           </header>
           <p className={styles.intro}>
-            {services.pilotNoteBefore} <PilotTag /> {services.pilotNoteAfter}
+            {services.pilotNoteBefore} <PilotTag language={language} />{" "}
+            {services.pilotNoteAfter}
           </p>
         </div>
         <ol className={styles.areas}>
           {areas.map((area, i) => (
-            <li key={area.slug} className={styles.area} id={area.slug}>
+            <li
+              key={area.slug}
+              className={styles.area}
+              id={areaSegment(area.slug, language)}
+            >
               <div className={styles.areaHead}>
                 <span className={styles.num}>{numbering(i)}</span>
                 <h3>
-                  <Link href={servicePath(area.slug)}>{area.name}</Link>
+                  <Link href={servicePath(area.slug, language)}>{area.name}</Link>
                 </h3>
                 <p className={styles.promise}>{area.promise}</p>
                 <p className={styles.audience}>
@@ -45,7 +53,7 @@ export default function Services() {
                 {area.services.map((service) => (
                   <li key={service.name}>
                     {service.name}
-                    {service.pilot && <PilotTag />}
+                    {service.pilot && <PilotTag language={language} />}
                   </li>
                 ))}
               </ul>

@@ -26,6 +26,15 @@ const nextConfig: NextConfig = {
     prefetchInlining: false,
   },
 
+  // The services index is not a page; it answers with the section of the home page that
+  // lists every area.
+  async redirects() {
+    return [
+      { source: "/services", destination: "/#services", permanent: true },
+      { source: "/tr/hizmetler", destination: "/tr#hizmetler", permanent: true },
+    ];
+  },
+
   async headers() {
     return [
       { source: "/:path*", headers: securityHeaders },

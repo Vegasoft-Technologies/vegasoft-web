@@ -1,6 +1,7 @@
 // Every word on the About page. The ownership text comes from the commitments, so the
 // two can never differ.
 
+import { pagePath } from "../routes.ts";
 import { commitments } from "./commitments.ts";
 
 const ownership = commitments.items.find((item) => item.id === "ownership");
@@ -39,10 +40,10 @@ export const about = {
   },
   company: {
     title: "The company",
-    link: { label: "Company information", href: "/company" },
+    link: { label: "Company information", href: pagePath("company", "en") },
   },
   closing: {
     title: "Tell us about the job.",
-    cta: { label: "All contact details", href: "/contact" },
+    cta: { label: "All contact details", href: pagePath("contact", "en") },
   },
 };

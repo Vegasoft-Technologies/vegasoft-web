@@ -1,9 +1,8 @@
 import Link from "next/link";
-import { company, companyLabels } from "@/content/company.ts";
-import { areas } from "@/content/en/areas.ts";
-import { footer } from "@/content/en/navigation.ts";
+import { company } from "@/content/company.ts";
+import { contentFor } from "@/content/index.ts";
+import { servicePath, type Language } from "@/content/routes.ts";
 import { site } from "@/content/site.ts";
-import { servicePath } from "@/lib/services.ts";
 import { showSoon } from "@/lib/soon.ts";
 import Container from "@/components/ui/Container.tsx";
 import Logo from "@/components/ui/Logo.tsx";
@@ -14,12 +13,14 @@ import styles from "./SiteFooter.module.css";
 /** The company details under the email address and the telephone number. */
 const contactFields = ["location"] as const;
 
-export default function SiteFooter() {
+export default function SiteFooter({ language }: { language: Language }) {
+  const { areas, companyLabels, navigation } = contentFor(language);
+  const { footer } = navigation;
   return (
     <footer className={styles.footer}>
       <Container grid className={styles.columns}>
         <div className={styles.brand}>
-          <Logo background="dark" />
+          <Logo language={language} background="dark" />
           <p className={styles.tagline}>{footer.tagline}</p>
         </div>
         <nav
@@ -30,7 +31,7 @@ export default function SiteFooter() {
           <ul>
             {areas.map((area) => (
               <li key={area.slug}>
-                <Link href={servicePath(area.slug)}>{area.name}</Link>
+                <Link href={servicePath(area.slug, language)}>{area.name}</Link>
               </li>
             ))}
           </ul>
@@ -49,7 +50,7 @@ export default function SiteFooter() {
             {showSoon &&
               footer.companySoon.map((label) => (
                 <li key={label} className={styles.soon}>
-                  <Soon label={label} />
+                  <Soon language={language} label={label} />
                 </li>
               ))}
           </ul>
@@ -76,7 +77,7 @@ export default function SiteFooter() {
         </div>
       </Container>
       <Container>
-        <LegalLine />
+        <LegalLine language={language} />
       </Container>
     </footer>
   );

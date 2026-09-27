@@ -3,6 +3,8 @@
 // services and example) and from the problems on the home page that point at it, so a
 // change to the catalogue changes the page.
 
+import { anchorHref, pagePath } from "../routes.ts";
+
 export const servicePage = {
   audienceLabel: "Who it's for:",
   problemsTitle: "Problems this solves",
@@ -11,13 +13,13 @@ export const servicePage = {
   next: {
     title: "How a job runs",
     links: [
-      { label: "How we work", href: "/#how-we-work" },
-      { label: "How we price", href: "/#pricing" },
-      { label: "Questions we are asked", href: "/#questions" },
+      { label: "How we work", href: anchorHref("how-we-work", "en") },
+      { label: "How we price", href: anchorHref("pricing", "en") },
+      { label: "Questions we are asked", href: anchorHref("questions", "en") },
     ],
   },
   closing: {
     title: "Tell us about the job.",
-    cta: { label: "All contact details", href: "/contact" },
+    cta: { label: "All contact details", href: pagePath("contact", "en") },
   },
 };

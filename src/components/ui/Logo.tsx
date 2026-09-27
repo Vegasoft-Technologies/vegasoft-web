@@ -1,10 +1,12 @@
 import Image from "next/image";
 import Link from "next/link";
-import { labels } from "@/content/en/navigation.ts";
+import { contentFor } from "@/content/index.ts";
+import { pagePath, type Language } from "@/content/routes.ts";
 import { site } from "@/content/site.ts";
 import styles from "./Logo.module.css";
 
 type LogoProps = {
+  language: Language;
   /** The background the logo sits on. The artwork is never recoloured: a different file is used. */
   background: "light" | "dark";
   /** Fetch the file early. Only for the header's logo, which is above the fold. */
@@ -18,9 +20,13 @@ const files = {
   dark: "/brand/vegasoft-logo-beyaz.svg",
 };
 
-export default function Logo({ background, priority = false }: LogoProps) {
+export default function Logo({ language, background, priority = false }: LogoProps) {
   return (
-    <Link className={styles.brand} href="/" aria-label={labels.homeLink}>
+    <Link
+      className={styles.brand}
+      href={pagePath("home", language)}
+      aria-label={contentFor(language).navigation.labels.homeLink}
+    >
       <Image
         src={files[background]}
         alt={site.name}

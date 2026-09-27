@@ -1,23 +1,25 @@
-import { proof } from "@/content/en/proof.ts";
+import { contentFor } from "@/content/index.ts";
+import { anchorId, type Language } from "@/content/routes.ts";
 import { showSoon } from "@/lib/soon.ts";
 import PageSection from "@/components/ui/PageSection.tsx";
 import ProofGroup from "./ProofGroup.tsx";
 import styles from "./Proof.module.css";
 
-const { testimonials, caseStudies } = proof;
-
 /**
  * Proof a visitor can check. Both lists are empty until the owner supplies real, named
- * entries with permission; until then the section is absent from deployed builds and
- * shows its placeholders in development.
+ * entries with permission; until then the section is absent from the production build
+ * and shows its markers where they are on.
  */
-export default function Proof() {
+export default function Proof({ language }: { language: Language }) {
+  const { proof } = contentFor(language);
+  const { testimonials, caseStudies } = proof;
   const hasAny = testimonials.items.length > 0 || caseStudies.items.length > 0;
   if (!hasAny && !showSoon) return null;
   return (
-    <PageSection id="proof" title={proof.title} rule>
+    <PageSection id={anchorId("proof", language)} title={proof.title} rule>
       <div className={styles.groups}>
         <ProofGroup
+          language={language}
           title={testimonials.title}
           placeholder={testimonials.placeholder}
           count={testimonials.items.length}
@@ -36,6 +38,7 @@ export default function Proof() {
           </ul>
         </ProofGroup>
         <ProofGroup
+          language={language}
           title={caseStudies.title}
           placeholder={caseStudies.placeholder}
           count={caseStudies.items.length}

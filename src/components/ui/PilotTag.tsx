@@ -1,7 +1,8 @@
-import { pilotLabel } from "@/content/en/areas.ts";
+import { contentFor } from "@/content/index.ts";
+import type { Language } from "@/content/routes.ts";
 import styles from "./PilotTag.module.css";
 
 /** Marks a service that starts as a small trial on a single line or process. */
-export default function PilotTag() {
-  return <span className={styles.tag}>{pilotLabel}</span>;
+export default function PilotTag({ language }: { language: Language }) {
+  return <span className={styles.tag}>{contentFor(language).pilotLabel}</span>;
 }

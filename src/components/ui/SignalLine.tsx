@@ -1,10 +1,10 @@
-import { home } from "@/content/en/home.ts";
+import { contentFor } from "@/content/index.ts";
+import type { Language } from "@/content/routes.ts";
 import styles from "./SignalLine.module.css";
 
-const { signal } = home.approach;
-
 /** An uneven, hand-drawn line that becomes a regular digital signal. Static: no animation. */
-export default function SignalLine() {
+export default function SignalLine({ language }: { language: Language }) {
+  const { signal } = contentFor(language).home.approach;
   return (
     <figure className={styles.signal}>
       <svg viewBox="0 0 1200 160" role="img" aria-labelledby="signal-title">

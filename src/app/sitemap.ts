@@ -1,16 +1,18 @@
 import type { MetadataRoute } from "next";
-import { areaSlugs } from "@/content/en/areas.ts";
+import { allPagePaths, languageNames } from "@/content/routes.ts";
 import { site } from "@/content/site.ts";
-import { servicePath } from "@/lib/services.ts";
 
-// Every page of the site, at the canonical address. Later pull requests add their pages.
+// Every page of the site in both languages, each with the other language beside it.
 export default function sitemap(): MetadataRoute.Sitemap {
-  const paths = [
-    "/",
-    ...areaSlugs.map((slug) => servicePath(slug)),
-    "/about",
-    "/contact",
-    "/company",
-  ];
-  return paths.map((path) => ({ url: `${site.url}${path}` }));
+  return allPagePaths().flatMap((paths) => {
+    const languages = {
+      [languageNames.en.hrefLang]: `${site.url}${paths.en}`,
+      [languageNames.tr.hrefLang]: `${site.url}${paths.tr}`,
+      "x-default": `${site.url}${paths.en}`,
+    };
+    return [
+      { url: `${site.url}${paths.en}`, alternates: { languages } },
+      { url: `${site.url}${paths.tr}`, alternates: { languages } },
+    ];
+  });
 }
