@@ -39,6 +39,17 @@ type ContactFormProps = {
 
 const siteKey = process.env.NEXT_PUBLIC_TURNSTILE_SITE_KEY;
 
+declare global {
+  interface Window {
+    turnstile?: { reset: (widget?: string) => void };
+  }
+}
+
+/** A spam check token is good for one send, so a failed send needs a fresh one. */
+function resetCheck() {
+  window.turnstile?.reset();
+}
+
 /**
  * The one component on the site that runs in the browser. It posts the enquiry to the
  * route handler, which checks everything again and sends the email. Without JavaScript
@@ -96,8 +107,10 @@ export default function ContactForm({
       }
       setErrors(result.errors ?? {});
       setState(Object.keys(result.errors ?? {}).length > 0 ? "idle" : "failed");
+      resetCheck();
     } catch {
       setState("failed");
+      resetCheck();
     }
   }
 
