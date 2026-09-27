@@ -5,25 +5,45 @@ when it is done, with the date.
 
 ## Launch day, in order
 
-- [ ] The deployment secrets `CLOUDFLARE_API_TOKEN` and `CLOUDFLARE_ACCOUNT_ID` are set
+- [x] The deployment secrets `CLOUDFLARE_API_TOKEN` and `CLOUDFLARE_ACCOUNT_ID` are set
       on the repository, and the Deploy workflow has run on `main` and finished.
-- [ ] The contact form's two Worker secrets are set, each pasted when asked and never
+      27 September 2026, run 36320155083, to
+      `https://vegasoft-web.mertmertdzgn.workers.dev`.
+- [x] The contact form's two Worker secrets are set, each pasted when asked and never
       written into a file: `npx wrangler secret put RESEND_API_KEY` and
-      `npx wrangler secret put TURNSTILE_SECRET_KEY`.
-- [ ] The public half of the spam check is a repository variable, so the build reads it:
+      `npx wrangler secret put TURNSTILE_SECRET_KEY`. 27 September 2026. A submission
+      carrying an invented token is refused by Cloudflare with 403, rather than reported
+      as not configured, which is only possible once both are set.
+- [x] The public half of the spam check is a repository variable, so the build reads it:
       `gh variable set NEXT_PUBLIC_TURNSTILE_SITE_KEY --body <site key>`. The build after
-      it carries the widget.
-- [ ] The Worker is attached to `vegasoft.co.uk` and `www.vegasoft.co.uk` in the
-      Cloudflare dashboard, under Workers and Pages, vegasoft-web, Settings, Domains and
-      Routes. Attaching the apex replaces the two A records that still point at the old
-      site.
-- [ ] The mail records are untouched: the MX records and the SPF, DKIM and DMARC entries
-      still point at SiteGround, and email keeps arriving.
+      it carries the widget. 27 September 2026: the widget renders on the live contact
+      page and asks the visitor to confirm they are a person.
+- [x] The Worker is attached to `vegasoft.co.uk` and `www.vegasoft.co.uk` in the
+      Cloudflare dashboard, under Workers and Pages, vegasoft-web, Domains, which is a
+      tab of its own. Attaching the apex replaces the two A records that still point at
+      the old site. 27 September 2026: both names resolve to Cloudflare, the certificate
+      is valid to 26 December 2026, and every page answers 200 over HTTPS.
+- [x] The mail records are untouched: the MX records and the SPF, DKIM and DMARC entries
+      still point at SiteGround, and email keeps arriving. 27 September 2026: MX still
+      the three `mailspamprotection.com` servers, `mail.vegasoft.co.uk` still
+      35.214.100.129, and the SPF record unchanged. See the note under Domain.
 - [ ] A form submission from the live site arrives at `hello@vegasoft.co.uk`, with the
-      sender's address as the reply-to.
-- [ ] Cloudflare Web Analytics is switched on for the site in the dashboard.
-- [ ] Search Console is verified with a DNS TXT record on the zone.
+      sender's address as the reply-to. It has to be sent by a person: the spam check
+      refuses an automated browser, which is what it is for.
+- [ ] Cloudflare Web Analytics is switched on for the site in the dashboard. Checked on
+      28 September 2026: the pages carry no `cloudflareinsights` beacon, so it is still
+      off. It is switched on in the dashboard, never added to the code.
+- [ ] Search Console is verified with a DNS TXT record on the zone. Checked on
+      28 September 2026: the zone holds one TXT record, the SPF one, and no
+      `google-site-verification` record yet.
 - [ ] The sitemap is submitted: `https://vegasoft.co.uk/sitemap.xml`.
+
+- [ ] "Always Use HTTPS" is on in Cloudflare, under SSL/TLS, Edge Certificates.
+      Checked again on 28 September 2026: `http://vegasoft.co.uk/` and
+      `http://vegasoft.co.uk/about` still answer 200 rather than redirecting.
+      `http://www.vegasoft.co.uk/` does redirect, because the site's own rule catches the
+      host, but the apex over plain HTTP does not, and that is a zone setting rather than
+      code.
 
 ## After launch
 
@@ -57,18 +77,36 @@ when it is done, with the date.
 
 ## Domain
 
-The zone is already on Cloudflare, with the records that still serve the old site and the
-mailbox set to "DNS only". Attaching the Worker on launch day is what moves the site.
+The zone is on Cloudflare. Attaching the Worker on 27 September 2026 moved the site; the
+mailbox stays on SiteGround.
+
+- [x] The SPF record came through the move unchanged and still names the mail server.
+      27 September 2026, from the zone's own nameservers:
+      `v=spf1 ip4:35.214.100.129 +mx include:vegasoft.co.uk.spf.auto.dnssmarthost.net ~all`,
+      one record, no `+a`. Public resolvers answered with the old zone's copy for about
+      a day afterwards, because it carried a long time to live; the authoritative answer
+      is the record.
 
 - [ ] The old form provider, if the old site had one, is switched off.
 - [ ] The domain's registration is renewed and not due to lapse in the next month.
 
 ## Languages
 
-- [ ] The Turkish version is live, or follows within a week of launch.
+- [x] The Turkish version is live, or follows within a week of launch. 27 September 2026:
+      live at `/tr`, with its own addresses, alternates and structured data.
 
 ## On the production address
 
-- [ ] Lighthouse, mobile, at least 95 in all four categories.
-- [ ] axe reports no violations.
-- [ ] The site is complete with JavaScript off.
+- [x] Lighthouse, mobile, at least 95 in all four categories. 27 September 2026 on the
+      live address: the English home page 100, 100, 100 and 100; the Turkish home page
+      98, 100, 100 and 100. Largest contentful paint 1.2 s and cumulative layout shift 0
+      on both.
+- [x] axe reports no violations. 27 September 2026: none on the home page, the Turkish
+      home page, the contact page and both privacy notices, at 375 px.
+- [x] The site is complete with JavaScript off. 27 September 2026: the home page renders
+      all nine sections and the footer, and the contact page shows the email address and
+      the telephone number in place of the form.
+- [ ] Google's Rich Results test is run on the home page. It needs a signed-in Google
+      account, so the owner runs it. The structured data served from the live pages
+      parses and carries Organization, WebSite and FAQPage with ten questions, in
+      `en-GB` and in `tr-TR`.
