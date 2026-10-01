@@ -51,7 +51,7 @@ export const privacy = {
     items: [
       {
         name: "Cloudflare",
-        what: "Serves and protects this site, runs the spam check on the form and, once it is switched on, counts visits without cookies and without following anyone between sites.",
+        what: "Serves and protects this site, runs the spam check on the form and counts visits without cookies and without following anyone between sites.",
         where:
           "Cloudflare says it processes this data in its data centres in the United States and Europe.",
         safeguard:
