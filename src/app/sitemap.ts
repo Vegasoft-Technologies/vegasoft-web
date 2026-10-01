@@ -5,10 +5,18 @@ import { site } from "@/content/site.ts";
 /**
  * When the site last changed. The deployment sets it from the commit it is building, so
  * rebuilding the same commit gives the same answer and a crawler is not told the pages
- * changed when only the build did. A build without it falls back to the build date,
- * which is near enough for a preview and for a workstation.
+ * changed when only the build did. Anything else, including the empty string a workflow
+ * hands over when it has no commit to point at, falls back to the build date, which is
+ * near enough for a preview and for a workstation.
  */
-const lastModified = new Date(process.env.SITE_LAST_MODIFIED ?? Date.now());
+function lastChanged(): Date {
+  const given = process.env.SITE_LAST_MODIFIED;
+  if (!given) return new Date();
+  const date = new Date(given);
+  return Number.isNaN(date.getTime()) ? new Date() : date;
+}
+
+const lastModified = lastChanged();
 
 // Every page of the site in both languages, each with the other language beside it.
 export default function sitemap(): MetadataRoute.Sitemap {
