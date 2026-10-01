@@ -90,6 +90,15 @@ test("both languages hold the same rows on the company information page", () => 
   }
 });
 
+test("the company type is named in both languages, each in its own words", () => {
+  for (const language of languages) {
+    assert.ok(content[language].companyPage.rows.includes("companyType"), language);
+    const value = content[language].companyPage.companyType;
+    assert.ok(typeof value === "string" && value.trim().length > 0, language);
+  }
+  assert.notEqual(content.tr.companyPage.companyType, content.en.companyPage.companyType);
+});
+
 test("no sentence is the same in both languages, except a name or a label", () => {
   // A quick guard against a Turkish file left in English: the longest sentences differ.
   const longest = (language: Language) =>

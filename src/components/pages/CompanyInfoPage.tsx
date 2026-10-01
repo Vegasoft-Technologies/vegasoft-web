@@ -23,6 +23,14 @@ export default function CompanyInfoPage({ language }: { language: Language }) {
         node: <a href={site.phoneHref}>{site.phone}</a>,
       };
     }
+    // Each language names the company type in its own words; whether it is known at
+    // all is company.ts's answer, as it is for every other row.
+    if (row === "companyType") {
+      return {
+        label: companyLabels.companyType,
+        value: company.companyType === null ? null : companyPage.companyType,
+      };
+    }
     if (row === "address") {
       return {
         label: companyLabels.address,

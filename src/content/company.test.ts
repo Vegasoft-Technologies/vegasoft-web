@@ -24,6 +24,7 @@ test("the trading name is Vegasoft Technologies", () => {
 test("the text details are unknown (null) or trimmed and non-empty", () => {
   for (const key of [
     "legalName",
+    "companyType",
     "placeOfRegistration",
     "location",
     "companyNumber",

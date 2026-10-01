@@ -1,7 +1,7 @@
 // Every word on the Company information page. The rows come from src/content/company.ts,
 // with the email address and the telephone number from src/content/site.ts.
 
-import type { CompanyDetails } from "../company.ts";
+import { company, type CompanyDetails } from "../company.ts";
 
 export type CompanyRow = keyof CompanyDetails | "email" | "phone";
 
@@ -14,12 +14,15 @@ export const companyPage = {
   lead: "Details of the business behind this website.",
   emailLabel: "Email",
   phoneLabel: "Phone",
+  /** The company type in this language. The fact itself is in company.ts. */
+  companyType: company.companyType,
   /** The public register a company number is checked against. */
   registerUrl: "https://find-and-update.company-information.service.gov.uk/company/",
   /** The rows shown, in order. */
   rows: [
     "tradingName",
     "legalName",
+    "companyType",
     "placeOfRegistration",
     "companyNumber",
     "address",

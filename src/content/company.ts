@@ -31,6 +31,8 @@ export type CompanyDetails = {
   tradingName: string;
   /** The registered company behind the trading name. */
   legalName: string | null;
+  /** What kind of company it is, as the incorporation application files it. */
+  companyType: string | null;
   /** Where the company is registered, for example "England and Wales". */
   placeOfRegistration: string | null;
   /** The registered office. A PO box does not qualify. */
@@ -54,6 +56,7 @@ export type CompanyDetails = {
 export const company: CompanyDetails = {
   tradingName: "Vegasoft Technologies",
   legalName: "Vegasoft Technologies London Ltd",
+  companyType: "Private company limited by shares",
   placeOfRegistration: "England and Wales",
   address: {
     street: "20 Wenlock Road",
