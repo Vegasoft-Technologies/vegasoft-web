@@ -48,23 +48,47 @@ registered.
 
 ## Facts about the business
 
-| Field                | Where it appears                                                             | Required by law before launch                                        | Value or format                                           | Shown by |
-| -------------------- | ---------------------------------------------------------------------------- | -------------------------------------------------------------------- | --------------------------------------------------------- | -------- |
-| Trading name         | Everywhere                                                                   | Yes, and the legal name where it differs                             | Filled: `Vegasoft Technologies`                           | 14 of 14 |
-| Legal name           | Footer legal line, Company information, structured data                      | Yes (Companies Act 2006, E-Commerce Regulations 2002 reg. 6)         | Filled: `Vegasoft Technologies London Ltd`                | 12 of 14 |
-| Registered in        | Footer legal line, Company information                                       | Yes, if a company (Company, LLP and Business Names Regulations 2015) | Filled: `England and Wales`                               | 12 of 14 |
-| Registered office    | Footer legal line, Company information, structured data                      | Yes: a geographic address, a PO box does not qualify (reg. 6)        | Filled: `20 Wenlock Road, London N1 7GU`, held in parts   | 10 of 14 |
-| Company number       | Footer legal line, Company information (linked to the register once known)   | Yes, if a company                                                    | **Soon**: incorporation is in progress. Format `12345678` | 11 of 14 |
-| VAT number           | Nowhere                                                                      | Yes, if VAT registered (reg. 6)                                      | Not applicable: the business is not VAT registered        | 3 of 14  |
-| Location             | Contact section and page, About, footer                                      | No                                                                   | Filled: `London, United Kingdom`                          | 14 of 14 |
-| Email address        | Header (from 1024 px), contact section and page, footer, Company information | Yes (reg. 6)                                                         | Filled: `hello@vegasoft.co.uk`                            | 14 of 14 |
-| Telephone number     | Header (from 1024 px), contact section and page, footer, Company information | No                                                                   | Filled: `+44 7767 080863`                                 | 10 of 14 |
-| Area covered on site | About, Contact                                                               | No                                                                   | Filled: `Anywhere in the UK, by arrangement`              | 14 of 14 |
-| Founded              | About, structured data                                                       | No                                                                   | Filled: `2026`                                            | 9 of 14  |
-| Profiles             | Contact, structured data                                                     | No                                                                   | Filled: LinkedIn                                          | 11 of 14 |
-| Support hours        | The support-hours commitment, structured data                                | No                                                                   | Filled: Monday to Friday, 9:00 to 18:00 UK time           | 8 of 14  |
-| Privacy notice       | A page of its own, linked from the footer                                    | Yes (UK GDPR): what is collected, why, for how long, and the rights  | **Soon**: a page, with the date it was last updated       | 14 of 14 |
-| Terms of business    | A page of its own                                                            | No                                                                   | **Soon**: a page, with the date it was last updated       | 11 of 14 |
+| Field                | Where it appears                                                             | Required by law before launch                                        | Value or format                                           | Shown by     |
+| -------------------- | ---------------------------------------------------------------------------- | -------------------------------------------------------------------- | --------------------------------------------------------- | ------------ |
+| Trading name         | Everywhere                                                                   | Yes, and the legal name where it differs                             | Filled: `Vegasoft Technologies`                           | 14 of 14     |
+| Legal name           | Footer legal line, Company information, structured data                      | Yes (Companies Act 2006, E-Commerce Regulations 2002 reg. 6)         | Filled: `Vegasoft Technologies London Ltd`                | 12 of 14     |
+| Company type         | Company information                                                          | No                                                                   | Filled: `Private company limited by shares`               | Not surveyed |
+| Registered in        | Footer legal line, Company information                                       | Yes, if a company (Company, LLP and Business Names Regulations 2015) | Filled: `England and Wales`                               | 12 of 14     |
+| Registered office    | Footer legal line, Company information, structured data                      | Yes: a geographic address, a PO box does not qualify (reg. 6)        | Filled: `20 Wenlock Road, London N1 7GU`, held in parts   | 10 of 14     |
+| Company number       | Footer legal line, Company information (linked to the register once known)   | Yes, if a company                                                    | **Soon**: incorporation is in progress. Format `12345678` | 11 of 14     |
+| VAT number           | Nowhere                                                                      | Yes, if VAT registered (reg. 6)                                      | Not applicable: the business is not VAT registered        | 3 of 14      |
+| Location             | Contact section and page, About, footer                                      | No                                                                   | Filled: `London, United Kingdom`                          | 14 of 14     |
+| Email address        | Header (from 1024 px), contact section and page, footer, Company information | Yes (reg. 6)                                                         | Filled: `hello@vegasoft.co.uk`                            | 14 of 14     |
+| Telephone number     | Header (from 1024 px), contact section and page, footer, Company information | No                                                                   | Filled: `+44 7767 080863`                                 | 10 of 14     |
+| Area covered on site | About, Contact                                                               | No                                                                   | Filled: `Anywhere in the UK, by arrangement`              | 14 of 14     |
+| Founded              | About, structured data                                                       | No                                                                   | Filled: `2026`                                            | 9 of 14      |
+| Profiles             | Contact, structured data                                                     | No                                                                   | Filled: LinkedIn                                          | 11 of 14     |
+| Support hours        | The support-hours commitment, structured data                                | No                                                                   | Filled: Monday to Friday, 9:00 to 18:00 UK time           | 8 of 14      |
+| Privacy notice       | A page of its own, linked from the footer                                    | Yes (UK GDPR): what is collected, why, for how long, and the rights  | **Soon**: a page, with the date it was last updated       | 14 of 14     |
+| Terms of business    | A page of its own                                                            | No                                                                   | **Soon**: a page, with the date it was last updated       | 11 of 14     |
+
+## From the incorporation application, not shown on the site
+
+The incorporation application confirms the legal name, the registered office and England
+and Wales, which `src/content/company.ts` already holds. It adds the following. None of
+it is published: the site shows only the company type, because the rest is either on the
+public register already or is not a kind of information comparable sites show.
+
+| Field                    | Value                                                                                                                                                                        |
+| ------------------------ | ---------------------------------------------------------------------------------------------------------------------------------------------------------------------------- |
+| Name as filed            | `VEGASOFT TECHNOLOGIES LONDON LTD`. The site keeps the title-case form, `Vegasoft Technologies London Ltd`.                                                                  |
+| Company type             | Private company limited by shares. Shown on Company information, in each language's own words.                                                                               |
+| SIC codes                | 62012 Business and domestic software development; 58290 Other software publishing; 62020 Information technology consultancy activities; 74100 Specialised design activities. |
+| Registered email address | `hello@vegasoft.co.uk`. Companies House uses it for statutory notices. It is not published on the register.                                                                  |
+
+**The `hello@vegasoft.co.uk` mailbox must exist and be read.** It is the registered email
+address, so Companies House writes to it: confirmation statements, filing reminders and
+anything that follows from not answering them. It is also the address the contact form
+sends to and the address the site publishes, so one unread mailbox would lose both the
+enquiries and the statutory post.
+
+Incorporation is still in progress: nothing here says the company is incorporated, there
+is no date, and the company number stays `null` until Companies House issues one.
 
 ## Promises to clients
 

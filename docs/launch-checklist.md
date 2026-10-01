@@ -55,6 +55,9 @@ when it is done, with the date.
 - [ ] Ownership of the vegasoft.co.uk domain moves from the owner to the company.
 - [ ] The retention period in the privacy notice is approved, or changed and approved.
       Until then the section is not in the published page.
+- [ ] `Expires` in `public/.well-known/security.txt` is renewed before 1 October 2027.
+      RFC 9116 says a reader may ignore the file once that date has passed, so it is
+      moved on a year at a time, together with the contact address if that has changed.
 
 ## Company details
 

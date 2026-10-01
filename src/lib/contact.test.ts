@@ -5,6 +5,10 @@ import {
   RESEND_URL,
   TURNSTILE_VERIFY_URL,
   buildEmail,
+  checkRequest,
+  isOwnOrigin,
+  maxBodyBytes,
+  readBodyText,
   readSubmission,
   submitContact,
   validate,
@@ -35,21 +39,38 @@ type Answers = {
   human?: boolean;
   /** What the spam check gives as its reasons for refusing. */
   codes?: string[];
+  /** The site the spam check says the token was solved on. */
+  hostname?: string;
   sent?: boolean;
   /** What the email API answers, when it is not simply 200 or 422. */
   sendStatus?: number;
+  /** Which call, if either, never answers. */
+  silent?: "check" | "send";
 };
 
 /** Answers the spam check and the email API, and records every call. */
 function mockFetch(options: Answers = {}) {
-  const { human = true, codes = [], sent = true, sendStatus } = options;
+  const {
+    human = true,
+    codes = [],
+    hostname = "vegasoft.co.uk",
+    sent = true,
+    sendStatus,
+    silent,
+  } = options;
   globalThis.fetch = (async (url: string | URL | Request, init?: RequestInit) => {
     const address = typeof url === "string" ? url : url.toString();
     calls.push({ url: address, init });
-    if (address === TURNSTILE_VERIFY_URL) {
-      return new Response(JSON.stringify({ success: human, "error-codes": codes }), {
-        status: 200,
-      });
+    const check = address === TURNSTILE_VERIFY_URL;
+    // A service that never answers: the deadline on the call is what ends it.
+    if (silent === (check ? "check" : "send")) {
+      throw new DOMException("The operation was aborted", "TimeoutError");
+    }
+    if (check) {
+      return new Response(
+        JSON.stringify({ success: human, "error-codes": codes, hostname }),
+        { status: 200 },
+      );
     }
     return new Response(JSON.stringify({ id: "message-id" }), {
       status: sendStatus ?? (sent ? 200 : 422),
@@ -236,6 +257,27 @@ const failures: { what: string; run: () => Promise<unknown>; line: string }[] = 
     run: () => submitContact(good, config, "203.0.113.1"),
     line: "contact: email service answered 401",
   },
+  {
+    what: "a header smuggled into the name",
+    run: () =>
+      submitContact({ ...good, name: "Ada\r\nBcc: someone@example.com" }, config),
+    line: "contact: spam (control characters in name)",
+  },
+  {
+    what: "a token solved on another site",
+    run: () => submitContact(good, config, "203.0.113.1", "vegasoft.co.uk"),
+    line: "contact: spam check answered for another site",
+  },
+  {
+    what: "a spam check that never answers",
+    run: () => submitContact(good, config, "203.0.113.1"),
+    line: "contact: spam check did not answer in time",
+  },
+  {
+    what: "an email service that never answers",
+    run: () => submitContact(good, config, "203.0.113.1"),
+    line: "contact: email service did not answer in time",
+  },
 ];
 
 /** The answers each failure needs from the two services it talks to. */
@@ -243,6 +285,9 @@ const answersFor: Record<string, Answers> = {
   "the wrong spam check key": { human: false, codes: ["invalid-input-secret"] },
   "a spam check that simply says no": { human: false },
   "an email service that refuses the key": { sendStatus: 401 },
+  "a token solved on another site": { hostname: "someone-else.example.com" },
+  "a spam check that never answers": { silent: "check" },
+  "an email service that never answers": { silent: "send" },
 };
 
 for (const { what, run, line } of failures) {
@@ -280,11 +325,199 @@ test("no line carries the sender, the token or a key", async () => {
     seen.push(...warnings);
   }
   assert.equal(seen.length, failures.length);
+
+  // The refusals that happen before the body is read leave lines of their own.
+  warnings = [];
+  checkRequest(ask({ method: "GET" }));
+  checkRequest(ask({ headers: { "content-type": "text/plain" } }));
+  checkRequest(ask({ headers: { "content-length": String(maxBodyBytes + 1) } }));
+  checkRequest(ask({ headers: { origin: "https://evil.example.com" } }));
+  await readBodyText(
+    new Request(endpoint, { method: "POST", body: "x".repeat(maxBodyBytes + 1) }),
+  );
+  assert.equal(warnings.length, 5);
+  seen.push(...warnings);
   for (const line of seen) {
     assert.match(line, /^contact: /);
     for (const secret of secrets) {
       assert.ok(secret);
       assert.ok(!line.includes(secret), `${line} carries ${secret}`);
     }
+  }
+});
+
+// ---------------------------------------------------------------------------------
+// What is refused before the body is worth reading.
+// ---------------------------------------------------------------------------------
+
+const endpoint = "https://vegasoft.co.uk/api/contact";
+
+/** A request as the form makes it, with whatever is being tested changed. */
+function ask(
+  changes: { method?: string; headers?: Record<string, string>; body?: string } = {},
+) {
+  const { method = "POST", headers = {}, body = "{}" } = changes;
+  return new Request(endpoint, {
+    method,
+    headers: {
+      "content-type": "application/json",
+      origin: "https://vegasoft.co.uk",
+      ...headers,
+    },
+    ...(method === "GET" || method === "HEAD" ? {} : { body }),
+  });
+}
+
+test("a request from the form itself is not refused", () => {
+  assert.equal(checkRequest(ask()), null);
+  assert.deepEqual(warnings, []);
+});
+
+test("anything but POST is refused, and says which method may be used", () => {
+  for (const method of ["GET", "PUT", "PATCH", "DELETE"]) {
+    warnings = [];
+    assert.deepEqual(checkRequest(ask({ method })), {
+      status: 405,
+      reason: "method",
+      allow: "POST",
+    });
+    assert.deepEqual(warnings, [`contact: refused the ${method} method`]);
+  }
+});
+
+test("a body that is not JSON is refused", () => {
+  for (const type of ["text/plain", "application/x-www-form-urlencoded", ""]) {
+    warnings = [];
+    const refusal = checkRequest(ask({ headers: { "content-type": type } }));
+    assert.equal(refusal?.status, 415, type);
+    assert.deepEqual(warnings, ["contact: refused a body that is not JSON"]);
+  }
+});
+
+test("the charset on a JSON content type is still JSON", () => {
+  assert.equal(
+    checkRequest(ask({ headers: { "content-type": "application/json; charset=utf-8" } })),
+    null,
+  );
+});
+
+test("a body that declares more than the limit is refused before it is read", () => {
+  const refusal = checkRequest(
+    ask({ headers: { "content-length": String(maxBodyBytes + 1) } }),
+  );
+  assert.equal(refusal?.status, 413);
+  assert.deepEqual(warnings, [`contact: refused a body of ${maxBodyBytes + 1} bytes`]);
+});
+
+test("a submission from another site, or from none, is refused", () => {
+  for (const origin of ["https://evil.example.com", "http://vegasoft.co.uk.evil.test"]) {
+    warnings = [];
+    const refusal = checkRequest(ask({ headers: { origin } }));
+    assert.equal(refusal?.status, 403, origin);
+    assert.deepEqual(warnings, ["contact: refused a submission from another site"]);
+  }
+  warnings = [];
+  const request = new Request(endpoint, {
+    method: "POST",
+    headers: { "content-type": "application/json" },
+    body: "{}",
+  });
+  assert.equal(checkRequest(request)?.status, 403);
+});
+
+test("the address the request arrived at is its own origin, previews included", () => {
+  for (const host of [
+    "vegasoft.co.uk",
+    "vegasoft-web.example.workers.dev",
+    "a1b2c3-vegasoft-web.example.workers.dev",
+  ]) {
+    assert.ok(isOwnOrigin(`https://${host}`, host), host);
+  }
+  assert.ok(isOwnOrigin("http://localhost:8787", "localhost:8787"));
+  assert.ok(isOwnOrigin("https://vegasoft.co.uk", "vegasoft-web.example.workers.dev"));
+  // Another Worker on the same domain is not this one.
+  assert.ok(!isOwnOrigin("https://someone-else.example.workers.dev", "vegasoft.co.uk"));
+  assert.ok(!isOwnOrigin(null, "vegasoft.co.uk"));
+});
+
+test("a body longer than the limit is refused while it is read, not after", async () => {
+  const body = "x".repeat(maxBodyBytes + 100);
+  const request = new Request(endpoint, { method: "POST", body });
+  assert.equal(await readBodyText(request), null);
+  assert.deepEqual(warnings, [`contact: refused a body of over ${maxBodyBytes} bytes`]);
+});
+
+test("a body within the limit is read whole", async () => {
+  const body = JSON.stringify({ name: "x".repeat(1000) });
+  const request = new Request(endpoint, { method: "POST", body });
+  assert.equal(await readBodyText(request), body);
+  assert.deepEqual(warnings, []);
+});
+
+// ---------------------------------------------------------------------------------
+// What is refused once the submission is read.
+// ---------------------------------------------------------------------------------
+
+test("a carriage return or newline in a one-line field sends nothing", async () => {
+  for (const field of ["name", "email", "company"] as const) {
+    for (const bad of ["\r\nBcc: someone@example.com", "a\u0000b", "a\u001fb"]) {
+      mockFetch();
+      calls = [];
+      warnings = [];
+      const outcome = await submitContact({ ...good, [field]: `x${bad}x` }, config);
+      assert.deepEqual(outcome, { ok: false, status: 400, reason: "spam" }, field);
+      assert.equal(calls.length, 0, field);
+      assert.deepEqual(warnings, [`contact: spam (control characters in ${field})`]);
+    }
+  }
+});
+
+test("a token solved on another site is refused, and that site is not named", async () => {
+  mockFetch({ hostname: "someone-else.example.com" });
+  const outcome = await submitContact(good, config, "203.0.113.1", "vegasoft.co.uk");
+  assert.deepEqual(outcome, { ok: false, status: 403, reason: "spam" });
+  assert.deepEqual(warnings, ["contact: spam check answered for another site"]);
+  assert.ok(!warnings[0].includes("someone-else"));
+  // It never reached the email service.
+  assert.deepEqual(
+    calls.map((call) => call.url),
+    [TURNSTILE_VERIFY_URL],
+  );
+});
+
+test("a token solved on the address the request arrived at is accepted", async () => {
+  for (const host of ["vegasoft.co.uk", "a1b2-vegasoft-web.example.workers.dev"]) {
+    mockFetch({ hostname: host });
+    warnings = [];
+    assert.deepEqual(await submitContact(good, config, undefined, host), { ok: true });
+    assert.deepEqual(warnings, []);
+  }
+});
+
+test("a service that never answers counts as a failed send", async () => {
+  mockFetch({ silent: "check" });
+  assert.deepEqual(await submitContact(good, config), {
+    ok: false,
+    status: 502,
+    reason: "failed",
+  });
+  assert.deepEqual(warnings, ["contact: spam check did not answer in time"]);
+
+  mockFetch({ silent: "send" });
+  warnings = [];
+  assert.deepEqual(await submitContact(good, config), {
+    ok: false,
+    status: 502,
+    reason: "failed",
+  });
+  assert.deepEqual(warnings, ["contact: email service did not answer in time"]);
+});
+
+test("both calls are given a deadline", async () => {
+  mockFetch();
+  await submitContact(good, config);
+  assert.equal(calls.length, 2);
+  for (const call of calls) {
+    assert.ok(call.init?.signal, call.url);
   }
 });

@@ -1,0 +1,34 @@
+# Dependabot opens one pull request a week for each of these, with the small updates
+# grouped so that the week's routine bumps arrive together rather than one at a time.
+# A major update is left alone: it comes as its own pull request, to be read properly.
+#
+# Nothing is proposed in its first week. A package that has just been published is the
+# one most likely to have been taken over, and a week is long enough for that to surface
+# before it reaches a pull request here.
+version: 2
+
+updates:
+  - package-ecosystem: npm
+    directory: /
+    schedule:
+      interval: weekly
+    cooldown:
+      default-days: 7
+    open-pull-requests-limit: 5
+    groups:
+      minor-and-patch:
+        update-types:
+          - minor
+          - patch
+
+  - package-ecosystem: github-actions
+    directory: /
+    schedule:
+      interval: weekly
+    cooldown:
+      default-days: 7
+    groups:
+      minor-and-patch:
+        update-types:
+          - minor
+          - patch

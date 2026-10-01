@@ -1,0 +1,7 @@
+# How to report something you have found in this site. RFC 9116.
+# Expires has to be renewed before the date below; docs/launch-checklist.md says when.
+
+Contact: mailto:hello@vegasoft.co.uk
+Expires: 2027-10-01T00:00:00.000Z
+Preferred-Languages: en, tr
+Canonical: https://vegasoft.co.uk/.well-known/security.txt

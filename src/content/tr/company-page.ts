@@ -12,12 +12,15 @@ export const companyPage = {
   lead: "Bu web sitesinin arkasındaki işletmenin bilgileri.",
   emailLabel: "E-posta",
   phoneLabel: "Telefon",
+  /** Şirket türü, bu dilde. Bilginin kendisi company.ts dosyasındadır. */
+  companyType: "Paylarla sınırlı özel şirket (private company limited by shares)",
   /** Şirket numarasının doğrulandığı resmî sicil. */
   registerUrl: "https://find-and-update.company-information.service.gov.uk/company/",
   /** Gösterilen satırlar, sırasıyla. */
   rows: [
     "tradingName",
     "legalName",
+    "companyType",
     "placeOfRegistration",
     "companyNumber",
     "address",

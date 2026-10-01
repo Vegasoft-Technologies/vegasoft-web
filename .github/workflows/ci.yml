@@ -5,6 +5,7 @@ on:
     branches: [main]
     types: [opened, synchronize, reopened, edited]
 
+# Nothing here writes anything back to the repository: both jobs only read it.
 permissions:
   contents: read
 
@@ -15,13 +16,15 @@ jobs:
     # does, so that a pull request moved to main is built against main.
     if: github.event.action != 'edited' || github.event.changes.base
     runs-on: ubuntu-latest
+    permissions:
+      contents: read
 
     steps:
       - name: Check out the repository
-        uses: actions/checkout@v4
+        uses: actions/checkout@11d5960a326750d5838078e36cf38b85af677262 # v4.4.0
 
       - name: Set up Node.js
-        uses: actions/setup-node@v4
+        uses: actions/setup-node@49933ea5288caeca8642d1e84afbd3f7d6820020 # v4.4.0
         with:
           # Read from .nvmrc so the version is stated in exactly one place.
           node-version-file: .nvmrc
@@ -50,10 +53,12 @@ jobs:
   commit-messages:
     name: commit messages
     runs-on: ubuntu-latest
+    permissions:
+      contents: read
 
     steps:
       - name: Check out the repository
-        uses: actions/checkout@v4
+        uses: actions/checkout@11d5960a326750d5838078e36cf38b85af677262 # v4.4.0
         with:
           fetch-depth: 0
 

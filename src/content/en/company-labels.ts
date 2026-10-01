@@ -6,6 +6,7 @@ import type { CompanyDetails } from "../company.ts";
 export const companyLabels: Record<keyof CompanyDetails, string> = {
   tradingName: "Trading name",
   legalName: "Legal name",
+  companyType: "Company type",
   placeOfRegistration: "Registered in",
   address: "Registered office",
   location: "Location",
