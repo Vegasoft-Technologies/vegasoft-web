@@ -50,7 +50,7 @@ export const privacy = {
     items: [
       {
         name: "Cloudflare",
-        what: "Bu siteyi sunar ve korur, formdaki güvenlik denetimini çalıştırır ve açıldığında ziyaretleri çerez kullanmadan, kimseyi siteler arasında izlemeden sayar.",
+        what: "Bu siteyi sunar ve korur, formdaki güvenlik denetimini çalıştırır ve ziyaretleri çerez kullanmadan, kimseyi siteler arasında izlemeden sayar.",
         where:
           "Cloudflare, bu veriyi Amerika Birleşik Devletleri'ndeki ve Avrupa'daki veri merkezlerinde işlediğini söyler.",
         safeguard:
