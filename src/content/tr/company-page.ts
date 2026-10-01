@@ -6,7 +6,8 @@ import type { CompanyRow } from "../en/company-page.ts";
 export const companyPage = {
   meta: {
     title: "Şirket bilgileri",
-    description: "Vegasoft Technologies şirket bilgileri.",
+    description:
+      "Bu web sitesinin arkasındaki işletme: ticari ad, yasal ad, şirket türü, kayıt yeri, kayıtlı ofis ve bize ulaşmanın yolları burada.",
   },
   title: "Şirket bilgileri",
   lead: "Bu web sitesinin arkasındaki işletmenin bilgileri.",

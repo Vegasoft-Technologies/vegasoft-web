@@ -1,5 +1,6 @@
 import type { NextConfig } from "next";
 import { initOpenNextCloudflareForDev } from "@opennextjs/cloudflare";
+import { oldAddresses } from "./src/content/redirects.ts";
 
 // The canonical address. HSTS is sent for this host alone: the mail names (mail, ftp,
 // autoconfig and the rest) are another provider's and must not be forced to HTTPS by us,
@@ -95,6 +96,12 @@ const nextConfig: NextConfig = {
       { source: "/tr/hizmetler", destination: "/tr#hizmetler", permanent: true },
       // The old site linked to the privacy notice by file name.
       { source: "/privacy.html", destination: "/privacy", permanent: true },
+      // The rest of the old site's pages, which search engines still hold.
+      ...oldAddresses.map(({ source, destination }) => ({
+        source,
+        destination,
+        permanent: true,
+      })),
       // One address for the site: www goes to the apex, keeping the path. The root and
       // the rest are separate rules, because an empty :path* is left unfilled.
       {
@@ -121,6 +128,15 @@ const nextConfig: NextConfig = {
         source: "/:path*",
         has: [{ type: "host", value: canonicalHost }],
         headers: [{ key: "Strict-Transport-Security", value: "max-age=31536000" }],
+      },
+      // The icons and the manifest answer at a fixed address and change very rarely.
+      // Next.js gives its metadata routes no cache lifetime at all, which would have a
+      // browser, and Google, ask for the icon again on every visit. favicon.ico is not
+      // here: Cloudflare serves it as a static asset, so it is in public/_headers.
+      {
+        source:
+          "/:file(favicon.ico|icon.png|icon.svg|apple-icon.png|manifest.webmanifest)",
+        headers: [{ key: "Cache-Control", value: "public, max-age=604800" }],
       },
       // Preview and workers.dev addresses must never be indexed. The canonical address
       // is always https://vegasoft.co.uk.

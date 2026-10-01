@@ -53,8 +53,8 @@ when it is done, with the date.
 - [ ] The registered office in `company.ts` is checked against the Companies House
       register once the company is on it.
 - [ ] Ownership of the vegasoft.co.uk domain moves from the owner to the company.
-- [ ] The retention period in the privacy notice is approved, or changed and approved.
-      Until then the section is not in the published page.
+- [x] The retention period in the privacy notice is approved, or changed and approved.
+      Twelve months, approved by the owner on 1 October 2026.
 - [ ] `Expires` in `public/.well-known/security.txt` is renewed before 1 October 2027.
       RFC 9116 says a reader may ignore the file once that date has passed, so it is
       moved on a year at a time, together with the contact address if that has changed.

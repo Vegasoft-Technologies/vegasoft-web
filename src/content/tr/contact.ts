@@ -5,7 +5,7 @@ export const contact = {
   meta: {
     title: "İletişim",
     description:
-      "Ekibinizin her gün elle tekrarladığı bir işi bize anlatın. Bir iş günü içinde yanıt veriyoruz.",
+      "Ekibinizin her gün elle tekrarladığı bir işi bize anlatın. Bir iş günü içinde yanıt veriyoruz. E-posta, telefon veya sayfadaki form ile.",
   },
   title: "İşinizi anlatın.",
   details: {

@@ -5,7 +5,7 @@ export const contact = {
   meta: {
     title: "Contact",
     description:
-      "Tell us about a job your team repeats by hand. We reply within one working day.",
+      "Tell us about a job your team repeats by hand. We reply within one working day. Write by email, by telephone, or through the form on the page.",
   },
   title: "Tell us about the job.",
   details: {

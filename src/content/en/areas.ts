@@ -24,6 +24,12 @@ export type Area = {
   slug: AreaSlug;
   name: string;
   promise: string;
+  /**
+   * What a search result says about the area. The promise is the page's own opening
+   * line and is often too short on its own, so this says the same thing and then who
+   * it is for, which the page says too, in 120 to 160 characters.
+   */
+  metaDescription: string;
   audience: string;
   services: Service[];
   example?: { label: string; href: string; text: string };
@@ -38,6 +44,8 @@ export const areas: Area[] = [
     promise:
       "We collect machine data without anyone writing it down, and show on screen how production is really going.",
     audience: "Manufacturing plants, workshops, filling and packaging lines.",
+    metaDescription:
+      "We collect machine data without anyone writing it down, and show on screen how production is really going. For plants, workshops and packaging lines.",
     services: [
       {
         name: "Machine data collection",
@@ -88,6 +96,8 @@ export const areas: Area[] = [
     promise:
       "We hand the office work that gets repeated by hand every day to a system, so your team gets back to its real job.",
     audience: "Finance, sales, purchasing, HR and admin teams.",
+    metaDescription:
+      "We hand the office work that gets repeated by hand every day to a system, so your team gets back to its real job. For finance, sales and admin teams.",
     services: [
       {
         name: "Automated emails and notifications",
@@ -138,6 +148,9 @@ export const areas: Area[] = [
       "We build sites that load fast, look right on a phone and get found on Google, with systems behind them that actually work.",
     audience:
       "Restaurants, clinics, shops, manufacturers and service firms of every size.",
+    // Already within the limits, so it is the promise unchanged.
+    metaDescription:
+      "We build sites that load fast, look right on a phone and get found on Google, with systems behind them that actually work.",
     example: {
       label: "zukiscaffetteria.co.uk",
       href: "https://zukiscaffetteria.co.uk",
@@ -191,6 +204,8 @@ export const areas: Area[] = [
       "We don't deploy AI for show. We deploy it to take on a specific, time-consuming job.",
     audience:
       "Teams dealing with heavy paperwork, busy inboxes or the same questions over and over.",
+    metaDescription:
+      "We don't deploy AI for show. We deploy it to take on a specific, time-consuming job, for teams with heavy paperwork, a busy inbox or repeated questions.",
     services: [
       {
         name: "Document reading",
@@ -241,6 +256,8 @@ export const areas: Area[] = [
     promise:
       "We bring scattered spreadsheets and systems into one place, so decisions rest on numbers rather than guesswork.",
     audience: "Managers, business owners and planning teams.",
+    metaDescription:
+      "We bring scattered spreadsheets and systems into one place, so decisions rest on numbers rather than guesswork. For managers and planning teams.",
     services: [
       {
         name: "Management dashboard",
@@ -280,6 +297,8 @@ export const areas: Area[] = [
     name: "Mobile and field",
     promise: "Phone and tablet apps for teams who don't work at a desk.",
     audience: "Service, maintenance, delivery, warehouse and field teams.",
+    metaDescription:
+      "Phone and tablet apps for teams who don't work at a desk: service, maintenance, delivery, warehouse and field teams, on the job rather than in the office.",
     services: [
       {
         name: "Field team app",
@@ -317,6 +336,8 @@ export const areas: Area[] = [
     name: "Infrastructure and security",
     promise: "We keep your systems running, secure and connected to each other.",
     audience: "Businesses that run software but have no team to look after it.",
+    metaDescription:
+      "We keep your systems running, secure and connected to each other, for businesses that run software but have no team of their own to look after it.",
     services: [
       {
         name: "APIs and integration",
