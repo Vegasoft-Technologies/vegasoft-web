@@ -1,5 +1,6 @@
 import type { NextConfig } from "next";
 import { initOpenNextCloudflareForDev } from "@opennextjs/cloudflare";
+import { oldAddresses } from "./src/content/redirects.ts";
 
 // The canonical address. HSTS is sent for this host alone: the mail names (mail, ftp,
 // autoconfig and the rest) are another provider's and must not be forced to HTTPS by us,
@@ -95,6 +96,12 @@ const nextConfig: NextConfig = {
       { source: "/tr/hizmetler", destination: "/tr#hizmetler", permanent: true },
       // The old site linked to the privacy notice by file name.
       { source: "/privacy.html", destination: "/privacy", permanent: true },
+      // The rest of the old site's pages, which search engines still hold.
+      ...oldAddresses.map(({ source, destination }) => ({
+        source,
+        destination,
+        permanent: true,
+      })),
       // One address for the site: www goes to the apex, keeping the path. The root and
       // the rest are separate rules, because an empty :path* is left unfilled.
       {
