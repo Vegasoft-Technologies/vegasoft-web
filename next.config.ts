@@ -32,6 +32,8 @@ const contentSecurityPolicy = [
 ].join("; ");
 
 // The browser features the site never uses. An empty list means "nobody, not even us".
+// picture-in-picture is deliberately not among them: the spam check's frame asks for it,
+// and denying it puts a policy violation in the console of every contact page.
 const permissionsPolicy = [
   "accelerometer",
   "autoplay",
@@ -46,7 +48,6 @@ const permissionsPolicy = [
   "microphone",
   "midi",
   "payment",
-  "picture-in-picture",
   "publickey-credentials-get",
   "screen-wake-lock",
   "serial",
