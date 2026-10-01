@@ -26,6 +26,10 @@ Set in `next.config.ts` and sent with every page.
 
 `poweredByHeader` is off, so no page announces what serves it.
 
+`Permissions-Policy` leaves out `picture-in-picture`. The site does not use it either, but
+Turnstile's frame asks for it, and denying it puts a policy violation in the console of
+every contact page for no gain.
+
 `Strict-Transport-Security` deliberately leaves out `includeSubDomains` and `preload`.
 Mail for this domain is handled elsewhere, on names under it we do not control, and it
 is not ours to force those onto HTTPS for ever.
