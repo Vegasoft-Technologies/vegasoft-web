@@ -70,12 +70,14 @@ for (const size of [16, 32, 48]) forIco.push({ size, png: await draw(page, size)
 await writeFile(new URL("../src/app/favicon.ico", import.meta.url), ico(forIco));
 console.log("src/app/favicon.ico", forIco.map((i) => i.size).join(", "));
 
+// Each path is written from the repository root, so that what is logged is what a
+// reader would type, and nothing has to be trimmed off it afterwards.
 for (const [target, size] of [
-  ["../src/app/icon.png", 192],
-  ["../public/brand/vegasoft-logo-512.png", 512],
+  ["src/app/icon.png", 192],
+  ["public/brand/vegasoft-logo-512.png", 512],
 ]) {
-  await writeFile(new URL(target, import.meta.url), await draw(page, size));
-  console.log(target.replace("../", ""), `${size}px`);
+  await writeFile(new URL(`../${target}`, import.meta.url), await draw(page, size));
+  console.log(target, `${size}px`);
 }
 
 await browser.close();
