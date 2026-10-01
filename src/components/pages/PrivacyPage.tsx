@@ -47,7 +47,7 @@ export default function PrivacyPage({ language }: { language: Language }) {
           </ul>
         </PageSection>
 
-        {/* The period is still a draft, so the section is absent until it is approved. */}
+        {/* A period the owner has not approved is absent from the page, not guessed at. */}
         {(privacy.retention.approved || showSoon) && (
           <PageSection id="retention" title={privacy.retention.title} rule>
             {privacy.retention.approved ? (
