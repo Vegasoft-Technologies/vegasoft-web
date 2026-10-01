@@ -18,7 +18,8 @@ export function structuredData(language: Language) {
     url: site.url,
     email: site.email,
     telephone: site.phone,
-    logo: `${site.url}/brand/vegasoft-logo-renkli.svg`,
+    // Google wants a raster square of at least 112 px here, not the wordmark SVG.
+    logo: `${site.url}/brand/vegasoft-logo-512.png`,
     contactPoint: {
       "@type": "ContactPoint",
       email: site.email,
@@ -49,11 +50,15 @@ export function structuredData(language: Language) {
     ...(company.founded !== null && { foundingDate: company.founded }),
     ...(company.social !== null && { sameAs: company.social.map((link) => link.href) }),
   };
+  // The name Google shows above the address in a result. It belongs to the domain, not
+  // to a language, so both home pages carry the same node pointing at the root: Google
+  // reads it from the root and ignores one in a subdirectory.
   const webSite = {
     "@type": "WebSite",
-    "@id": `${homeUrl}/#website`,
+    "@id": `${site.url}/#website`,
     name: site.name,
-    url: `${homeUrl}/`,
+    alternateName: site.shortName,
+    url: `${site.url}/`,
     inLanguage: languageNames[language].hrefLang,
     publisher: { "@id": organizationId },
   };
