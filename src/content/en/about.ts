@@ -10,7 +10,7 @@ export const about = {
   meta: {
     title: "About",
     description:
-      "Vegasoft Technologies builds software, data tools and AI that take repetitive work off businesses.",
+      "Vegasoft Technologies builds software, data tools and AI that take repetitive work off businesses. We measure the job first and start small.",
   },
   title: "About Vegasoft",
   lead: "We build software, data tools and AI that take repetitive work off businesses, from the machine on the factory floor to the inbox in the office.",

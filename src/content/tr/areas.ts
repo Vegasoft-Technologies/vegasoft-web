@@ -12,6 +12,8 @@ export const areas: Area[] = [
     promise:
       "Makine verisini kimse elle yazmadan toplar, üretimin gerçekte nasıl gittiğini ekranda gösteririz.",
     audience: "Üretim tesisleri, atölyeler, dolum ve paketleme hatları.",
+    metaDescription:
+      "Makine verisini kimse elle yazmadan toplar, üretimin gerçekte nasıl gittiğini ekranda gösteririz. Üretim tesisleri, atölyeler ve paketleme hatları için.",
     services: [
       {
         name: "Makine verisi toplama",
@@ -61,6 +63,8 @@ export const areas: Area[] = [
     promise:
       "Ofiste her gün elle tekrarlanan işi bir sisteme devrederiz, ekibiniz de asıl işine döner.",
     audience: "Finans, satış, satın alma, insan kaynakları ve idari ekipler.",
+    metaDescription:
+      "Ofiste her gün elle tekrarlanan işi bir sisteme devrederiz, ekibiniz de asıl işine döner. Finans, satış, satın alma ve idari ekipler için.",
     services: [
       {
         name: "Otomatik e-posta ve bildirimler",
@@ -111,6 +115,8 @@ export const areas: Area[] = [
       "Hızlı açılan, telefonda düzgün görünen ve Google'da bulunan siteler kurarız; arkalarında gerçekten çalışan sistemlerle.",
     audience:
       "Restoranlar, klinikler, mağazalar, üreticiler ve her ölçekten hizmet firması.",
+    metaDescription:
+      "Hızlı açılan, telefonda düzgün görünen ve Google'da bulunan siteler kurarız; arkalarında gerçekten çalışan sistemlerle. Her ölçekten işletme için.",
     example: {
       label: "zukiscaffetteria.co.uk",
       href: "https://zukiscaffetteria.co.uk",
@@ -165,6 +171,8 @@ export const areas: Area[] = [
       "Yapay zekayı gösteriş için kurmayız. Belirli ve çok zaman alan bir işi devralsın diye kurarız.",
     audience:
       "Yoğun evrakla, dolu bir gelen kutusuyla veya sürekli tekrarlanan sorularla uğraşan ekipler.",
+    metaDescription:
+      "Yapay zekayı gösteriş için kurmayız. Belirli ve çok zaman alan bir işi devralsın diye kurarız. Yoğun evrak ve dolu gelen kutusuyla uğraşan ekipler için.",
     services: [
       {
         name: "Belge okuma",
@@ -215,6 +223,8 @@ export const areas: Area[] = [
     promise:
       "Dağınık tabloları ve sistemleri tek yerde toplarız, böylece kararlar tahmine değil sayılara dayanır.",
     audience: "Yöneticiler, işletme sahipleri ve planlama ekipleri.",
+    metaDescription:
+      "Dağınık tabloları ve sistemleri tek yerde toplarız, böylece kararlar tahmine değil sayılara dayanır. Yöneticiler ve planlama ekipleri için.",
     services: [
       {
         name: "Yönetim paneli",
@@ -253,6 +263,8 @@ export const areas: Area[] = [
     name: "Mobil ve saha",
     promise: "Masa başında çalışmayan ekipler için telefon ve tablet uygulamaları.",
     audience: "Servis, bakım, teslimat, depo ve saha ekipleri.",
+    metaDescription:
+      "Masa başında çalışmayan ekipler için telefon ve tablet uygulamaları: servis, bakım, teslimat, depo ve saha ekipleri, ofiste değil işin başında.",
     services: [
       {
         name: "Saha ekibi uygulaması",
@@ -290,6 +302,8 @@ export const areas: Area[] = [
     name: "Altyapı ve güvenlik",
     promise: "Sistemlerinizin çalışır, güvenli ve birbirine bağlı kalmasını sağlarız.",
     audience: "Yazılım kullanan ama bakımını üstlenecek ekibi olmayan işletmeler.",
+    metaDescription:
+      "Sistemlerinizin çalışır, güvenli ve birbirine bağlı kalmasını sağlarız. Yazılım kullanan ama bakımını üstlenecek ekibi olmayan işletmeler için.",
     services: [
       {
         name: "API ve entegrasyon",

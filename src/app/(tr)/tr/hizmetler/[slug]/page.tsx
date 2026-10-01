@@ -23,7 +23,7 @@ export async function generateMetadata({ params }: Params): Promise<Metadata> {
   if (!content) return {};
   return pageMetadata(
     "tr",
-    { title: content.name, description: content.promise },
+    { title: content.name, description: content.metaDescription },
     servicePaths(area),
   );
 }

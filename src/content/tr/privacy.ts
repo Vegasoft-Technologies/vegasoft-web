@@ -9,7 +9,7 @@ export const privacy = {
   meta: {
     title: "Gizlilik bildirimi",
     description:
-      "Bu site neyi topluyor, neden topluyor, kimler işliyor ve bize ne sorabilirsiniz.",
+      "Bu site neyi topluyor, neden topluyor, kimler işliyor ve bize ne sorabilirsiniz. Site çerez kullanmaz; bir başvuru tek bir e-postaya dönüşür.",
   },
   title: "Gizlilik bildirimi",
   lead: "Bu site neyi topluyor, neden topluyor ve bize ne sorabilirsiniz.",
@@ -39,7 +39,7 @@ export const privacy = {
   retention: {
     title: "Ne kadar saklıyoruz",
     text: "İşe dönüşmeyen bir talep on iki ay sonra silinir.",
-    approved: false,
+    approved: true,
   },
   processors: {
     title: "Bizim adımıza kimler işliyor",

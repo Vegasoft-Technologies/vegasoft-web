@@ -10,7 +10,7 @@ export const privacy = {
   meta: {
     title: "Privacy notice",
     description:
-      "What this site collects, why, who processes it and what you can ask us to do about it.",
+      "What this site collects, why, who processes it and what you can ask us to do about it. The site sets no cookies and an enquiry becomes one email.",
   },
   title: "Privacy notice",
   lead: "What this site collects, why, and what you can ask us to do about it.",
@@ -40,7 +40,7 @@ export const privacy = {
   retention: {
     title: "How long we keep it",
     text: "An enquiry that does not lead to work is deleted after twelve months.",
-    approved: false,
+    approved: true,
   },
   processors: {
     title: "Who handles it for us",
