@@ -7,3 +7,9 @@
 
 /_next/static/*
   Cache-Control: public,max-age=31536000,immutable
+
+# favicon.ico is the one icon Cloudflare serves itself rather than the Worker, so its
+# cache lifetime cannot come from next.config.ts with the others. A week: the address
+# never changes, and Google asks for it by this name.
+/favicon.ico
+  Cache-Control: public,max-age=604800
