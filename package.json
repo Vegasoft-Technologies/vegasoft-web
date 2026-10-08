@@ -17,21 +17,21 @@
     "test": "node --test \"src/**/*.test.ts\""
   },
   "dependencies": {
-    "next": "16.3.6",
-    "react": "19.2.8",
-    "react-dom": "19.2.8"
+    "next": "16.3.8",
+    "react": "19.3.0",
+    "react-dom": "19.3.0"
   },
   "devDependencies": {
-    "@opennextjs/cloudflare": "^1.20.6",
+    "@opennextjs/cloudflare": "^1.20.7",
     "@types/node": "^24",
     "@types/react": "^19",
     "@types/react-dom": "^19",
     "eslint": "^9",
-    "eslint-config-next": "16.3.6",
+    "eslint-config-next": "16.3.8",
     "eslint-config-prettier": "^10.1.8",
     "prettier": "^3.9.8",
     "typescript": "^5",
-    "wrangler": "^4.138.0"
+    "wrangler": "^4.145.0"
   },
   "overrides": {
     "undici": "^7.29.1"
