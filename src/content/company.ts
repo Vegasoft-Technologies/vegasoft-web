@@ -1,8 +1,9 @@
 // Company details for the footer, the About, Contact and Company information pages, the
 // structured data and, later, the privacy notice.
 //
-// The business trades as Vegasoft Technologies and is being incorporated as a private
-// company limited by shares. null means "not known yet". A deployed build shows nothing
+// The business trades as Vegasoft Technologies. The company behind it is Vegasoft
+// Software Engineering UK Ltd, incorporated on 8 October 2026 as a private company
+// limited by shares. null means "not known yet". A deployed build shows nothing
 // for a null detail, and a build with the markers on (`npm run dev`, `npm run preview:soon`
 // and pull request previews) shows "Soon" in the places listed in docs/company-details.md.
 // A null detail that is not coming at all, such as the VAT number, shows nothing anywhere.
@@ -39,9 +40,13 @@ export type CompanyDetails = {
   address: PostalAddress | null;
   /** A short public location, such as a town and country. */
   location: string | null;
-  /** From Companies House, once incorporation is complete. */
+  /** From Companies House. Eight digits for a company registered in England and Wales. */
   companyNumber: string | null;
-  /** The business is not VAT registered, so nothing is shown for this, not even "Soon". */
+  /**
+   * Companies House does not hold this; it comes from HMRC on registration, which is
+   * only compulsory above the turnover threshold. The business is not registered, so
+   * nothing is shown for it, not even "Soon".
+   */
   vatNumber: string | null;
   /** Where we work on site. */
   serviceArea: string | null;
@@ -55,7 +60,7 @@ export type CompanyDetails = {
 
 export const company: CompanyDetails = {
   tradingName: "Vegasoft Technologies",
-  legalName: "Vegasoft Technologies London Ltd",
+  legalName: "Vegasoft Software Engineering UK Ltd",
   companyType: "Private company limited by shares",
   placeOfRegistration: "England and Wales",
   address: {
@@ -65,7 +70,7 @@ export const company: CompanyDetails = {
     country: "United Kingdom",
   },
   location: "London, United Kingdom",
-  companyNumber: null,
+  companyNumber: "17507818",
   vatNumber: null,
   serviceArea: "Anywhere in the UK, by arrangement",
   founded: "2026",
