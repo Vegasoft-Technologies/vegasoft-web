@@ -47,11 +47,10 @@ when it is done, with the date.
 
 ## After launch
 
-- [ ] The company number goes into `src/content/company.ts` as soon as incorporation is
-      complete. The site launched before it, by the owner's decision, and the footer's
-      company number clause stays out of the page until the number is there.
-- [ ] The registered office in `company.ts` is checked against the Companies House
-      register once the company is on it.
+- [x] The company number goes into `src/content/company.ts` as soon as incorporation is
+      complete. Done on 8 October 2026: `17507818`.
+- [x] The registered office in `company.ts` is checked against the Companies House
+      register once the company is on it. Checked on 8 October 2026: it matches.
 - [ ] Ownership of the vegasoft.co.uk domain moves from the owner to the company.
 - [x] The retention period in the privacy notice is approved, or changed and approved.
       Twelve months, approved by the owner on 1 October 2026.
@@ -61,9 +60,9 @@ when it is done, with the date.
 
 ## Company details
 
-- [ ] Incorporation of Vegasoft Technologies London Ltd is complete, the company number is
-      in `src/content/company.ts`, and the legal name, registered office and place of
-      registration there match the Companies House register.
+- [x] Incorporation is complete. The company is Vegasoft Software Engineering UK Ltd,
+      number 17507818; `src/content/company.ts` holds the number, and the legal name,
+      registered office and place of registration there match the register.
 - [ ] If the registered office has changed, `company.ts` has the new one.
 - [ ] Written permission from Zuki's Caffetteria to name them as an example is on file.
       The confidentiality commitment says we never name a client without written

@@ -37,6 +37,17 @@ test("the text details are unknown (null) or trimmed and non-empty", () => {
   }
 });
 
+test("the company number is eight digits, as England and Wales issues them", () => {
+  const { companyNumber } = company;
+  if (companyNumber === null) return;
+  assert.match(companyNumber, /^\d{8}$/, companyNumber);
+});
+
+test("the legal name is the one on the register, not the trading name", () => {
+  assert.notEqual(company.legalName, company.tradingName);
+  assert.match(String(company.legalName), /\bLtd\b|\bLimited\b/);
+});
+
 test("the registered office has every part, or is not known", () => {
   const { address } = company;
   if (address === null) return;
