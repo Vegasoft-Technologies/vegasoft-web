@@ -110,16 +110,19 @@ export function anchorId(anchor: AnchorKey, language: Language): string {
   return anchors[anchor][language];
 }
 
-/** A link to a section of the home page from anywhere on the site. */
+/**
+ * A link to a section of the home page from anywhere on the site. The home page's
+ * address is always in front of the hash: a bare "#services" would point at a section
+ * of whatever page the reader is on, and on About or Contact there is no such section,
+ * so the link would do nothing at all.
+ */
 export function anchorHref(anchor: AnchorKey, language: Language): string {
-  const home = pagePath("home", language);
-  return `${home === "/" ? "" : home}#${anchorId(anchor, language)}`;
+  return `${pagePath("home", language)}#${anchorId(anchor, language)}`;
 }
 
-/** A link to an area's row on the home page. */
+/** A link to an area's row on the home page, from anywhere, for the same reason. */
 export function areaAnchorHref(slug: AreaSlug, language: Language): string {
-  const home = pagePath("home", language);
-  return `${home === "/" ? "" : home}#${areaSegment(slug, language)}`;
+  return `${pagePath("home", language)}#${areaSegment(slug, language)}`;
 }
 
 /** Every address on the site, in one language, in the order the sitemap lists them. */
