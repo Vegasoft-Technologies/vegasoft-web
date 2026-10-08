@@ -57,8 +57,22 @@ a:hover {
   border-radius: 1px;
 }
 
+/*
+ * A link to a section of this page travels to it, so the reader sees where it went
+ * rather than finding the page suddenly somewhere else. The padding keeps the heading
+ * off the very top edge, so its place on the page is readable when it arrives.
+ */
+html {
+  scroll-behavior: smooth;
+  scroll-padding-top: 2rem;
+}
+
 @media (prefers-reduced-motion: reduce) {
   * {
     transition: none !important;
+  }
+
+  html {
+    scroll-behavior: auto;
   }
 }

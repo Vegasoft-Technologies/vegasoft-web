@@ -6,6 +6,7 @@ import {
   allPagePaths,
   allPaths,
   anchorHref,
+  areaAnchorHref,
   anchorId,
   areaForSegment,
   areaSegment,
@@ -113,11 +114,19 @@ test("every link in the copy points at a page or an anchor that exists", () => {
 });
 
 test("a link to a section of the home page carries the home page's address", () => {
+  // Both languages, and English especially: its home page is "/", and a link that left
+  // that off would read as a section of whatever page the reader is on, so About and
+  // Contact would have a Services link that does nothing.
   for (const language of languages) {
+    const home = pagePath("home", language);
     for (const key of anchorKeys) {
       const href = anchorHref(key, language);
-      assert.ok(href.includes(`#${anchorId(key, language)}`), href);
-      if (language === "tr") assert.ok(href.startsWith("/tr#"), href);
+      assert.equal(href, `${home}#${anchorId(key, language)}`, `${language} ${key}`);
+      assert.ok(href.startsWith(`${home}#`), href);
+    }
+    for (const slug of areaSlugs) {
+      const href = areaAnchorHref(slug, language);
+      assert.ok(href.startsWith(`${home}#`), href);
     }
   }
 });

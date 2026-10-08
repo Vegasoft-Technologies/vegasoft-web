@@ -42,7 +42,6 @@
   border-top: 1px solid var(--navy);
   padding-block: clamp(32px, 4vw, 56px);
   row-gap: 20px;
-  scroll-margin-top: 24px;
 }
 
 .area h3 {
